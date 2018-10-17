@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{02aa4892-bcad-4166-ac95-e66574cab78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PropertyGrid">
+      <UniqueIdentifier>{ac84ade1-a75c-4531-943c-cdc209d4598e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XListCtrl">
+      <UniqueIdentifier>{50123931-1814-4ca7-a87a-61e9bade38b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{5f55814b-7876-4ce6-b165-f5b70a3057ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{b5f5022e-1a02-4f5f-8e69-586585c9e0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{9df58005-3218-49ad-bce3-773a98cdffa5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\file_view.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\file_view_hc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\class_view.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\class_view_hc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\fileview.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\fileview_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\classview.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\classview_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\explorer.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\explorer_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\sort.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\sort_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\menuimages.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\menuimages_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\output_wnd.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\output_wnd_hc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\properties_wnd.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\properties_wnd_hc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\properties.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\properties_hc.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\buttons.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\filelarge.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\filesmall.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\main.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\writelarge.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\writesmall.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\ribbon.mfcribbon-ms">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\Toolbar256.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\RoilibApp.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\RoilibApp.rc2">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\RoilibAppDoc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\CustomItem.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\DynDialogEx.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\DynDialogItemEx.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\ListDynDialogEx.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGrid.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridCombo.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridDirectoryPicker.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridInPlaceEdit.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridMonthCalCtrl.h">
+      <Filter>PropertyGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\DrawDoc.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\DrawObj.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\DrawTool.H">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\DrawVw.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\ScrollViewEx.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\FileOperations.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\MSExcel.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\OLEMethod.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\Path.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\AdvComboBox.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\AdvComboEdit.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\DropListBox.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\DropScrollBar.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\DropWnd.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\MemDCXCtl.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\SortCStringArray.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\VisualStylesXP.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XCombo.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XComboList.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XEdit.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XHeaderCtrl.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XListCtrl.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\XListCtrl\XTrace.h">
+      <Filter>XListCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\UI_Object.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\Direct_Info.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="LogWnd.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgConfig.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomRibbonBar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\Sdiapp.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\Sdiframe.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\Tokenizer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RecipeView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgRecipeSet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FrmProperty.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesWnd.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ImgProcEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\blob.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BlobContour.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BlobLibraryConfiguration.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BlobOperators.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BlobResult.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ComponentLabeling.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Utils\String.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\EdgesSubPix.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RoilibApp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RoilibAppDoc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RoilibAppView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="IniUtil.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Config.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\DataBlock.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\DefIOAddr.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\LineData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\RecipeBase.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\RecipeData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Rectdouble.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\RoiBase.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\RoiData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\imgprocbase.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessingClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\DynDialogEx.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\DynDialogItemEx.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\ListDynDialogEx.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGrid.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridCombo.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridDirectoryPicker.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridInPlaceEdit.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridMonthCalCtrl.cpp">
+      <Filter>PropertyGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\DrawDoc.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\DrawObj.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\DrawTool.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\DrawVw.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\ScrollViewEx.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\FileOperations.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\MSExcel.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\OLEMethod.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\Path.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\AdvComboBox.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\AdvComboEdit.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\DropListBox.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\DropScrollBar.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\DropWnd.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\VisualStylesXP.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\XCombo.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\XComboList.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\XEdit.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\XHeaderCtrl.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\XListCtrl\XListCtrl.cpp">
+      <Filter>XListCtrl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\Direct_Info.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\UI_Object.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\Log.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\Utils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LogWnd.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgConfig.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomRibbonBar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\Sdiapp.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ui\Sdiframe.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\Tokenizer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RecipeView.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgRecipeSet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FrmProperty.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesWnd.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ImgProcEngine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\blob.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BlobContour.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BlobOperators.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BlobResult.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ComponentLabeling.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Utils\String.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\EdgesSubPix.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RoilibApp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RoilibAppDoc.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RoilibAppView.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IniUtil.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Config.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\DataBlock.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\LineData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\RecipeBase.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\RecipeData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Rectdouble.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\RoiBase.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\RoiData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\imgprocbase.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessingClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\mainribbon.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\mainribbonsmall.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\lgmain32.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\lgmain.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\gtmain32.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\navi_wnd.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\navi_wnd_hc.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\GridBrush.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Common\XListCtrl\checkboxes.bmp">
+      <Filter>XListCtrl</Filter>
+    </Image>
+    <Image Include="res\yjmain32.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\hsmain32.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Splash.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RoilibApp.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

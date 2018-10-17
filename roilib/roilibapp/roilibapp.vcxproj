@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <_ResolveReferenceDependencies>true</_ResolveReferenceDependencies>
+    <ProjectGuid>{CA7C9027-C1A2-4007-BE0A-6094B9385A02}</ProjectGuid>
+    <RootNamespace>roilibapp</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>RoilibApp</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_UNICODE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;./pthread;../Common;$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_UNICODE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;./pthread;../Common;$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D CLIENTNO=1 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Rpcrt4.lib</AdditionalDependencies>
+      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;./pthread;../Common;$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_UNICODE;WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;./pthread;../Common;$(OPENCV_BUILD)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D CLIENTNO=1 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\opencv\build\x64\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Rpcrt4.lib</AdditionalDependencies>
+      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\buttons.bmp" />
+    <None Include="res\classview.bmp" />
+    <None Include="res\classview_hc.bmp" />
+    <None Include="res\class_view.ico" />
+    <None Include="res\class_view_hc.ico" />
+    <None Include="res\explorer.bmp" />
+    <None Include="res\explorer_hc.bmp" />
+    <None Include="res\filelarge.bmp" />
+    <None Include="res\filesmall.bmp" />
+    <None Include="res\fileview.bmp" />
+    <None Include="res\fileview_hc.bmp" />
+    <None Include="res\file_view.ico" />
+    <None Include="res\file_view_hc.ico" />
+    <None Include="res\main.bmp" />
+    <None Include="res\menuimages.bmp" />
+    <None Include="res\menuimages_hc.bmp" />
+    <None Include="res\RoilibApp.ico" />
+    <None Include="res\RoilibApp.rc2" />
+    <None Include="res\RoilibAppDoc.ico" />
+    <None Include="res\output_wnd.ico" />
+    <None Include="res\output_wnd_hc.ico" />
+    <None Include="res\properties.bmp" />
+    <None Include="res\properties_hc.bmp" />
+    <None Include="res\properties_wnd.ico" />
+    <None Include="res\properties_wnd_hc.ico" />
+    <None Include="res\ribbon.mfcribbon-ms" />
+    <None Include="res\sort.bmp" />
+    <None Include="res\sort_hc.bmp" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\Toolbar256.bmp" />
+    <None Include="res\writelarge.bmp" />
+    <None Include="res\writesmall.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\PropertyGrid\CustomItem.h" />
+    <ClInclude Include="..\Common\PropertyGrid\DynDialogEx.h" />
+    <ClInclude Include="..\Common\PropertyGrid\DynDialogItemEx.h" />
+    <ClInclude Include="..\Common\PropertyGrid\ListDynDialogEx.h" />
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGrid.h" />
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridCombo.h" />
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridDirectoryPicker.h" />
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridInPlaceEdit.h" />
+    <ClInclude Include="..\Common\PropertyGrid\PropertyGridMonthCalCtrl.h" />
+    <ClInclude Include="..\Common\ui\DrawDoc.h" />
+    <ClInclude Include="..\Common\ui\DrawObj.h" />
+    <ClInclude Include="..\Common\ui\DrawTool.H" />
+    <ClInclude Include="..\Common\ui\DrawVw.h" />
+    <ClInclude Include="..\Common\ui\ScrollViewEx.h" />
+    <ClInclude Include="..\Common\ui\Sdiapp.h" />
+    <ClInclude Include="..\Common\ui\Sdiframe.h" />
+    <ClInclude Include="..\Common\Utils\Direct_Info.h" />
+    <ClInclude Include="..\Common\Utils\FileOperations.h" />
+    <ClInclude Include="..\Common\Utils\Log.h" />
+    <ClInclude Include="..\Common\Utils\MSExcel.h" />
+    <ClInclude Include="..\Common\Utils\OLEMethod.h" />
+    <ClInclude Include="..\Common\Utils\Path.h" />
+    <ClInclude Include="..\Common\Utils\String.h" />
+    <ClInclude Include="..\Common\Utils\Tokenizer.h" />
+    <ClInclude Include="..\Common\Utils\UI_Object.h" />
+    <ClInclude Include="..\Common\Utils\Utils.h" />
+    <ClInclude Include="..\Common\XListCtrl\AdvComboBox.h" />
+    <ClInclude Include="..\Common\XListCtrl\AdvComboEdit.h" />
+    <ClInclude Include="..\Common\XListCtrl\DropListBox.h" />
+    <ClInclude Include="..\Common\XListCtrl\DropScrollBar.h" />
+    <ClInclude Include="..\Common\XListCtrl\DropWnd.h" />
+    <ClInclude Include="..\Common\XListCtrl\MemDCXCtl.h" />
+    <ClInclude Include="..\Common\XListCtrl\SortCStringArray.h" />
+    <ClInclude Include="..\Common\XListCtrl\VisualStylesXP.h" />
+    <ClInclude Include="..\Common\XListCtrl\XCombo.h" />
+    <ClInclude Include="..\Common\XListCtrl\XComboList.h" />
+    <ClInclude Include="..\Common\XListCtrl\XEdit.h" />
+    <ClInclude Include="..\Common\XListCtrl\XHeaderCtrl.h" />
+    <ClInclude Include="..\Common\XListCtrl\XListCtrl.h" />
+    <ClInclude Include="..\Common\XListCtrl\XTrace.h" />
+    <ClInclude Include="Data\Config.h" />
+    <ClInclude Include="Data\DataBlock.h" />
+    <ClInclude Include="Data\DefIOAddr.h" />
+    <ClInclude Include="Data\LineData.h" />
+    <ClInclude Include="Data\RecipeBase.h" />
+    <ClInclude Include="Data\RecipeData.h" />
+    <ClInclude Include="Data\Rectdouble.h" />
+    <ClInclude Include="Data\RoiBase.h" />
+    <ClInclude Include="Data\RoiData.h" />
+    <ClInclude Include="DlgObject.h" />
+    <ClInclude Include="Engine\EdgesSubPix.h" />
+    <ClInclude Include="Engine\imgprocbase.h" />
+    <ClInclude Include="IniUtil.h" />
+    <ClInclude Include="ProcessingClass.h" />
+    <ClInclude Include="RoilibApp.h" />
+    <ClInclude Include="RoilibAppDoc.h" />
+    <ClInclude Include="RoilibAppView.h" />
+    <ClInclude Include="CustomRibbonBar.h" />
+    <ClInclude Include="DlgConfig.h" />
+    <ClInclude Include="DlgRecipeSet.h" />
+    <ClInclude Include="Engine\blob.h" />
+    <ClInclude Include="Engine\BlobContour.h" />
+    <ClInclude Include="Engine\BlobLibraryConfiguration.h" />
+    <ClInclude Include="Engine\BlobOperators.h" />
+    <ClInclude Include="Engine\BlobResult.h" />
+    <ClInclude Include="Engine\ComponentLabeling.h" />
+    <ClInclude Include="Engine\ImgProcEngine.h" />
+    <ClInclude Include="FrmProperty.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="LogWnd.h" />
+    <ClInclude Include="PropertiesWnd.h" />
+    <ClInclude Include="RecipeView.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Common\PropertyGrid\DynDialogEx.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\DynDialogItemEx.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\ListDynDialogEx.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGrid.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridCombo.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridDirectoryPicker.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridInPlaceEdit.cpp" />
+    <ClCompile Include="..\Common\PropertyGrid\PropertyGridMonthCalCtrl.cpp" />
+    <ClCompile Include="..\Common\ui\DrawDoc.cpp" />
+    <ClCompile Include="..\Common\ui\DrawObj.cpp" />
+    <ClCompile Include="..\Common\ui\DrawTool.cpp" />
+    <ClCompile Include="..\Common\ui\DrawVw.cpp" />
+    <ClCompile Include="..\Common\ui\ScrollViewEx.cpp" />
+    <ClCompile Include="..\Common\ui\Sdiapp.cpp" />
+    <ClCompile Include="..\Common\ui\Sdiframe.cpp" />
+    <ClCompile Include="..\Common\Utils\Direct_Info.cpp" />
+    <ClCompile Include="..\Common\Utils\FileOperations.cpp" />
+    <ClCompile Include="..\Common\Utils\Log.cpp" />
+    <ClCompile Include="..\Common\Utils\MSExcel.cpp" />
+    <ClCompile Include="..\Common\Utils\OLEMethod.cpp" />
+    <ClCompile Include="..\Common\Utils\Path.cpp" />
+    <ClCompile Include="..\Common\Utils\String.cpp" />
+    <ClCompile Include="..\Common\Utils\Tokenizer.cpp" />
+    <ClCompile Include="..\Common\Utils\UI_Object.cpp" />
+    <ClCompile Include="..\Common\Utils\Utils.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\AdvComboBox.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\AdvComboEdit.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\DropListBox.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\DropScrollBar.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\DropWnd.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\VisualStylesXP.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\XCombo.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\XComboList.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\XEdit.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\XHeaderCtrl.cpp" />
+    <ClCompile Include="..\Common\XListCtrl\XListCtrl.cpp" />
+    <ClCompile Include="Data\Config.cpp" />
+    <ClCompile Include="Data\DataBlock.cpp" />
+    <ClCompile Include="Data\LineData.cpp" />
+    <ClCompile Include="Data\RecipeBase.cpp" />
+    <ClCompile Include="Data\RecipeData.cpp" />
+    <ClCompile Include="Data\Rectdouble.cpp" />
+    <ClCompile Include="Data\RoiBase.cpp" />
+    <ClCompile Include="Data\RoiData.cpp" />
+    <ClCompile Include="DlgObject.cpp" />
+    <ClCompile Include="Engine\EdgesSubPix.cpp" />
+    <ClCompile Include="Engine\imgprocbase.cpp" />
+    <ClCompile Include="IniUtil.cpp" />
+    <ClCompile Include="ProcessingClass.cpp" />
+    <ClCompile Include="RoilibApp.cpp" />
+    <ClCompile Include="RoilibAppDoc.cpp" />
+    <ClCompile Include="RoilibAppView.cpp" />
+    <ClCompile Include="CustomRibbonBar.cpp" />
+    <ClCompile Include="DlgConfig.cpp" />
+    <ClCompile Include="DlgRecipeSet.cpp" />
+    <ClCompile Include="Engine\blob.cpp" />
+    <ClCompile Include="Engine\BlobContour.cpp" />
+    <ClCompile Include="Engine\BlobOperators.cpp" />
+    <ClCompile Include="Engine\BlobResult.cpp" />
+    <ClCompile Include="Engine\ComponentLabeling.cpp" />
+    <ClCompile Include="Engine\ImgProcEngine.cpp" />
+    <ClCompile Include="FrmProperty.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="LogWnd.cpp" />
+    <ClCompile Include="PropertiesWnd.cpp" />
+    <ClCompile Include="RecipeView.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RoilibApp.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Common\XListCtrl\checkboxes.bmp" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmap2.bmp" />
+    <Image Include="res\GridBrush.bmp" />
+    <Image Include="res\gtmain32.bmp" />
+    <Image Include="res\hsmain32.bmp" />
+    <Image Include="res\lgmain.bmp" />
+    <Image Include="res\lgmain32.bmp" />
+    <Image Include="res\mainribbon.bmp" />
+    <Image Include="res\mainribbonsmall.bmp" />
+    <Image Include="res\navi_wnd.ico" />
+    <Image Include="res\navi_wnd_hc.ico" />
+    <Image Include="res\Splash.bmp" />
+    <Image Include="res\yjmain32.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="roilibapp.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
