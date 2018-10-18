@@ -3,7 +3,7 @@
 // All rights reserved by jerry1455@gmail.com
 //
 
-// MainFrm.cpp : CMainFrame 클래스의 구현
+// MainFrm.cpp : CMainFrame 클래스의 구현.
 //
 
 #include "stdafx.h"
@@ -367,7 +367,7 @@ void CMainFrame::SetDockingWindowIcons(BOOL bHiColorIcons)
 
 }
 
-// CMainFrame 진단
+// CMainFrame 진단.
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -562,7 +562,7 @@ void CMainFrame::OnClose()
 }
 
 //
-// 메세지 처리 루틴
+// 메세지 처리 루틴.
 //
 
 // CLogBarWnd Window(Pain Win)에 Log를 추가한다.
@@ -811,11 +811,11 @@ LRESULT CMainFrame::OnPropertyAdd(WPARAM wParam, LPARAM lParam)
     if (pObj->m_pParent)
         pObj = pObj->m_pParent;
 
-    if (wParam&BUTTON_PRESS) { //  마우스버턴을 눌렀을때
+    if (wParam&BUTTON_PRESS) { //  마우스버턴을 눌렀을때.
         m_wndProperties.AddPropertyItem(pObj);
     }
 
-    if (wParam&BUTTON_RELEASE) // 마우스버턴을 띄었을때
+    if (wParam&BUTTON_RELEASE) // 마우스버턴을 띄었을때.
     {
         m_pRecipeView->ClearTracker();
 
@@ -1008,7 +1008,7 @@ void CMainFrame::OnInspectionStart()
         if (theApp.m_vecProcessingClass.size() <= nCh)
             break;
         CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[nCh];
-        if (pProcessingClass->cimg == NULL) // 이 채널에 카메라가 없다
+        if (pProcessingClass->cimg == NULL) // 이 채널에 카메라가 없다.
             break;
 
         int sx = pProcessingClass->cimg->width;

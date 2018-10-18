@@ -120,7 +120,7 @@ BOOL CRecipeView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 
-// CRecipeView 그리기
+// CRecipeView 그리기.
 
 void CRecipeView::OnDraw(CDC* pDC)
 {
@@ -243,7 +243,7 @@ void CRecipeView::OnInitialUpdate()
 
     theApp.m_ImgProcEngine.InitEngine(theApp.m_nSelectCh);
 
-    SetTimer(0, 50, 0); // Camera preview 용
+    SetTimer(0, 50, 0); // Camera preview 용.
 }
 
 void CRecipeView::DrawGride(CDC* pDC)
@@ -288,7 +288,7 @@ void CRecipeView::DrawGride(CDC* pDC)
     pDC->SelectObject (pOldPen);
 }
 
-// CRecipeView 진단
+// CRecipeView 진단.
 
 #ifdef _DEBUG
 void CRecipeView::AssertValid() const
@@ -309,7 +309,7 @@ CRoilibAppDoc* CRecipeView::GetDocument() const // 디버그되지 않은 버전
 #endif //_DEBUG
 
 
-// CRecipeView 메시지 처리기
+// CRecipeView 메시지 처리기.
 
 void CRecipeView::SetZoomCal(double zf) {
     SetZoomFactor(zf);
@@ -592,14 +592,14 @@ void CRecipeView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
                 // Zoom이 변할때 한번만 계산하면 된다.
                 long x1 = 0; long y1 = 0;	GetImageXY(pDoc, ima, &x1, &y1);
                 long x2 = (rClient.right - rClient.left); long y2 = (rClient.bottom - rClient.top);
-                GetImageXY(pDoc, ima, &x2, &y2); // 실제 이미지가 표시되는 영역을 얻어옴
+                GetImageXY(pDoc, ima, &x2, &y2); // 실제 이미지가 표시되는 영역을 얻어옴.
 
                 double zf = GetOldZoomFactor(); SetZoomFactor(GetZoomFactor());
                 long x3 = 0; long y3 = 0;	GetImageXY(pDoc, ima, &x3, &y3, zf);
                 long x4 = (rClient.right - rClient.left); long y4 = (rClient.bottom - rClient.top);
-                GetImageXY(pDoc, ima, &x4, &y4, zf); // Zoom 이전에 이미지가 표시되는 영역을 얻어옴
+                GetImageXY(pDoc, ima, &x4, &y4, zf); // Zoom 이전에 이미지가 표시되는 영역을 얻어옴.
 
-                int vh = (((x4-x3) - (x2-x1)) / 2) * GetZoomFactor() ; // 변화된 화면 Scroll 범위의 반
+                int vh = (((x4-x3) - (x2-x1)) / 2) * GetZoomFactor() ; // 변화된 화면 Scroll 범위의 반.
                 int vv = (((y4-y3) - (y2-y1)) / 2) * GetZoomFactor() ;
                 //
 
@@ -1163,7 +1163,7 @@ void CRecipeView::OnRecipeGrabStart()
     if (theApp.m_vecProcessingClass.size() >= nCh)
     {
         CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[nCh];
-        pProcessingClass->AreaCamImageGrab(TRUE);	// iplImage에 저장
+        pProcessingClass->AreaCamImageGrab(TRUE);	// iplImage에 저장.
         if (pProcessingClass->cimg == NULL)
             return;
 

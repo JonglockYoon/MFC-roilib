@@ -4,7 +4,7 @@
 //
 
 
-// RoilibAppDoc.cpp : CRoilibAppDoc 클래스의 구현
+// RoilibAppDoc.cpp : CRoilibAppDoc 클래스의 구현.
 //
 
 #include "stdafx.h"
@@ -32,7 +32,7 @@ BEGIN_MESSAGE_MAP(CRoilibAppDoc, CDrawDoc)
 END_MESSAGE_MAP()
 
 
-// CRoilibAppDoc 생성/소멸
+// CRoilibAppDoc 생성/소멸.
 
 CRoilibAppDoc::CRoilibAppDoc()
 {
@@ -221,7 +221,7 @@ void CRoilibAppDoc::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CRoilibAppDoc 명령
+// CRoilibAppDoc 명령.
 
 void CRoilibAppDoc::OnRecipeLoad()
 {

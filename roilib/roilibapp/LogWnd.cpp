@@ -132,7 +132,7 @@ BEGIN_MESSAGE_MAP(CLogList, CListBox)
     ON_WM_WINDOWPOSCHANGING()
 END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
-// CLogList 메시지 처리기
+// CLogList 메시지 처리기.
 
 void CLogList::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 {

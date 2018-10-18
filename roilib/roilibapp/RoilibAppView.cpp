@@ -157,7 +157,7 @@ void CRoilibAppView::OnDraw(CDC* pDC)
         int x = rect.left + rect.Width() / 2;
         int y = rect.top + rect.Height() / 2;
 
-        double dX = gCfg.m_dRulerMaxX / rect.right; // 1개 dot당 거리
+        double dX = gCfg.m_dRulerMaxX / rect.right; // 1개 dot당 거리.
         double dY = gCfg.m_dRulerMaxY / rect.bottom;
 
         pDC->SelectObject(pOldPen);
@@ -815,7 +815,7 @@ void CRoilibAppView::OnMouseMove(UINT nFlags, CPoint point)
         statusBar.Invalidate();
     }
 
-    //CDrawTool::c_drawShape = moving; // RoilibAppView는 이미지 이동만 지원
+    //CDrawTool::c_drawShape = moving; // RoilibAppView는 이미지 이동만 지원.
     CDrawView::OnMouseMove(nFlags, point);
 }
 
@@ -915,14 +915,14 @@ void CRoilibAppView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
                 // Zoom이 변할때 한번만 계산하면 된다.
                 long x1 = 0; long y1 = 0;	GetImageXY(m_ximage, &x1,&y1);
                 long x2 = (rClient.right - rClient.left); long y2 = (rClient.bottom - rClient.top);
-                GetImageXY(m_ximage, &x2,&y2); // 실제 이미지가 표시되는 영역을 얻어옴
+                GetImageXY(m_ximage, &x2,&y2); // 실제 이미지가 표시되는 영역을 얻어옴.
 
                 double zf = GetOldZoomFactor(); SetZoomFactor(GetZoomFactor());
                 long x3 = 0; long y3 = 0;	GetImageXY(m_ximage, &x3,&y3, zf);
                 long x4 = (rClient.right - rClient.left); long y4 = (rClient.bottom - rClient.top);
-                GetImageXY(m_ximage, &x4,&y4, zf); // Zoom 이전에 이미지가 표시되는 영역을 얻어옴
+                GetImageXY(m_ximage, &x4,&y4, zf); // Zoom 이전에 이미지가 표시되는 영역을 얻어옴.
 
-                int vh = (((x4-x3) - (x2-x1)) / 2) * GetZoomFactor() ; // 변화된 화면 Scroll 범위의 반
+                int vh = (((x4-x3) - (x2-x1)) / 2) * GetZoomFactor() ; // 변화된 화면 Scroll 범위의 반.
                 int vv = (((y4-y3) - (y2-y1)) / 2) * GetZoomFactor() ;
                 //
 

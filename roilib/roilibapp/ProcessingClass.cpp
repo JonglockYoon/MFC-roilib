@@ -38,7 +38,7 @@ UINT CProcessingClass::ThreadInspProcessing(LPVOID pParam){
     while (pProcessingClass->m_bInspProcessRun)
     {
         DWORD state = WaitForSingleObject(pProcessingClass->m_hProcessEvent, 50); // 50ms대기
-        //if(state == WAIT_TIMEOUT)            // 이벤트가 발생하지 않은 경우
+        //if(state == WAIT_TIMEOUT)            // 이벤트가 발생하지 않은 경우.
         //	continue;
 
         ::ResetEvent(pProcessingClass->m_hProcessEvent);
@@ -89,8 +89,8 @@ void CProcessingClass::GrabImageSave(CString sName)
     g_cLog->AddLog(sPath, _LOG_LIST_INSP);
 }
 
-// bGrab==TRUE이면 iplImage buffer로
-// m_bPreviewMode==TRUE이면 previewImage buffer로
+// bGrab==TRUE이면 iplImage buffer로.
+// m_bPreviewMode==TRUE이면 previewImage buffer로.
 BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
 {
     BOOL bRet = FALSE;
@@ -108,7 +108,7 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
 
         theApp.cs.Lock();
 
-        theApp.cap[nCam] >> mat;		// 동시 그랩이 안되에 cs 이용
+        theApp.cap[nCam] >> mat;		// 동시 그랩이 안되에 cs 이용.
         theApp.cap[nCam] >> mat;		// 두번을 호출해야 최신 영상이 얻어진다..
         IplImage *s = &IplImage(mat);
         if (s != NULL)

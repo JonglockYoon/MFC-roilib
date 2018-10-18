@@ -3,144 +3,136 @@
 #include "Rectdouble.h"
 
 
-// ¿©±â¿¡ Á¤ÀÇµÈ ¼ø¼­¸¦ º¯°æÇÏ¸é ¸ğµç ·¹½ÃÇÇ ÆÄÀÏ¿¡ ¿µÇâÀ» ÁÖ¹Ç·Î
-// ¼ø¼­º¯°æ½Ã¿¡´Â ·¹½ÃÇÇ ini ÆÄÀÏÀÇ nInspectTypeµµ °°ÀÌ º¯°æÇØ¾ßÇÑ´Ù.
+// ì—¬ê¸°ì— ì •ì˜ëœ ìˆœì„œë¥¼ ë³€ê²½í•˜ë©´ ëª¨ë“  ë ˆì‹œí”¼ íŒŒì¼ì— ì˜í–¥ì„ ì£¼ë¯€ë¡œ
+// ìˆœì„œë³€ê²½ì‹œì—ëŠ” ë ˆì‹œí”¼ ini íŒŒì¼ì˜ nInspectTypeë„ ê°™ì´ ë³€ê²½í•´ì•¼í•œë‹¤.
 typedef enum _tagInspectType
 {
-	_Inspect_Patt_Start = 0,
-	_Inspect_Patt_End,		// ÆĞÅÏ¸¶Áö¸·
+        _Inspect_Patt_Start = 0,
+        _Inspect_Patt_End,		// íŒ¨í„´ë§ˆì§€ë§‰.
 
-	_Inspect_Roi_Start = 100,
-	_Inspect_Roi_Circle,
-	_Inspect_BarCode,
-	_Inspect_Roi_End,			// ¿µ¿ª ¸¶Áö¸·
+        _Inspect_Roi_Start = 100,
+        _Inspect_Roi_Circle,
+        _Inspect_BarCode,
+        _Inspect_Roi_End,			// ì˜ì—­ ë§ˆì§€ë§‰.
 
-	_Inspect_Point_Start = 200,
-	_Inspect_Point_End,
+        _Inspect_Point_Start = 200,
+        _Inspect_Point_End,
 
-	_Inspect_Type_End,
+        _Inspect_Type_End,
 
 
 } InspectType;
 
 typedef struct  _Point2i
 {
-	int x, y;
+        int x, y;
 } Point2i;
 
 typedef struct  _Size2i
 {
-	int width, height;
+        int width, height;
 } Size2i;
 
 typedef struct  _Size2f
 {
-	float width, height;
+        float width, height;
 } Size2f;
 
 typedef struct  _RectI
 {
-	int left, top, right, bottom;
+        int left, top, right, bottom;
 } RectI;
 
 typedef struct  _RectF
 {
-	float left, top, right, bottom;
+        float left, top, right, bottom;
 } RectF;
 
 enum ObjectTypeList
 {
-	_ObjType_Patt,
-	_ObjType_Roi,
-	_ObjType_Point,
-	_ObjType_Line,
-	_ObjType_Number
+        _ObjType_Patt,
+        _ObjType_Roi,
+        _ObjType_Point,
+        _ObjType_Line,
+        _ObjType_Number
 };
 
 struct	DOUBLE_POINT{
-	double x;
-	double y;
-	DOUBLE_POINT(){
-		x = 0;
-		y = 0;
-	};
+        double x;
+        double y;
+        DOUBLE_POINT(){
+                x = 0;
+                y = 0;
+        };
 };
 
 enum  ValueType{
-	_BoolValue,
-	_IntValue,
-	_DoubleValue,
-	_StringValue,
-	_ComboValue,
+        _BoolValue,
+        _IntValue,
+        _DoubleValue,
+        _StringValue,
+        _ComboValue,
 };
 
 enum  StepType{
-	_MaskingValue,
-	_ProcessValue1,
-	_ProcessValue2,
-	_ProcessValue3,
-	_FilterValue,
-	_PostProcessValue1,
-	_PostProcessValue2,
-	_DecideValue,
-	_PriorityValue,
-	_LightValue,
+        _MaskingValue,
+        _ProcessValue1,
+        _ProcessValue2,
+        _ProcessValue3,
+        _FilterValue,
+        _PostProcessValue1,
+        _PostProcessValue2,
+        _DecideValue,
+        _PriorityValue,
+        _LightValue,
 };
 extern CString  StepTypeValue[];
 
 class  CParam
 {
 public:
-	enum StepType		stepType;	// ¸¶½ºÅ©, ÀüÃ³¸®, Process, ÈÄÃ³¸®,...
-	int id;	// stepType³»¿¡¼­ uniqueÇÑ id
-	std::basic_string<TCHAR>	Name;
-	enum ValueType		valueType;	// _BoolValue, ...
-	std::basic_string<TCHAR>	Value;
-	std::basic_string<TCHAR>	Detail; // ComboÀÏ°æ¿ì Combo Ç×¸ñµéÀ» ÄŞ¸¶(Comma)·Î ±¸ºĞÇØ¼­ ³Ö¾îµĞ´Ù.
-	vector<std::basic_string<TCHAR>> m_vecDetail;
+        enum StepType		stepType;	// ë§ˆìŠ¤í¬, ì „ì²˜ë¦¬, Process, í›„ì²˜ë¦¬,...
+        std::basic_string<TCHAR>	Name;
+        enum ValueType		valueType;	// _BoolValue, ...
+        std::basic_string<TCHAR>	Value;
+        std::basic_string<TCHAR>	Detail; // Comboì¼ê²½ìš° Combo í•­ëª©ë“¤ì„ ì½¤ë§ˆ(Comma)ë¡œ êµ¬ë¶„í•´ì„œ ë„£ì–´ë‘”ë‹¤.
+        vector<std::basic_string<TCHAR>> m_vecDetail;
 
 public:
-	CParam(void){};
-	~CParam(void){};
-	CParam(enum StepType nStep, const int nId, CString sName, enum ValueType nType, CString sVal, CString sDetail = _T(""))
-	{
-		//TCHAR buff[64];
-		//_stprintf(buff, _T("%.3f"), dVal);
-
-		stepType = nStep;
-		id = nId;
-		Name = sName.GetString();
-		valueType = nType;
-		//std::ostringstream strs;
-		//strs << dVal;
-		//std::string str = strs.str();
-		Value = sVal.GetString();
-		Detail = sDetail.GetString();
-	};
+        CParam(void){};
+        ~CParam(void){};
+        CParam(enum StepType nStep, CString sName, enum ValueType nType, CString sVal, CString sDetail = _T(""))
+        {
+                stepType = nStep;
+                Name = sName.GetString();
+                valueType = nType;
+                Value = sVal.GetString();
+                Detail = sDetail.GetString();
+        };
 };
 
 
 class CRoiBase
 {
 public:
-	CRoiBase();
-	CRoiBase(CRect nrect);
-	virtual ~CRoiBase();
-	
-	CString sUniqueID;
-	int m_nCh;	// ROI°¡ ¼ÓÇØÀÖ´Â Channel - º¸Åë Ä«¸Ş¶ó·Î ±¸ºĞµÈ´Ù.
-	int m_nObjectType; // ÆĞÅÏ, ¿µ¿ª, Æ÷ÀÎÅÍ ±¸ºĞ; ObjectTypeList ÂüÁ¶
-	TCHAR m_sName[512]; // ROIÀÌ¸§
-	InspectType m_nInspectType; // Inspection Type, RecipeData.hÀÇ InspectType ÂüÁ¶
-	DOUBLE_POINT m_dCenterPos;	// Point Áß½ÉÁ¡ ¶Ç´Â RectÀÇ Áß½ÉÁ¡
-	CRectdouble	m_RoiArea; // ROIÀÇ ÀüÃ¼ ¿µ¿ªÀ» ³ªÅ¸³½´Ù.
-	CRectdouble ptnRoi;
-	IplImage*	iplTemplate;
+        CRoiBase();
+        CRoiBase(CRect nrect);
+        virtual ~CRoiBase();
 
-	vector<CParam> m_vecParams;	// stepType, Name, valueType, Value, Detail ¸¦ ´ãÀº vector
+        CString sUniqueID;
+        int m_nCh;	// ROIê°€ ì†í•´ìˆëŠ” Channel - ë³´í†µ ì¹´ë©”ë¼ë¡œ êµ¬ë¶„ëœë‹¤.
+        int m_nObjectType; // íŒ¨í„´, ì˜ì—­, í¬ì¸í„° êµ¬ë¶„; ObjectTypeList ì°¸ì¡°.
+        TCHAR m_sName[512]; // ROIì´ë¦„
+        InspectType m_nInspectType; // Inspection Type, RecipeData.hì˜ InspectType ì°¸ì¡°.
+        DOUBLE_POINT m_dCenterPos;	// Point ì¤‘ì‹¬ì  ë˜ëŠ” Rectì˜ ì¤‘ì‹¬ì .
+        CRectdouble	m_RoiArea; // ROIì˜ ì „ì²´ ì˜ì—­ì„ ë‚˜íƒ€ë‚¸ë‹¤.
+        CRectdouble ptnRoi;
+        IplImage*	iplTemplate;
 
-	double Width();
-	double Height();
-	CRect GetRect();
-	void SetRect(CRect nrect);
+        vector<CParam> m_vecParams;	// stepType, Name, valueType, Value, Detail ë¥¼ ë‹´ì€ vector
+
+        double Width();
+        double Height();
+        CRect GetRect();
+        void SetRect(CRect nrect);
 };

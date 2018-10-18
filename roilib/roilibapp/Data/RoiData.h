@@ -5,75 +5,38 @@
 
 typedef struct  _tagDetectResult
 {
-	int nCh;			// 0 ~ 15
-	//Result Error ID
-	int ErrorID;
-	CvPoint2D32f pt;
-	CvPoint2D32f pt1;
+        int nCh;
+        int ErrorID;
+        CvPoint2D32f pt;
+        CvPoint2D32f pt1;
 
-	//¸ğ¸àÆ® °³¼ö
-	int momentSize;
-	//°Ë»öµÈ ¿øÀÇ ¹İÁö¸§
-	double dRadius;
-	double dAngle;
-	//°Ë»ö ½Ã°£
-	double dTime;
-	//¸ÅÄª·ü
-	double dMatchRate;
+        //ëª¨ë©˜íŠ¸ ê°œìˆ˜.
+        int momentSize;
+        //ê²€ìƒ‰ëœ ì›ì˜ ë°˜ì§€ë¦„.
+        double dRadius;
+        double dAngle;
+        //ê²€ìƒ‰ ì‹œê°„.
+        double dTime;
+        //ë§¤ì¹­ë¥ .
+        double dMatchRate;
 
-	CString strResult;
+        CString strResult;
 } DetectResult;
-
-enum NG_TYPE
-{
-	_NG_ALIGN,
-	_NG_NUMBER
-};
-
-typedef struct _SpecInfomation
-{
-	BOOL	bEnable;
-
-	_SpecInfomation()
-	{
-		bEnable = FALSE;
-	};
-
-}SpecInfo;
-
 
 class CRoiData : public CRoiBase
 {
 public:
-	CRoiData();
-	virtual ~CRoiData();
+        CRoiData();
+        virtual ~CRoiData();
 
 public:
-	SpecInfo	m_tSpec[_NG_NUMBER];
-	vector<DetectResult>	m_vecDetectResult;
+        vector<DetectResult>	m_vecDetectResult;
 
-	int ReplaceParam(CParam param);
-	int AddParam(CParam param);
-	BOOL IsRegWorkList(CString sName);
-	CParam* getParam(int nId);
-	CParam* getParam(CString sName);
-
-	int nParam(int nId)
-	{
-		int n = 0;
-		CParam* pParam = getParam(nId);
-		if (pParam)	n = _ttoi(pParam->Value.c_str());
-		return n;
-	}
-	float fParam(int nId)
-	{
-		float n = 0;
-		CParam* pParam = getParam(nId);
-		if (pParam)	n = _ttof(pParam->Value.c_str());
-		return n;
-	}
-	BOOL	LoadImageData(CString path);
-	BOOL	SaveImageData(CString path);
+        int AddParam(CParam param);
+        BOOL IsRegWorkList(CString sName);
+        CParam* getParam(CString sName);
+        BOOL	LoadImageData(CString path);
+        BOOL	SaveImageData(CString path);
 };
 
 

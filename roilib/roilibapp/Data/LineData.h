@@ -3,13 +3,13 @@
 class CLineData
 {
 public:
-	CLineData(void);
-	~CLineData(void);
+        CLineData(void);
+        ~CLineData(void);
 
 public:
-	int		m_iIndex;			// LineÀÇ index	
-	CPoint	m_ptPosStart;		// LineÀÇ X ÁÂÇ¥
-	CPoint	m_ptPosEnd;			// LineÀÇ Y ÁÂÇ¥
-	double	m_dLength;			// LineÀÇ ±æÀÌ
-	CPoint	m_ptCenterOfLenght;	// Line ±æÀÌÀÇ Áß¾Ó ÀÚÇ¥ 
+        int		m_iIndex;			// Lineì˜ index
+        CPoint	m_ptPosStart;		// Lineì˜ X ì¢Œí‘œ.
+        CPoint	m_ptPosEnd;			// Lineì˜ Y ì¢Œí‘œ.
+        double	m_dLength;			// Lineì˜ ê¸¸ì´.
+        CPoint	m_ptCenterOfLenght;	// Line ê¸¸ì´ì˜ ì¤‘ì•™ ìí‘œ.
 };

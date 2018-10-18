@@ -9,68 +9,31 @@
 #include "IniUtil.h"
 #include "RecipeBase.h"
 
-//#define PATTERN_MATCHING_RATE _T("Pattern matching rate")
-
-
-enum  BOUNDARY_POSITION //_T("Boundary position") - ¿Ü°û °Ë»ç À§Ä¡ÁöÁ¤
-{
-	_BoundaryPos_Horz,
-	_BoundaryPos_Vert,
-	_BoundaryPos_Round,
-	_BoundaryPos_Half, // ROI ¿µ¿ªÀ» LEFT ¹× RIGHT ¹İÂÊÀ¸·Î Àâ¾ÒÀ»¶§
-	_BoundaryPos_Full,	// ROI¿µ¿ªÀ» ÀÌ¹ÌÁö ÀüÃ¼·Î Àâ¾ÒÀ»¶§ - GRABÀÌ¹ÌÁö Ç°ÁúÀÌ ÁÁÀ¸¸é FULL·Î ÀâÀ¸¸é µÉ°Í °°´Ù.
-	_BoundaryPos_Number
-};
-
-
-enum  PreMode //°Ë»çÅ¸ÀÔ
-{
-	PREMODE_BINARY,	//"Fixed Binary Process"
-	PREMODE_ADAPTIVE_BINARY,
-	PREMODE_EDGE,	//"Edge Process"
-};
-
-struct CEPData
-{
-	CPoint	m_ptPosStart;		// LineÀÇ X ÁÂÇ¥
-	CPoint	m_ptPosEnd;			// LineÀÇ Y ÁÂÇ¥
-};
-
 typedef struct _tagParamTable {
-	InspectType nInspectType;
-	CParam param;
+        InspectType nInspectType;
+        CParam param;
 } ParamTable;
-
-
-struct ErasePatternInformation {
-	int nCellSize;
-	vector<CEPData> m_LineList[64][64]; // X,Y Cell
-};
 
 class CRecipeData : public CRecipeBase
 {
 public:
-	CRecipeData(void);
-	virtual ~CRecipeData(void);
+        CRecipeData(void);
+        virtual ~CRecipeData(void);
 
-	SpecInfo		m_tGeneralSpec[_NG_NUMBER];
+        CString	m_sInspList[_Inspect_Type_End]; // ROI Type Table
+        vector<CRoiData*>	m_vecRoiData;	// ê° ëª¨ë¸ë³„ ëª¨ë“  ROIë“¤ì´ ë“±ë¡ë˜ì–´ ìˆëŠ” vector
+        vector<vector<CRoiData*>>	m_vecWorkRoiData;  // ëª¨ë¸ë³„ ì‹¤ì œ ê²€ì‚¬í•  ROIë§Œ ë“¤ì–´ ìˆëŠ” vector
 
-	CString	m_sInspList[_Inspect_Type_End]; // ROI Type Table
-	vector<CRoiData*>	m_vecRoiData;	// °¢ ¸ğµ¨º° ¸ğµç ROIµéÀÌ µî·ÏµÇ¾î ÀÖ´Â vector
-	vector<vector<CRoiData*>>	m_vecWorkRoiData;  // ¸ğµ¨º° ½ÇÁ¦ °Ë»çÇÒ ROI¸¸ µé¾î ÀÖ´Â vector
+        void InitParamData(void);
+        void ClearImageBuff();
+        virtual void LoadRecipeData(); //í•´ë‹¹ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê¸°ì „ì— ObjectíŒŒì¼ì„ ë¨¼ì € ë¶ˆëŸ¬ì£¼ì–´ì•¼ ëœë‹¤.
+        void UpdateOneRecipeData(CRoiData *pRoiData, int nSeq);
+        virtual void SaveRecipeData();
 
-	void InitParamData(void);
-	void ClearImageBuff();
-	virtual void LoadRecipeData(); //ÇØ´ç ÇÔ¼ö¸¦ È£ÃâÇÏ±âÀü¿¡ ObjectÆÄÀÏÀ» ¸ÕÀú ºÒ·¯ÁÖ¾î¾ß µÈ´Ù.
-	void UpdateOneRecipeData(CRoiData *pRoiData, int nSeq);
-	virtual void SaveRecipeData();
+        int GetObjectInspIndex(CString sName);
 
-	//int GetLastNewIndex();
-	//CString GetInspName(CString sName);
-	int GetObjectInspIndex(CString sName);
-
-	CString getInspName(int nInspectType);
-	int getSeq(CRoiData* pRoiData);
+        CString getInspName(int nInspectType);
+        int getSeq(CRoiData* pRoiData);
 
 };
 

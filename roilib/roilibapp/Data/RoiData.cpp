@@ -13,26 +13,6 @@ CRoiData::~CRoiData(void)
 {
 }
 
-int CRoiData::ReplaceParam(CParam param)
-{
-	CString str;
-
-	int size = m_vecParams.size();
-	for (int i = 0; i < size; i++)
-	{
-		if (param.id == m_vecParams[i].id)
-		//if (_tcscmp(param.Name.c_str(), m_vecParams[i].Name.c_str()) == 0)
-		{
-			//m_vecParams[i] = param;
-			m_vecParams[i].Value = param.Value;
-			return 0;
-		}
-	}
-
-	//m_vecParams.push_back(param);
-
-	return 0;
-}
 int CRoiData::AddParam(CParam param)
 {
 	m_vecParams.push_back(param);
@@ -49,19 +29,6 @@ BOOL CRoiData::IsRegWorkList(CString sName)
 			return TRUE;
 	}
 	return FALSE;
-}
-
-CParam* CRoiData::getParam(int nId)
-{
-	int size = m_vecParams.size();
-	for (int i = 0; i < size; i++)
-	{
-		if (nId == m_vecParams[i].id)
-		{
-			return &m_vecParams[i];
-		}
-	}
-	return NULL;
 }
 
 CParam* CRoiData::getParam(CString sName)
@@ -98,9 +65,7 @@ BOOL	CRoiData::SaveImageData(CString path)
 {
 	if (iplTemplate != NULL)
 	{
-		//cvSetImageROI(image, cvRect(ptnRoi.m_RoiArea.left, ptnRoi.m_RoiArea.top, ptnRoi.Width(), ptnRoi.Height()));
 		CT2A ascii(path); cvSaveImage(ascii, iplTemplate);
-		//cvResetImageROI(image);
 	}
 	return TRUE;
 }

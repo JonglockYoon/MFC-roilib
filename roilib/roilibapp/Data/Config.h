@@ -7,33 +7,33 @@
 
 typedef struct
 {
-	CString strFriendlyName;
-	CString		strDevPath;
+        CString strFriendlyName;
+        CString		strDevPath;
 } CAMINFO;
 
 class CButtonST;
 class CConfig
 {
 public:
-	CConfig();
-	CConfig(TCHAR *pszPath);
-	virtual ~CConfig(void);
+        CConfig();
+        CConfig(TCHAR *pszPath);
+        virtual ~CConfig(void);
 
-	CString m_sFileName;	//¼³Á¤ÆÄÀÏ¿¡ ´ëÇÑ °æ·Î
-	void ReadConfig();		//¼³Á¤ÆÄÀÏ ºÒ·¯¿À´Â ÇÔ¼ö
-	void WriteConfig();		//¼³Á¤ÆÄÀÏ ÀúÀåÇÏ´Â ÇÔ¼ö
+        CString m_sFileName;	//ì„¤ì •íŒŒì¼ì— ëŒ€í•œ ê²½ë¡œ.
+        void ReadConfig();		//ì„¤ì •íŒŒì¼ ë¶ˆëŸ¬ì˜¤ëŠ” í•¨ìˆ˜.
+        void WriteConfig();		//ì„¤ì •íŒŒì¼ ì €ì¥í•˜ëŠ” í•¨ìˆ˜.
 
-	int    m_Webcam[MAX_CH_NUM];
-	bool	m_bSaveEngineImg;
-	bool	m_bSaveGrabImg;
+        int    m_Webcam[MAX_CH_NUM];
+        bool	m_bSaveEngineImg;
+        bool	m_bSaveGrabImg;
 
-	double m_dRulerMaxY;
-	double m_dRulerMaxX;
+        double m_dRulerMaxY;
+        double m_dRulerMaxX;
 
-	CString m_Root;
+        CString m_Root;
 
-	CString m_sSaveRootDir;
-	CString m_sLastRecipeName;
+        CString m_sSaveRootDir;
+        CString m_sLastRecipeName;
 
 };
-extern CConfig gCfg;//¿ÜºÎ(´Ù¸¥ Å¬·¡½º)¿¡¼­ Á¢±ÙÇÏ±â À§ÇÑ º¯¼ö
+extern CConfig gCfg;//ì™¸ë¶€(ë‹¤ë¥¸ í´ë˜ìŠ¤)ì—ì„œ ì ‘ê·¼í•˜ê¸° ìœ„í•œ ë³€ìˆ˜.

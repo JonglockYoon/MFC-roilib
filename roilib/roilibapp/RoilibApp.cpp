@@ -101,7 +101,7 @@ CRoilibAppApp::CRoilibAppApp()
 CRoilibAppApp theApp;
 
 
-// CRoilibAppApp 초기화
+// CRoilibAppApp 초기화.
 
 BOOL CRoilibAppApp::InitInstance()
 {
@@ -149,7 +149,7 @@ BOOL CRoilibAppApp::InitInstance()
     SetRegistryKey(_T("MFC-Roilib"));
     TCHAR szCurPath[512];
 
-    GetCurrentDirectory(sizeof(szCurPath), szCurPath); // 현재 Directory Path를 가져온다. Config위치를 고정할려면 여기에 절대Path를 사용하면 된다. ex) D:\\EasyVision
+    GetCurrentDirectory(sizeof(szCurPath), szCurPath); // 현재 Directory Path를 가져온다. Config위치를 고정할려면 여기에 절대Path를 사용하면 된다.
     gCfg.m_sFileName.Format(_T("%s\\Config\\CONFIG.ini"), szCurPath);
     theApp.g_sRootPath = szCurPath;
 
@@ -236,7 +236,7 @@ int CRoilibAppApp::ExitInstance()
     return CSDIWinApp::ExitInstance();
 }
 
-// CRoilibAppApp 메시지 처리기
+// CRoilibAppApp 메시지 처리기.
 
 
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
@@ -298,7 +298,7 @@ void CRoilibAppApp::SaveCustomState()
 {
 }
 
-// CRoilibAppApp 메시지 처리기
+// CRoilibAppApp 메시지 처리기.
 
 CString _fnLoadString(UINT id, ...) {
     CString sID;
@@ -319,7 +319,7 @@ CString _fnLoadString(UINT id, ...) {
 }
 
 
-// 디버깅을 위한 함수
+// 디버깅을 위한 함수.
 int CRoilibAppApp::AddLog(CString str)
 {
     int ret = 1;
