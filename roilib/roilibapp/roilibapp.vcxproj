@@ -275,7 +275,6 @@
     <ClInclude Include="..\Common\XListCtrl\XTrace.h" />
     <ClInclude Include="BarcodeReader.h" />
     <ClInclude Include="Data\Config.h" />
-    <ClInclude Include="Data\DataBlock.h" />
     <ClInclude Include="Data\DefIOAddr.h" />
     <ClInclude Include="Data\LineData.h" />
     <ClInclude Include="Data\RecipeBase.h" />
@@ -348,7 +347,6 @@
     <ClCompile Include="..\Common\XListCtrl\XHeaderCtrl.cpp" />
     <ClCompile Include="..\Common\XListCtrl\XListCtrl.cpp" />
     <ClCompile Include="Data\Config.cpp" />
-    <ClCompile Include="Data\DataBlock.cpp" />
     <ClCompile Include="Data\LineData.cpp" />
     <ClCompile Include="Data\RecipeBase.cpp" />
     <ClCompile Include="Data\RecipeData.cpp" />

@@ -13,9 +13,20 @@ CRoiData::~CRoiData(void)
 {
 }
 
-int CRoiData::AddParam(CParam param)
+int CRoiData::ReplaceParam(CParam param)
 {
-	m_vecParams.push_back(param);
+	CString str;
+
+	int size = m_vecParams.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (_tcscmp(param.Name.c_str(), m_vecParams[i].Name.c_str()) == 0)
+		{
+			m_vecParams[i].Value = param.Value;
+			return 0;
+		}
+	}
+
 	return 0;
 }
 

@@ -176,35 +176,20 @@ void CRecipeData::LoadRecipeData()
                         while (token != NULL)
                         {
                                 if (seq == 0)	param.stepType = (enum StepType)_ttoi(token);
-                                else if (seq == 1)	param.id = _ttoi(token);
-                                else if (seq == 2)	param.Name = token;
-                                else if (seq == 3)	param.valueType = (enum ValueType)_ttoi(token);
-                                else if (seq == 4)	{
+                                else if (seq == 1)	param.Name = token;
+                                else if (seq == 2)	param.valueType = (enum ValueType)_ttoi(token);
+                                else if (seq == 3)	{
                                         CString str(token);
                                         str.TrimRight(_T(" "));	// 파일에서 ;;를 없애기위해 ; ; 처럼 공백을 추가했는데 없애기위하
                                         param.Value = str;
                                 }
-                                else if (seq == 5)	param.Detail = token;
+                                else if (seq == 4)	param.Detail = token;
                                 seq++;
                                 token = _tcstok(NULL, seps);
                         }
                         //strParam.ReleaseBuffer();
                         pRoiData->ReplaceParam(param);
                 }
-
-                strParam = ini->ReadString(str, _T("SPEC_USE"), _T(""));
-                _tcscpy(szTok, (LPCTSTR)strParam.GetBuffer(0));
-                int seq = 0;
-                token = _tcstok(szTok, _T(","));
-                while (token != NULL)
-                {
-                        pRoiData->m_tSpec[seq].bEnable = _ttoi(token);
-                        seq++;
-                        if (seq >= _NG_NUMBER)
-                                break;
-                        token = _tcstok(NULL, _T(","));
-                }
-                //strParam.ReleaseBuffer();
 
                 m_vecRoiData.push_back(pRoiData);
         }
@@ -314,16 +299,9 @@ void CRecipeData::UpdateOneRecipeData(CRoiData *pRoiData, int nSeq)
         for (int j = 0; j < nParamSize; j++) {
                 sub.Format(_T("PARAM%02d"), j);
                 CParam *pParam = &pRoiData->m_vecParams[j];
-                strParam.Format(_T("%d;%d;%s;%d;%s ;%s;"), pParam->stepType, pParam->id, pParam->Name.c_str(), pParam->valueType, pParam->Value.c_str(), pParam->Detail.c_str()); //Value 뒤에 공백을 한개 두자. _strtok()이 ;;로 붙어 있느니까 마지막으로 처라한다.
+                strParam.Format(_T("%d;%s;%d;%s ;%s;"), pParam->stepType, pParam->Name.c_str(), pParam->valueType, pParam->Value.c_str(), pParam->Detail.c_str()); //Value 뒤에 공백을 한개 두자. _strtok()이 ;;로 붙어 있느니까 마지막으로 처라한다.
                 ini->WriteString(str, sub, strParam);
         }
-
-        strParam.Empty();
-        for (int i = 0; i < _NG_NUMBER; i++) {
-                sub.Format(_T("%d,"), pRoiData->m_tSpec[i].bEnable);
-                strParam += sub;
-        }
-        ini->WriteString(str, _T("SPEC_USE"), strParam);
 
 }
 

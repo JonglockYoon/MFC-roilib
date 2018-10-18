@@ -32,8 +32,8 @@ public:
 public:
         vector<DetectResult>	m_vecDetectResult;
 
-        int AddParam(CParam param);
-        BOOL IsRegWorkList(CString sName);
+		int ReplaceParam(CParam param);
+		BOOL IsRegWorkList(CString sName);
         CParam* getParam(CString sName);
         BOOL	LoadImageData(CString path);
         BOOL	SaveImageData(CString path);

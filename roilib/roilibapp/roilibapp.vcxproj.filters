@@ -327,9 +327,6 @@
     <ClInclude Include="Data\Config.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Data\DataBlock.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="Data\DefIOAddr.h">
       <Filter>Data</Filter>
     </ClInclude>
@@ -534,9 +531,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Data\Config.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\DataBlock.cpp">
       <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="Data\LineData.cpp">
