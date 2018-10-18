@@ -31,7 +31,7 @@ class CDrawDoc;
 // CDrawObj - base class for all 'drawable objects'
 
 //
-// 변수추가할때는 CDrawObj& operator= 함수에도 넣어주세요
+// 변수추가할때는 CDrawObj& operator= 함수에도 넣어주세요.
 //
 class CDrawObj : public CObject
 {
@@ -102,16 +102,16 @@ public:
 
     // implementation data
 public:
-    //CPoint m_scrpt; // MIL일때만 사용하는 임시변수이며, GetScrollPosition()의 값을 가지고 있다
     CRoiData* m_pRoiData; // CRoiBase를 상속받는 객체중 가장 메모리공간을 크게 사용하는 객체로 Alloc해서 사용하자..
+	TCHAR m_text[512]; // Shape::text 일때 결과 string.
 public:
     CDrawObj *m_pParent;
-    enum Shape { none, point, rectangle, roundRectangle, ellipse, line, cross, roi, roipat, polygon };
+    enum Shape { none, point, rectangle, roundRectangle, ellipse, line, cross, roi, roipat, polygon, text };
     Shape m_nShape;
-    BOOL m_bSizeFix; // 패턴ROI의 cross포인터에서 사용
+    BOOL m_bSizeFix; // 패턴ROI의 cross포인터에서 사용.
     double m_ZoomFactor;
 
-    int m_nSeq; // CDrawObj가 가지는 유일한값 - Undo에서 사용할려고 추가
+    int m_nSeq; // CDrawObj가 가지는 유일한값 - Undo에서 사용할려고 추가.
     enum Undo { unone, umove, uadd, udelete };
     int m_nUndoOper; // 0-none, 1-move, 2-add, 3-delete (0이면 m_objects의 CDrawObj 대체, 1이면 삭제, 2이면추가)
 protected:
@@ -168,7 +168,7 @@ public:
     virtual void Remove();
 
 protected:
-    CPoint m_roundness; // for roundRect corners -> roundRectangle일때
+    CPoint m_roundness; // for roundRect corners -> roundRectangle일때.
 
     friend class CRectTool;
     friend class CDrawRoiPat;

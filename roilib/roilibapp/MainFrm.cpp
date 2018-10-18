@@ -1041,15 +1041,28 @@ void CMainFrame::OnInspectionStart()
             for (int i = 0; i < size; i++) {
                 DetectResult *prst = &pData->m_vecDetectResult[i];
 
-                CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x, prst->pt.y, prst->pt1.x, prst->pt1.y));
-                pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
-                pObj->SetLineColor(RGB(255, 0, 0));
-                pObj->m_pDocument = pDoc;
-                pObj->m_nShape = CDrawObj::ellipse;
-                pObj->m_ZoomFactor = pView->GetZoomFactor();
-                pObj->SetLineWidth(2);
-                _stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
-                pView->m_otherObjects.AddTail(pObj);
+				if (pData->m_nInspectType == _Inspect_BarCode)
+				{
+					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 30));
+					_tcscpy(pObj->m_text, prst->strResult);
+					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
+					pObj->m_pDocument = pDoc;
+					pObj->m_nShape = CDrawObj::text;
+					pObj->m_ZoomFactor = pView->GetZoomFactor();
+					_stprintf(pObj->m_pRoiData->m_sName, _T(""));
+					pView->m_otherObjects.AddTail(pObj);
+				}
+				else {
+					CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x, prst->pt.y, prst->pt1.x, prst->pt1.y));
+					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
+					pObj->SetLineColor(RGB(255, 0, 0));
+					pObj->m_pDocument = pDoc;
+					pObj->m_nShape = CDrawObj::ellipse;
+					pObj->m_ZoomFactor = pView->GetZoomFactor();
+					pObj->SetLineWidth(2);
+					_stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
+					pView->m_otherObjects.AddTail(pObj);
+				}
             }
         }
         pView->Invalidate();

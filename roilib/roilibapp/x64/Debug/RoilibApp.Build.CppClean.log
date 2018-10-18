@@ -18,8 +18,10 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\blobresult.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\componentlabeling.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\imgprocengine.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\frmproperty.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\mainfrm.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\logwnd.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\propertieswnd.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\recipeview.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\advcomboedit.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\droplistbox.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\dropscrollbar.obj
@@ -66,16 +68,12 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\listdyndialogex.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\propertygrid.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\propertygridcombo.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\propertygriddirectorypicker.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\mainfrm.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\recipeview.obj
 d:\qt\mfc-roilib\roilib\x64\debug\roilibapp.ilk
 d:\qt\mfc-roilib\roilib\x64\debug\roilibapp.exe
 d:\qt\mfc-roilib\roilib\x64\debug\roilibapp.pdb
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\roilibapp.res
 d:\qt\mfc-roilib\roilib\x64\debug\roilibapp.lib
 d:\qt\mfc-roilib\roilib\x64\debug\roilibapp.exp
-d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\imgprocengine.obj.enc
-d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\recipeview.obj.enc
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\roilibapp.tlog\cl.command.1.tlog
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\roilibapp.tlog\cl.read.1.tlog
 d:\qt\mfc-roilib\roilib\roilibapp\x64\debug\roilibapp.tlog\cl.write.1.tlog

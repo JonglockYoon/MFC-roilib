@@ -63,12 +63,7 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 		SingleROICircle(nCh, croppedImage, pData, rect);
 		break;
 	case _Inspect_BarCode:
-		str = SingleROIBarCode(nCh, croppedImage, pData, rect);
-		std::string code = common::wstr2str(str.GetBuffer(0));
-
-		cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0, 0, 3, CV_AA);
-		cvPutText(img, code.c_str(), cvPoint(10, 10), &font, cvScalar(126, 126, 126, 0));
-
+		SingleROIBarCode(nCh, croppedImage, pData, rect);
 		break;
 	}
 	cvReleaseImage(&croppedImage);
@@ -89,7 +84,7 @@ int CImgProcEngine::SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *p
 
 	return n;
 }
-CString CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
+int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
@@ -99,12 +94,15 @@ CString CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiDa
 		(unsigned char*)pimg->imageData, pimg->widthStep * 1, 1, 0, 1, 2); // BW Image
 	auto bitmap = new ZXing::HybridBinarizer(binImg);
 	auto result = pMainFrame->_bcreader->read(*bitmap);
+	delete bitmap;
 	if (result.isValid()) {
 		str = CString(result.text().c_str());
 		TRACE(_T("Barcode : %d\n"), str);
+		m_DetectResult.strResult = str;
+		pData->m_vecDetectResult.push_back(m_DetectResult);
+		return 0;
 	}
-	delete bitmap;
-	return str;
+	return -1;
 }
 
 void CImgProcEngine::SaveOutImage(IplImage* pImgOut, int nCh, CString strMsg, BOOL bClear/*=FALSE*/)

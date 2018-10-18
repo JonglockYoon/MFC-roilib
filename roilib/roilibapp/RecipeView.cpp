@@ -1135,13 +1135,6 @@ void CRecipeView::OnRecipeImageload()
     if (FileExists(filename) == true) {
         CT2A ascii(filename);
         pProcessingClass->iplImage = cvLoadImage(ascii, 0);
-
-		theApp.cs.Lock();
-		if (pProcessingClass->cimg)
-			cvReleaseImage(&pProcessingClass->cimg);
-		pProcessingClass->cimg = cvCreateImage(cvSize(pProcessingClass->iplImage->width, pProcessingClass->iplImage->height), IPL_DEPTH_8U, 3);
-		cvCvtColor(pProcessingClass->iplImage, pProcessingClass->cimg, CV_GRAY2RGB);
-		theApp.cs.Unlock();
 	}
 
 
@@ -1226,20 +1219,35 @@ void CRecipeView::OnRecipeInspection()
             pData->m_vecDetectResult.clear();
             theApp.m_ImgProcEngine.InspectOneItem(nCh, pProcessingClass->iplImage, pData);
 
-            int size = pData->m_vecDetectResult.size();
-            for (int i = 0; i < size; i++) {
-                DetectResult *prst = &pData->m_vecDetectResult[i];
 
-                CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x, prst->pt.y, prst->pt1.x, prst->pt1.y));
-                pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
-                pObj->SetLineColor(RGB(255, 0, 0));
-                pObj->m_pDocument = pDoc;
-                pObj->m_nShape = CDrawObj::ellipse;
-                pObj->m_ZoomFactor = GetZoomFactor();
-                pObj->SetLineWidth(2);
-                _stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
-                m_otherObjects.AddTail(pObj);
-            }
+			int size = pData->m_vecDetectResult.size();
+			for (int i = 0; i < size; i++) {
+				DetectResult *prst = &pData->m_vecDetectResult[i];
+
+				if (pData->m_nInspectType == _Inspect_BarCode)
+				{
+					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 30));
+					_tcscpy(pObj->m_text, prst->strResult);
+					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
+					pObj->m_pDocument = pDoc;
+					pObj->m_nShape = CDrawObj::text;
+					pObj->m_ZoomFactor = GetZoomFactor();
+					_stprintf(pObj->m_pRoiData->m_sName, _T(""));
+					m_otherObjects.AddTail(pObj);
+				}
+				else {
+					CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x, prst->pt.y, prst->pt1.x, prst->pt1.y));
+					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
+					pObj->SetLineColor(RGB(255, 0, 0));
+					pObj->m_pDocument = pDoc;
+					pObj->m_nShape = CDrawObj::ellipse;
+					pObj->m_ZoomFactor = GetZoomFactor();
+					pObj->SetLineWidth(2);
+					_stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
+					m_otherObjects.AddTail(pObj);
+				}
+			}
+
         }
     }
     pMainFrame->Invalidate();

@@ -1,6 +1,6 @@
 // author : jerry1455@gmail.com
 // DrawObj.cpp - implementation for drawing objects
-//    Prof-UIS의 DRAWCLI Project에 가져와서 구현
+//    Prof-UIS의 DRAWCLI Project에 가져와서 구현.
 //
 
 
@@ -12,7 +12,7 @@
 
 //IMPLEMENT_SERIAL(CDrawObj, CObject, 0)
 
-static int nLastSeq = 0; // Undo에서 사용할 Unique Seq 번호
+static int nLastSeq = 0; // Undo에서 사용할 Unique Seq 번호.
 
 //CDrawObj::CDrawObj() : m_pParent(NULL), m_ZoomFactor(1.0)
 //{
@@ -244,19 +244,19 @@ void CDrawObj::Draw(CDC* pDC)
         LOGFONT m_logfont;
         //CFont m_font;
 
-        //m_logfont.lfHeight = 16; // 폰트의 너비와높이
+        //m_logfont.lfHeight = 16; // 폰트의 너비와높이.
         m_logfont.lfHeight = fontHeight;
         m_logfont.lfWeight = 0;
-        m_logfont.lfEscapement = 0; // 기울어진 각도
+        m_logfont.lfEscapement = 0; // 기울어진 각도.
         m_logfont.lfOrientation = 0;
-        m_logfont.lfWeight = FW_NORMAL; // 굵기
-        m_logfont.lfItalic = FALSE; // 기울임꼴과밑줄
+        m_logfont.lfWeight = FW_NORMAL; // 굵기.
+        m_logfont.lfItalic = FALSE; // 기울임꼴과밑줄.
         m_logfont.lfUnderline = FALSE;
-        m_logfont.lfStrikeOut = FALSE;  //취소선과 문자셋트
+        m_logfont.lfStrikeOut = FALSE;  //취소선과 문자셋트.
         m_logfont.lfCharSet = DEFAULT_CHARSET;
-        m_logfont.lfOutPrecision = OUT_CHARACTER_PRECIS;  //출력정확도
-        m_logfont.lfClipPrecision = CLIP_CHARACTER_PRECIS; //클립핑정확도
-        m_logfont.lfQuality = DEFAULT_QUALITY; //출력의질과시간
+        m_logfont.lfOutPrecision = OUT_CHARACTER_PRECIS;  //출력정확도.
+        m_logfont.lfClipPrecision = CLIP_CHARACTER_PRECIS; //클립핑정확도.
+        m_logfont.lfQuality = DEFAULT_QUALITY; //출력의질과시간.
         m_logfont.lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
         _tcscpy(m_logfont.lfFaceName, fontFaceName);
         pFont->CreateFontIndirect(&m_logfont);
@@ -300,7 +300,7 @@ void CDrawObj::Draw(CDC* pDC)
         rect.right = (LONG)(rect.right * m_ZoomFactor);
         rect.top = (LONG)(rect.top * m_ZoomFactor);
         rect.bottom = (LONG)(rect.bottom * m_ZoomFactor);
-        rect.right = rect.left;// +(16 * len); // n개 글자
+        rect.right = rect.left;// +(16 * len); // n개 글자.
         rect.bottom = rect.top;// +16;
 
         rect += m_textOffset;
@@ -854,7 +854,8 @@ void CDrawRect::Draw(CDC* pDC)
     roundPt.x *= (LONG)((double)m_ZoomFactor);
     roundPt.y *= (LONG)((double)m_ZoomFactor);
 
-    switch (m_nShape)
+	RECT rc;
+	switch (m_nShape)
     {
     case roi:
     case rectangle:
@@ -933,6 +934,11 @@ void CDrawRect::Draw(CDC* pDC)
 
         break;
 
+	case text:
+		::SetRect(&rc, rect.left, rect.top, rect.Width(), rect.Height());
+		::DrawText(*pDC, m_text, _tcslen(m_text), &rc, DT_LEFT | DT_EXTERNALLEADING | DT_WORDBREAK);
+
+		break;
     }
 
 

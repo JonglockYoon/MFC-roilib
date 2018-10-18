@@ -20,6 +20,8 @@ typedef struct  _tagDetectResult
 	double dTime;
 	//¸ÅÄª·ü
 	double dMatchRate;
+
+	CString strResult;
 } DetectResult;
 
 enum NG_TYPE
