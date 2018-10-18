@@ -26,10 +26,10 @@
 #pragma comment(lib,"wininet.lib")
 #pragma comment(lib,"crypt32.lib")
 #pragma comment(lib,"Setupapi.lib")
-#pragma comment (lib, "./pthread/pthreadVC1.lib")
+#pragma comment (lib, "./pthread/pthreadVC.lib")
 
 #ifdef _DEBUG
-#pragma comment (lib, "../lib/opencv_world340d.lib")
+#pragma comment (lib, "c:/opencv/build/x64/vc14/lib/opencv_world340d.lib")
 #pragma comment (lib, "../../cximage/lib/libdcr.lib")
 #pragma comment (lib, "../../cximage/lib/png.lib")
 #pragma comment (lib, "../../cximage/lib/jpeg.lib")
@@ -40,7 +40,7 @@
 #pragma comment (lib, "../../cximage/lib/mng.lib")
 #pragma comment (lib, "../../cximage/lib/cximage.lib")
 #else
-#pragma comment (lib, "../lib/opencv_world340.lib")
+#pragma comment (lib, "c:/opencv/build/x64/vc14/lib/opencv_world340.lib")
 #pragma comment (lib, "../../cximage/lib/libdcr.lib")
 #pragma comment (lib, "../../cximage/lib/png.lib")
 #pragma comment (lib, "../../cximage/lib/jpeg.lib")

@@ -106,13 +106,13 @@ BOOL CRoilibAppDoc::OnSaveDocument(LPCTSTR lpszPathName)
         pximage = pView->m_ximage;
     }
     if (pximage == NULL) {
-        AfxMessageBox(_T("이미지정보가 없어 저장하지 못하였습니다"));
+        AfxMessageBox(_T("Did not saved image, there is no image information."));
         return false;
     }
     int cx = pximage->GetWidth();
     int cy = pximage->GetHeight();
     if (cx <= 0 || cy <= 0) {
-        AfxMessageBox(_T("이미지정보가 없어 저장하지 못하였습니다"));
+        AfxMessageBox(_T("Did not saved image, there is no image information."));
         return false;
     }
 
@@ -127,7 +127,7 @@ BOOL CRoilibAppDoc::OnSaveDocument(LPCTSTR lpszPathName)
 
     int type = FindType(ext);
     if (type == CXIMAGE_FORMAT_UNKNOWN) {
-        AfxMessageBox(_T("확장자를 bmp 또는 png등으로 입력해야 합니다"));
+        AfxMessageBox(_T("You must enter the extensions as bmp or png, etc."));
         return false;
     }
 
