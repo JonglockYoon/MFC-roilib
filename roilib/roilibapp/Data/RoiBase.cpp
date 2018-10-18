@@ -3,9 +3,16 @@
 #include "Utils\Utils.h"
 
 CString  StepTypeValue[] = {
-	_T("MaskingValue"),	
-	_T("ProcessValue"),
+	_T("MaskingValue"),
+	_T("ProcessValue1"),
+	_T("ProcessValue2"),
+	_T("ProcessValue3"),
 	_T("FilterValue"),
+	_T("DecideValue"),
+	_T("PostProcessValue1"),
+	_T("PostProcessValue2"),
+	_T("PriorityValue(0-High)"),
+	_T("LightValue"),
 };
 
 

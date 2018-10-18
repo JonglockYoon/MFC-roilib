@@ -51,5 +51,6 @@ public:
 	void InitEngine(int nCh);
 	int InspectOneItem(int nCh, IplImage* img, CRoiData *pData);
 	int SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
+	CString SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
 };
 

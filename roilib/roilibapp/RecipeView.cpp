@@ -1122,7 +1122,6 @@ void CRecipeView::OnRecipeImageload()
     if (m_ximage[theApp.m_nSelectCh] != NULL)
         delete m_ximage[theApp.m_nSelectCh];
     m_ximage[theApp.m_nSelectCh] = new CxImage(filename, type);
-    //CxImage *image = m_ximage[theApp.m_nSelectCh];
 
     CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[theApp.m_nSelectCh];
 
@@ -1136,7 +1135,14 @@ void CRecipeView::OnRecipeImageload()
     if (FileExists(filename) == true) {
         CT2A ascii(filename);
         pProcessingClass->iplImage = cvLoadImage(ascii, 0);
-    }
+
+		theApp.cs.Lock();
+		if (pProcessingClass->cimg)
+			cvReleaseImage(&pProcessingClass->cimg);
+		pProcessingClass->cimg = cvCreateImage(cvSize(pProcessingClass->iplImage->width, pProcessingClass->iplImage->height), IPL_DEPTH_8U, 3);
+		cvCvtColor(pProcessingClass->iplImage, pProcessingClass->cimg, CV_GRAY2RGB);
+		theApp.cs.Unlock();
+	}
 
 
     CMainFrame *pMainFrame = (CMainFrame*)(AfxGetApp()->m_pMainWnd);

@@ -12,15 +12,17 @@
 CRecipeData * g_cRecipeData = NULL;
 
 ParamTable paramTable[] = {
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 5, _T("Noise out area"), _IntValue, _T("3")), // pixel size
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 6, _T("Noise out 1"), _IntValue, _T("-2")),	// -1 : Open - 작은 White blob 들을 없앤다
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 7, _T("Noise out 2"), _IntValue, _T("2")),	// 1 : Close - White blob 들을 묶는다.
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 8, _T("Smooth Use"), _ComboValue, _T("0"), _T("No,Yes")),
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 15, _T("Smooth method"), _ComboValue, _T("2"), _T("BLUR_NO_SCALE,BLUR,GAUSSIAN,CV_MEDIAN,BILATERAL ")),
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 16, _T("Smooth size"), _IntValue, _T("7")),
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 21, _T("Minimum circle radius"), _DoubleValue, _T("70")),
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 22, _T("Maximum circle radius"), _DoubleValue, _T("150")),
-	_Inspect_Roi_Circle, CParam(_ProcessValue, 23, _T("Maximum Threshold Canny"), _IntValue, _T("100")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 5, _T("Noise out area"), _IntValue, _T("3")), // pixel size
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 6, _T("Noise out 1"), _IntValue, _T("-2")),	// -1 : Open - 작은 White blob 들을 없앤다
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 7, _T("Noise out 2"), _IntValue, _T("2")),	// 1 : Close - White blob 들을 묶는다.
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 8, _T("Smooth Use"), _ComboValue, _T("0"), _T("No,Yes")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 15, _T("Smooth method"), _ComboValue, _T("2"), _T("BLUR_NO_SCALE,BLUR,GAUSSIAN,CV_MEDIAN,BILATERAL ")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 16, _T("Smooth size"), _IntValue, _T("7")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 21, _T("Minimum circle radius"), _DoubleValue, _T("70")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 22, _T("Maximum circle radius"), _DoubleValue, _T("150")),
+	_Inspect_Roi_Circle, CParam(_ProcessValue1, 23, _T("Maximum Threshold Canny"), _IntValue, _T("100")),
+
+	_Inspect_BarCode, CParam(_ProcessValue1, 5, _T("Type"), _IntValue, _T("Multiformat")),
 
 	_Inspect_Type_End, CParam(_FilterValue, 0, _T(""), _IntValue, _T("")), // 반드시 있어야한다.
 };
@@ -47,6 +49,7 @@ CRecipeData::~CRecipeData(void)
 void CRecipeData::InitParamData()
 {
 	m_sInspList[_Inspect_Roi_Circle].Format(_T("Find Circle"));
+	m_sInspList[_Inspect_BarCode].Format(_T("BarCode"));
 }
 
 void CRecipeData::ClearImageBuff()

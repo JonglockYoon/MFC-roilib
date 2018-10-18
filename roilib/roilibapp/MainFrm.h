@@ -86,6 +86,7 @@ public:
     BOOL m_bMultiNetConnected;
     ULONGLONG m_oTime;
     BOOL m_bGrabON;
+	std::shared_ptr<ZXing::MultiFormatReader> _bcreader;
 
 public:
     inline CMFCRibbonStatusBar&	  GetStatusBar() { return m_wndStatusBar; }

@@ -2,18 +2,6 @@
 
 #include "Data/Config.h"
 
-struct T_RESERVED_PROCESS{
-    CString sID;
-    int		nCh;
-    int		nStatus;
-
-    T_RESERVED_PROCESS(){
-        sID.Format(_T(""));
-        nCh = 0;
-        nStatus = 0;
-    };
-};
-
 //
 // 한개 카메라당 한개의 CProcessingClass가 운용된다.
 // theApp.m_vecProcessingClass에 등록되어 운용.
@@ -37,7 +25,6 @@ public:
     CWinThread *m_pThread;
 
     HANDLE m_hProcessEvent;
-    T_RESERVED_PROCESS m_ProcessState;
 
     void Class_Init(CMainFrame* pFrameWnd, int nGrabFrame = 0, BOOL bDigMode = true, int nCamSeq = 0);
     void Class_Destory();

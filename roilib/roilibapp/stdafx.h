@@ -51,6 +51,7 @@
 #include "PropertyGrid/PropertyGrid.h"
 
 #include "cximage/include/ximage.h"
+#include "BarcodeReader.h"
 #include <vector>
 using namespace std;
 

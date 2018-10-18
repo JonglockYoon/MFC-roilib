@@ -19,7 +19,6 @@ CProcessingClass::CProcessingClass(int nCh)
     m_bInspProcessRun = FALSE;
 
     m_pMainFrame = NULL;
-    m_ProcessState.nStatus = 0;
     m_hProcessEvent = CreateEvent(NULL, TRUE, FALSE, NULL); // Manual Reset - ResetEvent를 해주어야함
 }
 

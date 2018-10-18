@@ -85,6 +85,15 @@ CMainFrame::CMainFrame()
 
     m_bMultiNetConnected = FALSE;
     m_bGrabON = FALSE;
+
+	// ZXing init
+	bool tryHarder = false;
+	bool tryRotate = false;
+	ZXing::DecodeHints hints;
+	hints.setShouldTryHarder(tryHarder);
+	hints.setShouldTryRotate(tryRotate);
+	_bcreader = std::make_shared<ZXing::MultiFormatReader>(hints);
+
 }
 
 CMainFrame::~CMainFrame()

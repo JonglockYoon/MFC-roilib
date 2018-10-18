@@ -2,6 +2,7 @@
 #include "RoilibApp.h"
 #include "ImgProcEngine.h"
 #include "MainFrm.h"
+#include "Utils/String.h"
 
 using namespace cv;
 
@@ -41,16 +42,33 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 
 	IplImage* croppedImage;
 	CRect rect = pData->m_RoiArea.GetRect();	// Area로 등록된 ROI
+	CRect rect1 = CRect(0, 0, graySearchImg->width, graySearchImg->height);
+
+	CRect rcInter;
+	rcInter.IntersectRect(rect, rect1);
+	if (rcInter.IsRectEmpty())
+		return -1;
+
 	Point2f left_top = Point2f(rect.left, rect.top);
 	cvSetImageROI(graySearchImg, cvRect((int)left_top.x, (int)left_top.y, rect.Width(), rect.Height()));
 	croppedImage = cvCreateImage(cvSize(rect.Width(), rect.Height()), graySearchImg->depth, graySearchImg->nChannels);
 	cvCopy(graySearchImg, croppedImage);
 	cvResetImageROI(graySearchImg);
 
+	CString str;
+	CvFont font;
 	switch (pData->m_nInspectType)
 	{
 	case _Inspect_Roi_Circle:
 		SingleROICircle(nCh, croppedImage, pData, rect);
+		break;
+	case _Inspect_BarCode:
+		str = SingleROIBarCode(nCh, croppedImage, pData, rect);
+		std::string code = common::wstr2str(str.GetBuffer(0));
+
+		cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0, 0, 3, CV_AA);
+		cvPutText(img, code.c_str(), cvPoint(10, 10), &font, cvScalar(126, 126, 126, 0));
+
 		break;
 	}
 	cvReleaseImage(&croppedImage);
@@ -70,6 +88,23 @@ int CImgProcEngine::SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *p
 	}
 
 	return n;
+}
+CString CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
+{
+	CString str;
+	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
+
+	IplImage *pimg = croppedImage;
+	auto binImg = std::make_shared<ZXing::GenericLuminanceSource>((int)pimg->width, (int)pimg->height,
+		(unsigned char*)pimg->imageData, pimg->widthStep * 1, 1, 0, 1, 2); // BW Image
+	auto bitmap = new ZXing::HybridBinarizer(binImg);
+	auto result = pMainFrame->_bcreader->read(*bitmap);
+	if (result.isValid()) {
+		str = CString(result.text().c_str());
+		TRACE(_T("Barcode : %d\n"), str);
+	}
+	delete bitmap;
+	return str;
 }
 
 void CImgProcEngine::SaveOutImage(IplImage* pImgOut, int nCh, CString strMsg, BOOL bClear/*=FALSE*/)

@@ -273,6 +273,7 @@
     <ClInclude Include="..\Common\XListCtrl\XHeaderCtrl.h" />
     <ClInclude Include="..\Common\XListCtrl\XListCtrl.h" />
     <ClInclude Include="..\Common\XListCtrl\XTrace.h" />
+    <ClInclude Include="BarcodeReader.h" />
     <ClInclude Include="Data\Config.h" />
     <ClInclude Include="Data\DataBlock.h" />
     <ClInclude Include="Data\DefIOAddr.h" />

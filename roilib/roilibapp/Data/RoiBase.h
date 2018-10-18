@@ -12,6 +12,7 @@ typedef enum _tagInspectType
 
 	_Inspect_Roi_Start = 100,
 	_Inspect_Roi_Circle,
+	_Inspect_BarCode,
 	_Inspect_Roi_End,			// 영역 마지막
 
 	_Inspect_Point_Start = 200,
@@ -74,9 +75,16 @@ enum  ValueType{
 };
 
 enum  StepType{
-	_MaskingValue,	// 마스킹
-	_ProcessValue,
-	_FilterValue,	// 후처리
+	_MaskingValue,
+	_ProcessValue1,
+	_ProcessValue2,
+	_ProcessValue3,
+	_FilterValue,
+	_PostProcessValue1,
+	_PostProcessValue2,
+	_DecideValue,
+	_PriorityValue,
+	_LightValue,
 };
 extern CString  StepTypeValue[];
 
