@@ -6,13 +6,10 @@ CConfig gCfg;
 
 CConfig::CConfig()
 {
+	TCHAR szCurPath[512];
+	GetCurrentDirectory(sizeof(szCurPath), szCurPath); // 현재 Directory Path를 가져온다. 
 	m_sLastRecipeName =_T("");
-	m_sFileName.Format(_T(".\\Config\\Config.ini"));
-}
-CConfig::CConfig(TCHAR *pszPath)
-{
-	m_sLastRecipeName =_T("");
-	m_sFileName.Format(_T("%s\\Config\\CONFIG.ini"), pszPath);
+	m_sFileName.Format(_T("%s\\Config.ini"), szCurPath);
 }
 
 CConfig::~CConfig(void)

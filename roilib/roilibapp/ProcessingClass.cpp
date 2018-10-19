@@ -113,7 +113,7 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
         IplImage *s = &IplImage(mat);
         if (s != NULL)
         {
-            cvFlip(s, NULL, 1); // 좌우
+            //cvFlip(s, NULL, 1); // 좌우
 
             int sx = s->width;
             int sy = s->height;

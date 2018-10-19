@@ -148,9 +148,7 @@ BOOL CRoilibAppApp::InitInstance()
     // 적절한 내용으로 수정해야 합니다.
     SetRegistryKey(_T("MFC-Roilib"));
     TCHAR szCurPath[512];
-
-    GetCurrentDirectory(sizeof(szCurPath), szCurPath); // 현재 Directory Path를 가져온다. Config위치를 고정할려면 여기에 절대Path를 사용하면 된다.
-    gCfg.m_sFileName.Format(_T("%s\\Config\\CONFIG.ini"), szCurPath);
+    GetCurrentDirectory(sizeof(szCurPath), szCurPath); // 현재 Directory Path를 가져온다. 
     theApp.g_sRootPath = szCurPath;
 
     gCfg.ReadConfig();
@@ -276,7 +274,7 @@ void CRoilibAppApp::OnAppAbout()
     aboutDlg.DoModal();
 }
 
-// CRoilibAppApp 사용자 지정 로드/저장 메서드
+// CRoilibAppApp 사용자 지정 로드/저장 메서드.
 
 void CRoilibAppApp::PreLoadState()
 {

@@ -16,7 +16,6 @@ class CConfig
 {
 public:
         CConfig();
-        CConfig(TCHAR *pszPath);
         virtual ~CConfig(void);
 
         CString m_sFileName;	//설정파일에 대한 경로.

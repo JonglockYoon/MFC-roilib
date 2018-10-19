@@ -91,7 +91,7 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 
 	IplImage *pimg = croppedImage;
 	auto binImg = std::make_shared<ZXing::GenericLuminanceSource>((int)pimg->width, (int)pimg->height,
-		(unsigned char*)pimg->imageData, pimg->widthStep * 1, 1, 0, 1, 2); // BW Image
+		(unsigned char*)pimg->imageData, pimg->widthStep, 1, 2, 1, 0); // BW Image
 	auto bitmap = new ZXing::HybridBinarizer(binImg);
 	auto result = pMainFrame->_bcreader->read(*bitmap);
 	delete bitmap;
