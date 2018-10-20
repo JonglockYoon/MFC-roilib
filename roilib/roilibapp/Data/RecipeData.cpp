@@ -22,7 +22,9 @@ ParamTable paramTable[] = {
         _Inspect_Roi_Circle, CParam(_ProcessValue1, _T("Maximum circle radius"), _DoubleValue, _T("150")),
         _Inspect_Roi_Circle, CParam(_ProcessValue1, _T("Maximum Threshold Canny"), _IntValue, _T("100")),
 
-        _Inspect_BarCode, CParam(_ProcessValue1, _T("Type"), _IntValue, _T("Multiformat")),
+        _Inspect_BarCode, CParam(_ProcessValue1, _T("Type"), _IntValue, _T("English")),
+
+		_Inspect_Teseract, CParam(_ProcessValue1, _T("Type"), _IntValue, _T("Multiformat")),
 
         _Inspect_Type_End, CParam(_FilterValue, _T(""), _IntValue, _T("")), // 반드시 있어야한다.
 };
@@ -50,6 +52,7 @@ void CRecipeData::InitParamData()
 {
         m_sInspList[_Inspect_Roi_Circle].Format(_T("Find Circle"));
         m_sInspList[_Inspect_BarCode].Format(_T("BarCode"));
+		m_sInspList[_Inspect_Teseract].Format(_T("OCR"));
 }
 
 void CRecipeData::ClearImageBuff()

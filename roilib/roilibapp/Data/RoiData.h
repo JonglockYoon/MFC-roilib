@@ -30,7 +30,7 @@ public:
         virtual ~CRoiData();
 
 public:
-        vector<DetectResult>	m_vecDetectResult;
+		std::vector<DetectResult>	m_vecDetectResult;
 
 		int ReplaceParam(CParam param);
 		BOOL IsRegWorkList(CString sName);

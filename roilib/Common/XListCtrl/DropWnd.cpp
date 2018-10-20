@@ -34,7 +34,7 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CDropWnd
 
-CDropWnd::CDropWnd( CWnd* pComboParent, list<LIST_ITEM> &itemlist, DWORD dwACBStyle )
+CDropWnd::CDropWnd( CWnd* pComboParent, std::list<LIST_ITEM> &itemlist, DWORD dwACBStyle )
 :
 	m_pComboParent( pComboParent ),
 	m_list( itemlist ),

@@ -82,7 +82,7 @@ public:
     CRecipeView*	m_pRecipeView;			//레시피 작성을위한 View
     CRoilibAppView* m_pMainView[MAX_CH_NUM];	// 2개의 이미지 그랩View를 가짐. OnTimer에의해 연속적으로 Update된다.
 
-    vector<CAMINFO> vecCamList;
+	std::vector<CAMINFO> vecCamList;
     BOOL m_bMultiNetConnected;
     ULONGLONG m_oTime;
     BOOL m_bGrabON;

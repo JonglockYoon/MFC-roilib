@@ -135,8 +135,8 @@ void CRecipeView::OnDraw(CDC* pDC)
     if (m_brHatch.m_hObject){
         CRect rect;
         GetClientRect(&rect);
-        rect.right  = max(rect.right , m_totalDev.cx);
-        rect.bottom = max(rect.bottom, m_totalDev.cy);
+        rect.right  = MAX(rect.right , m_totalDev.cx);
+        rect.bottom = MAX(rect.bottom, m_totalDev.cy);
         m_brHatch.UnrealizeObject();
         CPoint pt(0, 0);
         pDC->LPtoDP(&pt);
@@ -1224,15 +1224,17 @@ void CRecipeView::OnRecipeInspection()
 			for (int i = 0; i < size; i++) {
 				DetectResult *prst = &pData->m_vecDetectResult[i];
 
-				if (pData->m_nInspectType == _Inspect_BarCode)
+				if (pData->m_nInspectType == _Inspect_BarCode || pData->m_nInspectType == _Inspect_Teseract)
 				{
-					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 30));
+					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 200, 60));
 					_tcscpy(pObj->m_text, prst->strResult);
 					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
 					pObj->m_pDocument = pDoc;
 					pObj->m_nShape = CDrawObj::text;
 					pObj->m_ZoomFactor = GetZoomFactor();
 					_stprintf(pObj->m_pRoiData->m_sName, _T(""));
+					pObj->SetTextFontSize(32);
+					pObj->SetTextColor(RGB(255, 0, 0));
 					m_otherObjects.AddTail(pObj);
 				}
 				else {

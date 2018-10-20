@@ -3,8 +3,13 @@
 #include "ImgProcEngine.h"
 #include "MainFrm.h"
 #include "Utils/String.h"
+#include <string>
+
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
 
 using namespace cv;
+using namespace std;
 
 CImgProcEngine::CImgProcEngine()
 {
@@ -49,7 +54,7 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 	if (rcInter.IsRectEmpty())
 		return -1;
 
-	Point2f left_top = Point2f(rect.left, rect.top);
+	cv::Point2f left_top = cv::Point2f(rect.left, rect.top);
 	cvSetImageROI(graySearchImg, cvRect((int)left_top.x, (int)left_top.y, rect.Width(), rect.Height()));
 	croppedImage = cvCreateImage(cvSize(rect.Width(), rect.Height()), graySearchImg->depth, graySearchImg->nChannels);
 	cvCopy(graySearchImg, croppedImage);
@@ -64,6 +69,9 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 		break;
 	case _Inspect_BarCode:
 		SingleROIBarCode(nCh, croppedImage, pData, rect);
+		break;
+	case _Inspect_Teseract:
+		SingleROIOCR(nCh, croppedImage, pData, rect);
 		break;
 	}
 	cvReleaseImage(&croppedImage);
@@ -84,6 +92,7 @@ int CImgProcEngine::SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *p
 
 	return n;
 }
+
 int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
 	CString str;
@@ -102,6 +111,43 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 		pData->m_vecDetectResult.push_back(m_DetectResult);
 		return 0;
 	}
+	return -1;
+}
+
+int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
+{
+	CString str;
+	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
+
+	// Create Tesseract object
+	tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
+	// Initialize tesseract to use English (eng) and the OEM_DEFAULT engine. 
+	const int init_failed = ocr->Init(".\\tessdata", "eng", tesseract::OEM_DEFAULT);
+	if (init_failed) {
+		fprintf(stderr, "Could not initialize tesseract.\n");
+		return -1;
+	}
+
+	// Set Page segmentation mode to PSM_AUTO (3)
+	ocr->SetPageSegMode(tesseract::PSM_AUTO);
+
+	// Open input image using OpenCV
+	cv::Mat im = cv::cvarrToMat(croppedImage);
+	
+	// Set image data
+	ocr->SetImage(im.data, im.cols, im.rows, 1, im.step); // BW color
+
+	// Run Tesseract OCR on image
+	char* rst = ocr->GetUTF8Text();
+	//string outText = string();
+
+	// print recognized text
+	//cout << outText << endl; // Destroy used object and release memory ocr->End();
+	
+
+	m_DetectResult.strResult = rst;// outText.c_str();
+	pData->m_vecDetectResult.push_back(m_DetectResult);
+	
 	return -1;
 }
 
@@ -272,7 +318,7 @@ int CImgProcEngine::ThresholdRange(CRoiData *pData, IplImage* grayImg, int nDbg)
 	if (nThresholdHighValue == 0 && nThresholdLowValue == 0)
 		return -1;
 
-	cvInRangeS(grayImg, Scalar(nThresholdLowValue), Scalar(nThresholdHighValue), grayImg);
+	cvInRangeS(grayImg, cv::Scalar(nThresholdLowValue), cv::Scalar(nThresholdHighValue), grayImg);
 
 	if (bInvert == 1)
 		cvNot(grayImg, grayImg);

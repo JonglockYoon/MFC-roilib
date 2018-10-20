@@ -29,7 +29,6 @@
 #include <tchar.h>
 typedef std::basic_string<TCHAR> tstring;
 
-using namespace std;
 typedef struct _LIST_ITEM
 {
 	tstring strText;
@@ -64,7 +63,7 @@ class CDropWnd : public CWnd
 {
 // Construction
 public:
-	CDropWnd( CWnd* pComboParent, list<LIST_ITEM> &itemlist, DWORD dwACBStyle );
+	CDropWnd( CWnd* pComboParent, std::list<LIST_ITEM> &itemlist, DWORD dwACBStyle );
 
 // Attributes
 public:
@@ -73,7 +72,7 @@ public:
 
 // Operations
 public:
-	list<LIST_ITEM>& GetList() { return m_list; }
+	std::list<LIST_ITEM>& GetList() { return m_list; }
 
 // Overrides
 	// ClassWizard generated virtual function overrides
@@ -125,8 +124,8 @@ private:
 	CWnd* m_pComboParent;
 	CFont* m_pListFont;
 
-	list<LIST_ITEM> m_list;
-	list<LIST_ITEM>::iterator m_iter;
+	std::list<LIST_ITEM> m_list;
+	std::list<LIST_ITEM>::iterator m_iter;
 
 	bool m_bResizing;
 	CPoint m_ptLastResize;

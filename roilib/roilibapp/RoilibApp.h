@@ -42,8 +42,6 @@
 #define _S	_fnLoadString
 CString _fnLoadString(UINT id, ...);
 
-using namespace cv;
-
 class CRoilibAppApp : public CSDIWinApp //CWinAppEx
 {
 public:
@@ -51,7 +49,7 @@ public:
 
 public:
     CCriticalSection	cs;
-    VideoCapture cap[16]; // 최대 16개의 Webcam Open 지원
+    cv::VideoCapture cap[16]; // 최대 16개의 Webcam Open 지원
 
     CString	g_sRootPath;
 
@@ -68,8 +66,8 @@ public:
     // Ch이 달라지면 Base이미지가 달라진다. (즉, 다른 그랩이미지)
     int	m_nSelectCh;			// 검사시 그랩 횟수 관련 영역에 대한 설정이 달라짐으로 추가됨. (Ch은 그랩 이미지 구분)
 
-    vector<RecipeListInformation>	m_vecRecipeInfo;
-    vector<CProcessingClass*> m_vecProcessingClass; // 카메라당 한개의 Class가 생성 운용된다.
+	std::vector<RecipeListInformation>	m_vecRecipeInfo;
+	std::vector<CProcessingClass*> m_vecProcessingClass; // 카메라당 한개의 Class가 생성 운용된다.
     CImgProcEngine m_ImgProcEngine;
 
 // 재정의입니다.

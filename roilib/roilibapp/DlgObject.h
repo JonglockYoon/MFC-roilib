@@ -19,7 +19,7 @@ public:
     CRoiData m_roiData;
 
     /////////////////////////////////////////////////////////////////////////////////
-    vector<std::basic_string<TCHAR>> m_sParentName;
+	std::vector<std::basic_string<TCHAR>> m_sParentName;
     int	GetParentIndex(CString sName);
     /////////////////////////////////////////////////////
 

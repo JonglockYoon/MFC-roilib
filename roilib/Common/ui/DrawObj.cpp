@@ -856,88 +856,119 @@ void CDrawRect::Draw(CDC* pDC)
 
 	RECT rc;
 	switch (m_nShape)
-    {
-    case roi:
-    case rectangle:
-        pDC->Rectangle(rect);
-        //TRACE("    =>RECT = %d,%d,%d,%d\n", rect.left, rect.top, rect.right, rect.bottom);
-        break;
+	{
+	case roi:
+	case rectangle:
+		pDC->Rectangle(rect);
+		//TRACE("    =>RECT = %d,%d,%d,%d\n", rect.left, rect.top, rect.right, rect.bottom);
+		break;
 
-    case roundRectangle:
-        pDC->RoundRect(rect, roundPt);
-        break;
+	case roundRectangle:
+		pDC->RoundRect(rect, roundPt);
+		break;
 
-    case ellipse:
-        pDC->Ellipse(rect);
-        break;
+	case ellipse:
+		pDC->Ellipse(rect);
+		break;
 
-    case line:
-        if (rect.top > rect.bottom)
-        {
-            rect.top -= m_logpen.lopnWidth.y / 2;
-            rect.bottom += (m_logpen.lopnWidth.y + 1) / 2;
-        }
-        else
-        {
-            rect.top += (m_logpen.lopnWidth.y + 1) / 2;
-            rect.bottom -= m_logpen.lopnWidth.y / 2;
-        }
+	case line:
+		if (rect.top > rect.bottom)
+		{
+			rect.top -= m_logpen.lopnWidth.y / 2;
+			rect.bottom += (m_logpen.lopnWidth.y + 1) / 2;
+		}
+		else
+		{
+			rect.top += (m_logpen.lopnWidth.y + 1) / 2;
+			rect.bottom -= m_logpen.lopnWidth.y / 2;
+		}
 
-        if (rect.left > rect.right)
-        {
-            rect.left -= m_logpen.lopnWidth.x / 2;
-            rect.right += (m_logpen.lopnWidth.x + 1) / 2;
-        }
-        else
-        {
-            rect.left += (m_logpen.lopnWidth.x + 1) / 2;
-            rect.right -= m_logpen.lopnWidth.x / 2;
-        }
+		if (rect.left > rect.right)
+		{
+			rect.left -= m_logpen.lopnWidth.x / 2;
+			rect.right += (m_logpen.lopnWidth.x + 1) / 2;
+		}
+		else
+		{
+			rect.left += (m_logpen.lopnWidth.x + 1) / 2;
+			rect.right -= m_logpen.lopnWidth.x / 2;
+		}
 
-        pDC->MoveTo(rect.TopLeft());
-        pDC->LineTo(rect.BottomRight());
-        break;
+		pDC->MoveTo(rect.TopLeft());
+		pDC->LineTo(rect.BottomRight());
+		break;
 
-    case cross:
-    case point:
+	case cross:
+	case point:
 
-        pDC->MoveTo(rect.left, rect.top + rect.Height()/2);
-        pDC->LineTo(rect.right, rect.top + rect.Height()/2);
+		pDC->MoveTo(rect.left, rect.top + rect.Height() / 2);
+		pDC->LineTo(rect.right, rect.top + rect.Height() / 2);
 
-        pDC->MoveTo(rect.left + rect.Width()/2, rect.top);
-        pDC->LineTo(rect.left + rect.Width()/2, rect.bottom);
+		pDC->MoveTo(rect.left + rect.Width() / 2, rect.top);
+		pDC->LineTo(rect.left + rect.Width() / 2, rect.bottom);
 
-        break;
+		break;
 
-    //case roi:
-    case roipat:
-        {
-        int width = 7;
-        int height = 7;
+		//case roi:
+	case roipat:
+	{
+		int width = 7;
+		int height = 7;
 
-        pDC->MoveTo(rect.left, rect.top + height);
-        pDC->LineTo(rect.left, rect.top);
-        pDC->LineTo(rect.left + width, rect.top);
+		pDC->MoveTo(rect.left, rect.top + height);
+		pDC->LineTo(rect.left, rect.top);
+		pDC->LineTo(rect.left + width, rect.top);
 
-        pDC->MoveTo(rect.right - width, rect.top);
-        pDC->LineTo(rect.right, rect.top);
-        pDC->LineTo(rect.right, rect.top + height);
+		pDC->MoveTo(rect.right - width, rect.top);
+		pDC->LineTo(rect.right, rect.top);
+		pDC->LineTo(rect.right, rect.top + height);
 
-        pDC->MoveTo(rect.left, rect.bottom - height);
-        pDC->LineTo(rect.left, rect.bottom);
-        pDC->LineTo(rect.left+ width, rect.bottom);
+		pDC->MoveTo(rect.left, rect.bottom - height);
+		pDC->LineTo(rect.left, rect.bottom);
+		pDC->LineTo(rect.left + width, rect.bottom);
 
-        pDC->MoveTo(rect.right - width, rect.bottom);
-        pDC->LineTo(rect.right, rect.bottom);
-        pDC->LineTo(rect.right, rect.bottom - height);
-        }
+		pDC->MoveTo(rect.right - width, rect.bottom);
+		pDC->LineTo(rect.right, rect.bottom);
+		pDC->LineTo(rect.right, rect.bottom - height);
+	}
 
-        break;
+	break;
 
 	case text:
-		::SetRect(&rc, rect.left, rect.top, rect.Width(), rect.Height());
-		::DrawText(*pDC, m_text, _tcslen(m_text), &rc, DT_LEFT | DT_EXTERNALLEADING | DT_WORDBREAK);
+		{
+		CFont *pFont = new CFont();
+		pDC->SetTextColor(m_textColor);
+		pDC->SetBkMode(TRANSPARENT);
 
+		LOGFONT m_logfont;
+
+		m_logfont.lfHeight = fontHeight;
+		m_logfont.lfWeight = 0;
+		m_logfont.lfEscapement = 0; // 기울어진 각도.
+		m_logfont.lfOrientation = 0;
+		m_logfont.lfWeight = FW_NORMAL; // 굵기.
+		m_logfont.lfItalic = FALSE; // 기울임꼴과밑줄.
+		m_logfont.lfUnderline = FALSE;
+		m_logfont.lfStrikeOut = FALSE;  //취소선과 문자셋트.
+		m_logfont.lfCharSet = DEFAULT_CHARSET;
+		m_logfont.lfOutPrecision = OUT_CHARACTER_PRECIS;  //출력정확도.
+		m_logfont.lfClipPrecision = CLIP_CHARACTER_PRECIS; //클립핑정확도.
+		m_logfont.lfQuality = DEFAULT_QUALITY; //출력의질과시간.
+		m_logfont.lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
+		_tcscpy(m_logfont.lfFaceName, fontFaceName);
+		pFont->CreateFontIndirect(&m_logfont);
+
+		CFont* pOldFont;
+		pOldFont = pDC->SelectObject(pFont);
+
+		::SetRect(&rc, rect.left, rect.top, rect.Width(), rect.Height());
+		::DrawText(*pDC, m_text, _tcslen(m_text), &rc, DT_LEFT | DT_WORDBREAK);
+
+		pDC->SelectObject(pOldFont);
+
+		pFont->DeleteObject();
+		delete pFont;
+		}
 		break;
     }
 

@@ -13,6 +13,7 @@ typedef enum _tagInspectType
         _Inspect_Roi_Start = 100,
         _Inspect_Roi_Circle,
         _Inspect_BarCode,
+		_Inspect_Teseract,
         _Inspect_Roi_End,			// 영역 마지막.
 
         _Inspect_Point_Start = 200,
@@ -96,7 +97,7 @@ public:
         enum ValueType		valueType;	// _BoolValue, ...
         std::basic_string<TCHAR>	Value;
         std::basic_string<TCHAR>	Detail; // Combo일경우 Combo 항목들을 콤마(Comma)로 구분해서 넣어둔다.
-        vector<std::basic_string<TCHAR>> m_vecDetail;
+		std::vector<std::basic_string<TCHAR>> m_vecDetail;
 
 public:
         CParam(void){};
@@ -129,7 +130,7 @@ public:
         CRectdouble ptnRoi;
         IplImage*	iplTemplate;
 
-        vector<CParam> m_vecParams;	// stepType, Name, valueType, Value, Detail 를 담은 vector
+		std::vector<CParam> m_vecParams;	// stepType, Name, valueType, Value, Detail 를 담은 vector
 
         double Width();
         double Height();

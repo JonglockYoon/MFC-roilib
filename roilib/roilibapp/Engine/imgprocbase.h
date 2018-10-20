@@ -9,9 +9,6 @@
 #include <opencv2/features2d/features2d.hpp>
 #include "edgessubpix.h"
 
-using namespace std;
-//using namespace cv;
-
 #define CVX_RED		CV_RGB(255,0,0)
 #define CVX_ORANGE	CV_RGB(255,165,0)
 #define CVX_YELLOW	CV_RGB(255,255,0)
@@ -77,7 +74,7 @@ public:
 
 
     double SubPixelHessianEdge(IplImage *src, int nDir);
-    int SubPixelCorner(IplImage *src, vector<cv::Point2f> &points);
+    int SubPixelCorner(IplImage *src, std::vector<cv::Point2f> &points);
     double SubPixelRampEdgeImage(IplImage* edgeImage, int nDir);
 
 

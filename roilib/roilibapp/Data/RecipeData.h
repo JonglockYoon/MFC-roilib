@@ -21,8 +21,8 @@ public:
         virtual ~CRecipeData(void);
 
         CString	m_sInspList[_Inspect_Type_End]; // ROI Type Table
-        vector<CRoiData*>	m_vecRoiData;	// 각 모델별 모든 ROI들이 등록되어 있는 vector
-        vector<vector<CRoiData*>>	m_vecWorkRoiData;  // 모델별 실제 검사할 ROI만 들어 있는 vector
+		std::vector<CRoiData*>	m_vecRoiData;	// 각 모델별 모든 ROI들이 등록되어 있는 vector
+		std::vector<std::vector<CRoiData*>>	m_vecWorkRoiData;  // 모델별 실제 검사할 ROI만 들어 있는 vector
 
         void InitParamData(void);
         void ClearImageBuff();

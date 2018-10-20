@@ -253,7 +253,7 @@ int CImgProcBase::GetAngleABC(Point a, Point b, Point c)
 //
 double CImgProcBase::SubPixelRampEdgeImage(IplImage* edgeImage, int nDir)
 {
-    vector<cv::Point2f> vecEdges;
+	std::vector<cv::Point2f> vecEdges;
 
     int widthStep = edgeImage->widthStep;
     int cx = edgeImage->width;
@@ -793,7 +793,7 @@ double CImgProcBase::Dist2LineSegment(double px, double py, double X1, double Y1
 //
 double CImgProcBase::SubPixelHessianEdge(IplImage *src, int nDir)
 {
-    vector<Contour> contours;
+	std::vector<Contour> contours;
 
     double alpha = 1.0;
     int low = 10;
@@ -802,7 +802,7 @@ double CImgProcBase::SubPixelHessianEdge(IplImage *src, int nDir)
 
     Mat msrc = cvarrToMat(src);// imread(imagePath, IMREAD_GRAYSCALE);
     //vector<Contour> contours;
-    vector<Vec4i> hierarchy;
+	std::vector<Vec4i> hierarchy;
     //int64 t0 = getCPUTickCount();
 
     // alpha - GaussianBlur = sigma이며 흐려지는 정도를 조절할 수 있다.
@@ -818,7 +818,7 @@ double CImgProcBase::SubPixelHessianEdge(IplImage *src, int nDir)
         int count;
         int seq;
     } EDGE;
-    vector<EDGE> points;
+	std::vector<EDGE> points;
 
     //points.resize(contours.size());
     for (size_t i = 0; i < contours.size(); ++i)
@@ -1004,7 +1004,7 @@ double CImgProcBase::SubPixelRampEdge(unsigned char *pixelData, int pCnt)
 //
 // Subpixel을 이용하여 Corner Edge를 구한다.
 //
-int CImgProcBase::SubPixelCorner(IplImage *src, vector<Point2f> &points)
+int CImgProcBase::SubPixelCorner(IplImage *src, std::vector<Point2f> &points)
 {
     int i, corner_count = 150;
     IplImage *src_img_gray;
@@ -1490,7 +1490,7 @@ double CImgProcBase::ROIPixEdge(IplImage* croppedImage, int nDir, double dReject
     CopyImageROI(croppedImage, grayImg, cvRect(x, y, width, height));
 
     double dEdge = 0;
-    vector<cv::Point2f> vecEdges;
+	std::vector<cv::Point2f> vecEdges;
 
     int imgStep = grayImg->widthStep;
     uchar* imageData = (uchar*)grayImg->imageData;

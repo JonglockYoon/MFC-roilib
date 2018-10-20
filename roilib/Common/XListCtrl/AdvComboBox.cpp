@@ -711,8 +711,8 @@ void CAdvComboBox::OnLButtonDown(UINT nFlags, CPoint point)
 
 LRESULT CAdvComboBox::OnSelectedItem( WPARAM wParam, LPARAM /*lParam*/ )
 {
-	list<LIST_ITEM> itemlist;
-	list<LIST_ITEM>::iterator itemiter;
+	std::list<LIST_ITEM> itemlist;
+	std::list<LIST_ITEM>::iterator itemiter;
 
 	int nPos = (int)wParam;
 	itemlist = m_pDropWnd->GetList();
@@ -812,7 +812,7 @@ LRESULT CAdvComboBox::OnDestroyDropdownList( WPARAM /*wParam*/, LPARAM /*lParam*
 	return TRUE;
 }
 
-void CAdvComboBox::CreateDropList( list<LIST_ITEM> &droplist)
+void CAdvComboBox::CreateDropList(std::list<LIST_ITEM> &droplist)
 {
 	XLISTCTRL_TRACE(_T("in CAdvComboBox::CreateDropList\n"));
 	CRect rc;
@@ -959,7 +959,7 @@ BOOL CAdvComboBox::OnMouseWheel(UINT /*nFlags*/, short zDelta, CPoint /*pt*/)
 	// TODO: Add your message handler code here and/or call default
 	if( !m_bDropListVisible )
 	{
-		string str;
+		std::string str;
 		//
 		// Select another string from the map
 		m_zDelta += zDelta;
@@ -1951,8 +1951,8 @@ void CAdvComboBox::OnUpdateEdit()
 		{
 			if( m_dwACBStyle & ACBS_AUTOSUGGEST )
 			{
-				list<LIST_ITEM> suggestlist;
-				list<LIST_ITEM>::iterator suggestiter;
+				std::list<LIST_ITEM> suggestlist;
+				std::list<LIST_ITEM>::iterator suggestiter;
 				tstring str = (LPCTSTR)strEdit;
 				int nEditLen = str.length();
 				if( !nEditLen )

@@ -263,7 +263,7 @@ void CPropertyGrid::SetDisplayMode(EDisplayMode display_mode)
 
 void CPropertyGrid::ExpandAll(bool expand)
 {
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
     it->m_collapsed = !expand;
   RecalcLayout();
 }
@@ -332,7 +332,7 @@ HSECTION CPropertyGrid::AddSection(std::basic_string<TCHAR> title, bool collapse
 
   // insert it
   // if after does not exist then it is appended
-  vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), after);
+  std::vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), after);
   m_sections.insert(it, section);
 
   // done
@@ -343,12 +343,12 @@ HSECTION CPropertyGrid::AddSection(std::basic_string<TCHAR> title, bool collapse
 HITEM CPropertyGrid::AddItem(HSECTION hs, EItemType type, std::basic_string<TCHAR> name, void* pValue, bool editable, bool undefined, HITEM after)
 {
   // check section exists
-  vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), hs);
+	std::vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), hs);
   if (it == m_sections.end())
     return -1;
 
   // check item does not already exists
-  vector<CItem>::iterator it2 = find(it->m_items.begin(), it->m_items.end(), name);
+  std::vector<CItem>::iterator it2 = find(it->m_items.begin(), it->m_items.end(), name);
   if (it2 != it->m_items.end())
     return -1;
 
@@ -410,7 +410,7 @@ HITEM CPropertyGrid::AddDoubleItem(HSECTION section, std::basic_string<TCHAR> na
   return it;
 }
 
-HITEM CPropertyGrid::AddComboItem(HSECTION section, std::basic_string<TCHAR> name, const vector<std::basic_string<TCHAR>>& values, int cur, bool editable, bool undefined, HITEM after)
+HITEM CPropertyGrid::AddComboItem(HSECTION section, std::basic_string<TCHAR> name, const std::vector<std::basic_string<TCHAR>>& values, int cur, bool editable, bool undefined, HITEM after)
 {
   HITEM it = AddItem(section, IT_COMBO, name, &cur, editable, undefined, after);
   CItem* pItem = FindItem(it);
@@ -475,7 +475,7 @@ void CPropertyGrid::ResetContents()
 
 bool CPropertyGrid::RemoveSection(HSECTION hs)
 {
-  vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), hs);
+  std::vector<CSection>::iterator it = find(m_sections.begin(), m_sections.end(), hs);
   if (it == m_sections.end()) return false;
   m_sections.erase(it);
   return true;
@@ -483,9 +483,9 @@ bool CPropertyGrid::RemoveSection(HSECTION hs)
 
 bool CPropertyGrid::RemoveItem(HITEM item)
 {
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
-    vector<CItem>::iterator it2 = find(it->m_items.begin(), it->m_items.end(), item);
+    std::vector<CItem>::iterator it2 = find(it->m_items.begin(), it->m_items.end(), item);
     if (it2 != it->m_items.end())
     {
       it->m_items.erase(it2);
@@ -509,25 +509,25 @@ int CPropertyGrid::GetSectionSize(HSECTION hs)
 
 void CPropertyGrid::ValidateChanges()
 {
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
-    for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+    for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
       it2->ValidateChanges();
   }
 }
 
 CPropertyGrid::CSection* CPropertyGrid::FindSection(HSECTION hs) const
 {
-  vector<CSection>::const_iterator it = find(m_sections.begin(), m_sections.end(), hs);
+  std::vector<CSection>::const_iterator it = find(m_sections.begin(), m_sections.end(), hs);
   if (it == m_sections.end()) return NULL;
   return const_cast<CSection*>(&(*it));
 }
 
 CPropertyGrid::CItem* CPropertyGrid::FindItem(HITEM hi) const
 {
-  for (vector<CSection>::const_iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::const_iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
-    vector<CItem>::const_iterator it2 = find(it->m_items.begin(), it->m_items.end(), hi);
+    std::vector<CItem>::const_iterator it2 = find(it->m_items.begin(), it->m_items.end(), hi);
     if (it2 != it->m_items.end())
       return const_cast<CItem*>(&(*it2));
   }
@@ -913,7 +913,7 @@ BOOL CPropertyGrid::OnEraseBkgnd(CDC* pDC)
   return TRUE;
 }
 
-bool item_alpha_sort(vector<CPropertyGrid::CItem>::iterator it1, vector<CPropertyGrid::CItem>::iterator it2)
+bool item_alpha_sort(std::vector<CPropertyGrid::CItem>::iterator it1, std::vector<CPropertyGrid::CItem>::iterator it2)
 {
   return (it1->m_name.compare(it2->m_name) < 0);
 }
@@ -1012,10 +1012,10 @@ void CPropertyGrid::OnPaint()
     if (m_display_mode == DM_ALPHABETICAL)
     {
       // put all the items in a vector
-      vector<vector<CItem>::iterator> lst;
-      for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+      std::vector<std::vector<CItem>::iterator> lst;
+      for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
       {
-        for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+        for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
           lst.push_back(it2);
       }
 
@@ -1023,7 +1023,7 @@ void CPropertyGrid::OnPaint()
       sort(lst.begin(), lst.end(), item_alpha_sort);
 
       // display the items
-      for (vector<vector<CItem>::iterator>::iterator it2 = lst.begin(); it2 != lst.end(); ++it2)
+      for (std::vector<std::vector<CItem>::iterator>::iterator it2 = lst.begin(); it2 != lst.end(); ++it2)
       {
         // first reset
         (*it2)->m_rcName.SetRectEmpty();
@@ -1043,7 +1043,7 @@ void CPropertyGrid::OnPaint()
     else
     {
       // next iterate on sections
-      for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+      for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
       {
         // reset
         it->m_rcSign.SetRectEmpty();
@@ -1121,7 +1121,7 @@ void CPropertyGrid::OnPaint()
         // iterate on items
         if (!it->m_collapsed || m_display_mode != DM_CATEGORIZED)
         {
-          for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+          for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
           {
             // reset
             it2->m_rcName.SetRectEmpty();
@@ -1158,7 +1158,7 @@ void CPropertyGrid::OnPaint()
   ValidateRect(NULL);
 }
 
-void CPropertyGrid::DrawItem(CDC& dc, int w, int x, int y, vector<CItem>::iterator& it)
+void CPropertyGrid::DrawItem(CDC& dc, int w, int x, int y, std::vector<CItem>::iterator& it)
 {
   // brush needed
   CBrush brushText;
@@ -1456,7 +1456,7 @@ void CPropertyGrid::OnLButtonDown(UINT nFlags, CPoint point)
   // did we click on a section
   if (m_display_mode == DM_CATEGORIZED)
   {
-    for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+    for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
     {
       if (it->m_rcSign.PtInRect(point))
       {
@@ -1476,11 +1476,11 @@ void CPropertyGrid::OnLButtonDown(UINT nFlags, CPoint point)
   }
 
   // focus
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
     if (!it->m_collapsed || m_display_mode != DM_CATEGORIZED)
     {
-      for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+      for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
       {
         if (it2->m_rcName.PtInRect(point) || it2->m_rcValue.PtInRect(point))
         {
@@ -1662,7 +1662,7 @@ void CPropertyGrid::OnLButtonUp(UINT nFlags, CPoint point)
             }
             else
             {
-              for (vector<std::basic_string<TCHAR>>::iterator it = pItem->m_options.begin(); it != pItem->m_options.end(); ++it)
+              for (std::vector<std::basic_string<TCHAR>>::iterator it = pItem->m_options.begin(); it != pItem->m_options.end(); ++it)
                 pCombo->AddString(*it);
               if (!pItem->m_undefined)
                 pCombo->SetCurSel(pItem->m_nValue);
@@ -1761,7 +1761,7 @@ void CPropertyGrid::MoveForward(HSECTION& focused_section, HITEM& focused_item)
     if (focused_section == -1 && focused_item == -1)
       stop_on_next_valid = true;
 
-    for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+    for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
     {
       if (m_display_mode == DM_CATEGORIZED)
       {
@@ -1780,7 +1780,7 @@ void CPropertyGrid::MoveForward(HSECTION& focused_section, HITEM& focused_item)
 
       if (!it->m_collapsed || m_display_mode != DM_CATEGORIZED)
       {
-        for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+        for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
         {
           if (it2->m_id == focused_item)
           {
@@ -1835,7 +1835,7 @@ void CPropertyGrid::FocusNextItem()
 
 void CPropertyGrid::FocusPrevItem()
 {
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
     if (m_display_mode == DM_CATEGORIZED)
     {
@@ -1853,7 +1853,7 @@ void CPropertyGrid::FocusPrevItem()
     if (!it->m_collapsed || m_display_mode != DM_CATEGORIZED)
     {
       bool found = false;
-      for (vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
+      for (std::vector<CItem>::iterator it2 = it->m_items.begin(); it2 != it->m_items.end(); ++it2)
       {
         if (!it2->m_editable && !m_focus_disabled)
           continue;
@@ -1962,7 +1962,7 @@ void CPropertyGrid::RecalcLayout()
 
   // total height
   int height = 0;
-  for (vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
+  for (std::vector<CSection>::iterator it = m_sections.begin(); it != m_sections.end(); ++it)
   {
 	  if (m_display_mode == DM_CATEGORIZED){
 		  height += m_line_height;
@@ -2003,7 +2003,7 @@ void CPropertyGrid::RecalcLayout()
     info.nMin = 0;
     info.nMax = height;
     info.nPage = rc.Height();
-    info.nPos = min(offset, height);
+    info.nPos = MIN(offset, height);
     info.nTrackPos = 2;
     m_scrollbar.SetScrollInfo(&info);
 
@@ -2270,7 +2270,7 @@ void CPropertyGrid::EditFocusedItem()
       CDynDialogEx dlg(GetParent());
       dlg.SetUseSystemButtons(FALSE);
 #ifdef _UNICODE
-	  string str = CT2CA(pItem->m_name.c_str());
+	  std::string str = CT2CA(pItem->m_name.c_str());
       dlg.SetWindowTitle(str.c_str());
 #else
       dlg.SetWindowTitle((LPCSTR)pItem->m_name.c_str());
@@ -2293,7 +2293,7 @@ void CPropertyGrid::EditFocusedItem()
       CDynDialogEx dlg(GetParent());
       dlg.SetUseSystemButtons(FALSE);
 #ifdef _UNICODE
-	  string str = CT2CA(pItem->m_name.c_str());
+	  std::string str = CT2CA(pItem->m_name.c_str());
       dlg.SetWindowTitle(str.c_str());
 #else
       dlg.SetWindowTitle((LPCSTR)pItem->m_name.c_str());

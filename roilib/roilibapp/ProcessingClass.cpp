@@ -104,7 +104,7 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
     {
         if (!theApp.cap[nCam].isOpened())
             return FALSE;
-        Mat mat;
+        cv::Mat mat;
 
         theApp.cs.Lock();
 

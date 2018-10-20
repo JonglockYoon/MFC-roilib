@@ -103,8 +103,8 @@ void CRoilibAppView::OnDraw(CDC* pDC)
     if (m_brHatch.m_hObject){
         CRect rect;
         GetClientRect(&rect);
-        rect.right  = max(rect.right , m_totalDev.cx);
-        rect.bottom = max(rect.bottom, m_totalDev.cy);
+        rect.right  = MAX(rect.right , m_totalDev.cx);
+        rect.bottom = MAX(rect.bottom, m_totalDev.cy);
         m_brHatch.UnrealizeObject();
         CPoint pt(0, 0);
         pDC->LPtoDP(&pt);

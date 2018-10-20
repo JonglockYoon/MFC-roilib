@@ -61,8 +61,8 @@ BOOL CSDIFrameWnd::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
 		{
 			// find or create the splitter ID in the splitter map
 			int nID = pTemplate->m_nSplitterID;
-			m_SplitInfo[nID].m_MaxRow = max(m_SplitInfo[nID].m_MaxRow, pTemplate->m_nRow + 1);
-			m_SplitInfo[nID].m_MaxCol = max(m_SplitInfo[nID].m_MaxCol, pTemplate->m_nCol + 1);
+			m_SplitInfo[nID].m_MaxRow = MAX(m_SplitInfo[nID].m_MaxRow, pTemplate->m_nRow + 1);
+			m_SplitInfo[nID].m_MaxCol = MAX(m_SplitInfo[nID].m_MaxCol, pTemplate->m_nCol + 1);
 		}
 	}
   

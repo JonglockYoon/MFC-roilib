@@ -2583,7 +2583,7 @@ BOOL CXListCtrl::OnEraseBkgnd(CDC* pDC)
 
     int nFirstRow = GetTopIndex();
     int nLastRow = nFirstRow + GetCountPerPage();
-    nLastRow = min (nLastRow, nItemCount - 1); // Last Item displayed in Ctrl
+    nLastRow = MIN(nLastRow, nItemCount - 1); // Last Item displayed in Ctrl
 
     CListCtrl::GetSubItemRect(nFirstRow, 0, LVIR_BOUNDS, rectTop);
     CListCtrl::GetSubItemRect(nLastRow, 0, LVIR_BOUNDS, rectBottom);

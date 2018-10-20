@@ -43,7 +43,6 @@ typedef std::basic_string<TCHAR> tstring;
 #include <list>
 #include <map>
 #include <string>
-using namespace std;
 
 void AFXAPI DDX_ACBIndex( CDataExchange* pDX, int nIDC, int& index );
 void AFXAPI DDX_ACBString( CDataExchange* pDX, int nIDC, CString& value );
@@ -179,7 +178,7 @@ protected:
     BOOL RegisterWindowClass();
 
 private:
-	void CreateDropList( list<LIST_ITEM> &droplist );
+	void CreateDropList(std::list<LIST_ITEM> &droplist );
 	void SelPrevItem();
 	void SelNextItem();
 	void SelPrevPage();
@@ -204,8 +203,8 @@ private:
 	BOOL m_bDropListVisible;
 	bool m_bDropRectStored;
 
-	list<LIST_ITEM> m_list;
-	list<LIST_ITEM>::iterator m_iter;
+	std::list<LIST_ITEM> m_list;
+	std::list<LIST_ITEM>::iterator m_iter;
 
 	int m_zDelta; // MouseWheel...
 

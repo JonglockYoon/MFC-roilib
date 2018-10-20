@@ -388,7 +388,7 @@ void CFrmProperty::OnColumnClick(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CFrmProperty::DelWorkList(CString name)
 {
-    vector<CRoiData*> *pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
+	std::vector<CRoiData*> *pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
     int size = pVecRoiData->size();
     for (int i = size-1; i >= 0; i--){
         CRoiData* pData = (*pVecRoiData)[i];
@@ -403,7 +403,7 @@ void CFrmProperty::DelWorkList(CString name)
 
 void CFrmProperty::NewWorkList(CRoiData* pData)
 {
-    vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
+	std::vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
     int size = pVecRoiData->size();
     BOOL bExist = FALSE; //수정부분
     for (int i = 0; i < size; i++){
@@ -421,7 +421,7 @@ void CFrmProperty::NewWorkList(CRoiData* pData)
 
 void CFrmProperty::DelAllWorkList()
 {
-    vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
+	std::vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
     pVecRoiData->clear();
     g_cRecipeData->SaveRecipeData();
 }
@@ -429,7 +429,7 @@ void CFrmProperty::DelAllWorkList()
 void CFrmProperty::NewAllWorkList()
 {
     //CString str;
-    vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
+	std::vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
     pVecRoiData->clear();
     for (int i = 0; i<g_cRecipeData->m_vecRoiData.size(); i++){
 

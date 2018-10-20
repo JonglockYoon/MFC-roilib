@@ -164,8 +164,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
             AfxMessageBox(str);
         }
         else {
-            theApp.cap[i].set(CAP_PROP_FRAME_WIDTH, DEFAULT_CAM_WIDTH);// 1280);
-            theApp.cap[i].set(CAP_PROP_FRAME_HEIGHT, DEFAULT_CMA_HEIGHT);// 720);
+            theApp.cap[i].set(cv::CAP_PROP_FRAME_WIDTH, DEFAULT_CAM_WIDTH);// 1280);
+            theApp.cap[i].set(cv::CAP_PROP_FRAME_HEIGHT, DEFAULT_CMA_HEIGHT);// 720);
         }
     }
     theApp.m_ImgProcEngine.m_pMainWnd = this;
@@ -936,7 +936,7 @@ void CMainFrame::DeleteReceipe(CRoiData* pDelData)
 {
     int nCh = theApp.m_nSelectCh;
     int size = g_cRecipeData->m_vecWorkRoiData[nCh].size();
-    vector<CRoiData*> *pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[nCh];
+	std::vector<CRoiData*> *pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[nCh];
     for (int i = 0; i<size; i++){
         CRoiData *pWorkData = (*pVecRoiData)[i];
         if (pWorkData->sUniqueID == pDelData->sUniqueID) {
@@ -1041,7 +1041,7 @@ void CMainFrame::OnInspectionStart()
             for (int i = 0; i < size; i++) {
                 DetectResult *prst = &pData->m_vecDetectResult[i];
 
-				if (pData->m_nInspectType == _Inspect_BarCode)
+				if (pData->m_nInspectType == _Inspect_BarCode || pData->m_nInspectType == _Inspect_Teseract)
 				{
 					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 30));
 					_tcscpy(pObj->m_text, prst->strResult);

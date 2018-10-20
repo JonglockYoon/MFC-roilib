@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-using namespace std;
 
 // CPropertyGridCombo frame
 
@@ -23,7 +22,7 @@ public:
   void SetCurSel(int nItem);
 
 protected:
-  vector<std::basic_string<TCHAR>> m_Items;
+  std::vector<std::basic_string<TCHAR>> m_Items;
   int m_nSelected;
 
   CFont* m_pFont;

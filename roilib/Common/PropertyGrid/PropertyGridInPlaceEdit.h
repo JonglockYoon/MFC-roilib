@@ -30,7 +30,6 @@
 #endif // _MSC_VER >= 1000
 
 #include <string>
-using namespace std;
 
 #define WM_PG_ENDLABELEDIT WM_USER+488
 

@@ -156,7 +156,7 @@ void CPropertyGridCombo::OnPaint()
   int y = 1;
   dc.SelectObject(m_pFont);
   dc.SetBkMode(TRANSPARENT);
-  for (vector<std::basic_string<TCHAR>>::iterator it = m_Items.begin(); it != m_Items.end(); ++it)
+  for (std::vector<std::basic_string<TCHAR>>::iterator it = m_Items.begin(); it != m_Items.end(); ++it)
   {
     CRect rcItem(0, y, rc.Width(), y+m_line_height);
     rcItem.DeflateRect(1,0,1,0);
@@ -238,12 +238,12 @@ void CPropertyGridCombo::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
   if (nChar == VK_LEFT || nChar == VK_UP)
   {
-    m_nSelected = max(0, m_nSelected-1);
+    m_nSelected = MAX(0, m_nSelected-1);
     Invalidate();
   }
   else if (nChar == VK_RIGHT || nChar == VK_DOWN)
   {
-    m_nSelected = min(int(m_Items.size())-1, m_nSelected+1);
+    m_nSelected = MIN(int(m_Items.size())-1, m_nSelected+1);
     Invalidate();
   }
   else if (nChar == VK_ESCAPE)

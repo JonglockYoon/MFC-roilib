@@ -254,7 +254,7 @@ void CDlgRecipeSet::OnBnClickedBtnRcpup()
     if(m_nSelectRecipeIndex > (int)theApp.m_vecRecipeInfo.size()) return;
     if(m_nSelectRecipeIndex == 0) return;
 
-    vector<RecipeListInformation> tTempData;
+	std::vector<RecipeListInformation> tTempData;
 
     tTempData.resize((int)theApp.m_vecRecipeInfo.size());
 
@@ -285,7 +285,7 @@ void CDlgRecipeSet::OnBnClickedBtnRcpdown()
     if(m_nSelectRecipeIndex > (int)theApp.m_vecRecipeInfo.size()) return;
     if(m_nSelectRecipeIndex == (int)theApp.m_vecRecipeInfo.size()-1) return;
 
-    vector<RecipeListInformation> tTempData;
+	std::vector<RecipeListInformation> tTempData;
 
     tTempData.resize((int)theApp.m_vecRecipeInfo.size());
     for(int i=0; i<(int)theApp.m_vecRecipeInfo.size(); i++){

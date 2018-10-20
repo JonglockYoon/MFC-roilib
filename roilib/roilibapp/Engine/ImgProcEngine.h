@@ -13,8 +13,6 @@
 #include "edgessubpix.h"
 #include "imgprocbase.h"
 
-using namespace cv;
-
 #define CVX_RED		CV_RGB(255,0,0)
 #define CVX_ORANGE	CV_RGB(255,165,0)
 #define CVX_YELLOW	CV_RGB(255,255,0)
@@ -52,5 +50,6 @@ public:
 	int InspectOneItem(int nCh, IplImage* img, CRoiData *pData);
 	int SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
 	int SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
+	int SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
 };
 

@@ -5,7 +5,6 @@
 #include <map>
 #include <vector>
 #include <string>
-using namespace std;
 
 // CPropertyGrid
 
@@ -103,7 +102,7 @@ public:
   HITEM AddTextItem(HSECTION section, std::basic_string<TCHAR> name, std::basic_string<TCHAR> value, bool editable = true, HITEM after = -1);
   HITEM AddIntegerItem(HSECTION section, std::basic_string<TCHAR> name, int value, std::basic_string<TCHAR> format = _T(""), bool editable = true, bool undefined = false, HITEM after = -1);
   HITEM AddDoubleItem(HSECTION section, std::basic_string<TCHAR> name, double value, std::basic_string<TCHAR> format = _T(""), bool editable = true, bool undefined = false, HITEM after = -1);
-  HITEM AddComboItem(HSECTION section, std::basic_string<TCHAR> name, const vector<std::basic_string<TCHAR>>& values, int cur, bool editable = true, bool undefined = false, HITEM after = -1);
+  HITEM AddComboItem(HSECTION section, std::basic_string<TCHAR> name, const std::vector<std::basic_string<TCHAR>>& values, int cur, bool editable = true, bool undefined = false, HITEM after = -1);
   HITEM AddBoolItem(HSECTION section, std::basic_string<TCHAR> name, bool value, bool editable = true, bool undefined = false, HITEM after = -1);
   HITEM AddDateItem(HSECTION section, std::basic_string<TCHAR> name, COleDateTime value, std::basic_string<TCHAR> format = _T(""), bool editable = true, bool undefined = false, HITEM after = -1);
   HITEM AddDateTimeItem(HSECTION section, std::basic_string<TCHAR> name, COleDateTime value, std::basic_string<TCHAR> format = _T(""), bool editable = true, bool undefined = false, HITEM after = -1);
@@ -161,7 +160,7 @@ protected:
     EItemType m_type;
     std::basic_string<TCHAR> m_name;
 
-    vector<std::basic_string<TCHAR>> m_options;
+	std::vector<std::basic_string<TCHAR>> m_options;
 
     int m_nValue;
     double m_dValue;
@@ -190,7 +189,7 @@ protected:
     void ValidateChanges();
   };
 
-  friend bool item_alpha_sort(vector<CPropertyGrid::CItem>::iterator it1, vector<CPropertyGrid::CItem>::iterator it2);
+  friend bool item_alpha_sort(std::vector<CPropertyGrid::CItem>::iterator it1, std::vector<CPropertyGrid::CItem>::iterator it2);
 
   class CSection
   {
@@ -198,7 +197,7 @@ protected:
     HSECTION m_id;
     std::basic_string<TCHAR> m_title;
     bool m_collapsed;
-    vector<CItem> m_items;
+	std::vector<CItem> m_items;
 
     CRect m_rcSign;
     CRect m_rcTitle;
@@ -206,7 +205,7 @@ protected:
     bool operator==(const HSECTION& section) const;
   };
 
-  vector<CSection> m_sections;
+  std::vector<CSection> m_sections;
 
   HSECTION m_focused_section;
   HITEM m_focused_item;
@@ -264,7 +263,7 @@ protected:
   void InitControl();
 
   // drawing
-  void DrawItem(CDC& dc, int w, int x, int y, vector<CItem>::iterator& it);
+  void DrawItem(CDC& dc, int w, int x, int y, std::vector<CItem>::iterator& it);
 
   // item management
   CSection* FindSection(HSECTION hs) const;

@@ -53,7 +53,6 @@
 #include "cximage/include/ximage.h"
 #include "BarcodeReader.h"
 #include <vector>
-using namespace std;
 
 #include "XListCtrl/XTrace.h"
 #include "XListCtrl/XListCtrl.h"
