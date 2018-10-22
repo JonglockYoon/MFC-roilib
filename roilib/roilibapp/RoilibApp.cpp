@@ -30,8 +30,6 @@
 
 // D:\Projects\vcpkg-master\installed\x64-windows\lib 를 속성에 등록.
 
-#pragma comment (lib, "leptonica-1.74.4.lib")
-
 #pragma comment (lib, "jpeg.lib")
 #pragma comment (lib, "libpng16.lib")
 #pragma comment (lib, "tiff.lib")
@@ -39,10 +37,10 @@
 #pragma comment (lib, "zlib.lib")
 
 #ifdef _DEBUG
-#pragma comment (lib, "../../lib/tesseract305d.lib")
+#pragma comment (lib, "../../lib/leptonica-1.76.0d.lib")
+#pragma comment (lib, "../../lib/tesseract40d.lib")
 #pragma comment (lib, "../../zxing/lib/ZXingCoreD.lib")
-//#pragma comment (lib, "c:/opencv/build/x64/vc14/lib/opencv_world340d.lib")
-#pragma comment (lib, "../../lib/opencv_world343d.lib")
+#pragma comment (lib, "../../lib/opencv_world340d.lib")
 #pragma comment (lib, "../../lib/libdcrD.lib")
 //#pragma comment (lib, "../../lib/pngD.lib")
 //#pragma comment (lib, "../../lib/jpegD.lib")
@@ -53,10 +51,10 @@
 #pragma comment (lib, "../../lib/mngD.lib")
 #pragma comment (lib, "../../lib/cximageD.lib")
 #else
-#pragma comment (lib, "tesseract305.lib")
+#pragma comment (lib, "../../lib/leptonica-1.76.0.lib")
+#pragma comment (lib, "../../lib/tesseract40.lib")
 #pragma comment (lib, "../../zxing/lib/ZXingCore.lib")
-//#pragma comment (lib, "c:/opencv/build/x64/vc14/lib/opencv_world340.lib")
-#pragma comment (lib, "../../lib/opencv_world343.lib")
+#pragma comment (lib, "../../lib/opencv_world340.lib")
 #pragma comment (lib, "../../lib/libdcr.lib")
 //#pragma comment (lib, "../../lib/png.lib")
 //#pragma comment (lib, "../../lib/jpeg.lib")

@@ -116,20 +116,45 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 
 int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
+#if 1
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
 
 	// Create Tesseract object
 	tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
-	// Initialize tesseract to use English (eng) and the OEM_DEFAULT engine. 
-	const int init_failed = ocr->Init(".\\tessdata", "eng", tesseract::OEM_DEFAULT);
+
+	setlocale(LC_ALL, "");
+	//setlocale(LC_ALL, "C");
+	// Initialize tesseract to use English (eng) and the OEM_LSTM_ONLY engine. 
+	int init_failed = ocr->Init(".\\tessdata", "eng");// , tesseract::OEM_TESSERACT_LSTM_COMBINED);
+	
+	// 추천 글자들.
+	ocr->SetVariable("tessedit_char_whitelist", "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	// 비추천 글자들.
+	ocr->SetVariable("tessedit_char_blacklist", "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
+
 	if (init_failed) {
-		fprintf(stderr, "Could not initialize tesseract.\n");
+		g_cLog->AddLog(_T("Could not initialize tesseract."), _LOG_LIST_SYS);
 		return -1;
 	}
+	//g_cLog->AddLog(_T("initialize tesseract success."), _LOG_LIST_SYS);
 
 	// Set Page segmentation mode to PSM_AUTO (3)
 	ocr->SetPageSegMode(tesseract::PSM_AUTO);
+
+
+	//ThresholdRange(pData, croppedImage, 200);
+	//NoiseOut(pData, croppedImage, 202);
+	//Expansion(pData, croppedImage, 204);
+	CvSize sz = CvSize(croppedImage->width, croppedImage->height - croppedImage->height/4);
+	IplImage* tmp = cvCreateImage(sz, 8, 1);
+	//cvResize(croppedImage, tmp, CV_INTER_LINEAR);
+	//Smooth(pData, tmp, 206);
+	//
+	//if (gCfg.m_bSaveEngineImg) {
+	//	str.Format(_T("%s\\[%d]%03d_cvTmp.BMP"), m_sDebugPath, pData->m_nCh, 300);
+	//	CT2A ascii(str); cvSaveImage(ascii, tmp);
+	//}
 
 	// Open input image using OpenCV
 	cv::Mat im = cv::cvarrToMat(croppedImage);
@@ -137,17 +162,28 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	// Set image data
 	ocr->SetImage(im.data, im.cols, im.rows, 1, im.step); // BW color
 
+
 	// Run Tesseract OCR on image
+	ocr->Recognize(nullptr);
+
 	char* rst = ocr->GetUTF8Text();
 	//string outText = string();
-
+	
 	// print recognized text
 	//cout << outText << endl; // Destroy used object and release memory ocr->End();
-	
+	//CString str;
+	str.Format(_T("OCR Text:%s"), CString(rst));
+	g_cLog->AddLog(str, _LOG_LIST_SYS);
+
 
 	m_DetectResult.strResult = rst;// outText.c_str();
 	pData->m_vecDetectResult.push_back(m_DetectResult);
-	
+
+	cvReleaseImage(&tmp);
+
+	ocr->End();
+
+#endif	
 	return -1;
 }
 
@@ -155,9 +191,11 @@ void CImgProcEngine::SaveOutImage(IplImage* pImgOut, int nCh, CString strMsg, BO
 {
 	CString str = _T("");
 	str.Format(_T("%s\\[%d]%s"), m_sDebugPath, nCh, strMsg);
-	CT2A ascii(str); cvSaveImage(ascii, pImgOut);
+	CT2A ascii(str); 
+	cvSaveImage(ascii, pImgOut);
 	if (bClear) cvZero(pImgOut);
 }
+
 
 //
 // HoughCircle을 이용한 Circle을 찾는다
@@ -265,8 +303,8 @@ int CImgProcEngine::Threshold(CRoiData *pData, IplImage* grayImg, int nDbg)
 		nInvert = CV_THRESH_BINARY_INV;
 	cvThreshold(grayImg, grayImg, nThresholdValue, nThresholdMaxVal, nInvert);
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("%s\\[%d]%03d_cvThreshold.BMP"), m_sDebugPath, pData->m_nCh, nDbg);
-		CT2A ascii(str); cvSaveImage(ascii, grayImg);
+		str.Format(_T("%03d_cvThreshold.BMP"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
 	}
 
 	return 0;
@@ -341,7 +379,7 @@ int CImgProcEngine::NoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg)
 	IplImage* tmp = cvCreateImage(cvGetSize(grayImg), 8, 1);
 
 	// 1. Template이미지의 노이즈 제거
-	int filterSize = 6;  // 필터의 크기를 6으로 설정 (Noise out area)
+	int filterSize = 3;  // 필터의 크기를 3으로 설정 (Noise out area)
 	if (pData != NULL) {
 		CParam *pParam = pData->getParam(_T("Noise out area"));
 		if (pParam)
