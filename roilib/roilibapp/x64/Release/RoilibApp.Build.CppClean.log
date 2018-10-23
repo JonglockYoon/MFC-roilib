@@ -1,7 +1,6 @@
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\vc140.pdb
-d:\qt\mfc-roilib\roilib\roilibapp\x64\release\rectdouble.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\release\path.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\release\dyndialogex.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibapp.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\release\imgprocengine.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibapp.pch
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\stdafx.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\olemethod.obj
@@ -23,6 +22,7 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\release\propertygridcombo.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\propertygrid.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\listdyndialogex.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\dyndialogitemex.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\release\dyndialogex.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\recipedata.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\recipebase.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\linedata.obj
@@ -42,7 +42,7 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\release\utils.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\ui_object.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\tokenizer.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\string.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\release\imgprocengine.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\release\path.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\componentlabeling.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\blobresult.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\bloboperators.obj
@@ -53,7 +53,6 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\release\dlgconfig.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\customribbonbar.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibappview.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibappdoc.obj
-d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibapp.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\processingclass.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\iniutil.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\imgprocbase.obj
@@ -61,6 +60,7 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\release\edgessubpix.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\dlgobject.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roidata.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roibase.obj
+d:\qt\mfc-roilib\roilib\roilibapp\x64\release\rectdouble.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\recipeview.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\propertieswnd.obj
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\logwnd.obj
@@ -69,7 +69,6 @@ d:\qt\mfc-roilib\roilib\roilibapp\x64\release\frmproperty.obj
 d:\qt\mfc-roilib\bin\roilibapp.exe
 d:\qt\mfc-roilib\bin\roilibapp.ipdb
 d:\qt\mfc-roilib\bin\roilibapp.iobj
-d:\qt\mfc-roilib\bin\roilibapp.pdb
 d:\qt\mfc-roilib\roilib\roilibapp\x64\release\roilibapp.res
 d:\qt\mfc-roilib\bin\roilibapp.lib
 d:\qt\mfc-roilib\bin\roilibapp.exp

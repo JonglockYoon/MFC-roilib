@@ -16,13 +16,15 @@ CImgProcEngine::CImgProcEngine()
 	CString str;
 	str.Format(_T("%s\\[%d]Engine"), theApp.g_sRootPath);
 
+	// Create Tesseract object
+	setlocale(LC_ALL, "C");
+	//setlocale(LC_ALL, NULL);
 }
 
 void CImgProcEngine::InitEngine(int nCh)
 {
 	if (g_cRecipeData == NULL)
 		return;
-
 }
 
 CImgProcEngine::~CImgProcEngine()
@@ -116,22 +118,22 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 
 int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
+
 #if 1
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
 
-	// Create Tesseract object
-	tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
+	static tesseract::TessBaseAPI ocr;
+	int init_failed;
 
-	setlocale(LC_ALL, "");
-	//setlocale(LC_ALL, "C");
 	// Initialize tesseract to use English (eng) and the OEM_LSTM_ONLY engine. 
-	int init_failed = ocr->Init(".\\tessdata", "eng");// , tesseract::OEM_TESSERACT_LSTM_COMBINED);
-	
+	//init_failed = ocr.Init(".\\tessdata", "eng", tesseract::OEM_DEFAULT);
+	init_failed = ocr.Init(".\\tessdata", "eng", tesseract::OEM_LSTM_ONLY);
+
 	// 추천 글자들.
-	ocr->SetVariable("tessedit_char_whitelist", "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	ocr.SetVariable("tessedit_char_whitelist", "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 	// 비추천 글자들.
-	ocr->SetVariable("tessedit_char_blacklist", "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
+	ocr.SetVariable("tessedit_char_blacklist", "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
 
 	if (init_failed) {
 		g_cLog->AddLog(_T("Could not initialize tesseract."), _LOG_LIST_SYS);
@@ -140,34 +142,34 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	//g_cLog->AddLog(_T("initialize tesseract success."), _LOG_LIST_SYS);
 
 	// Set Page segmentation mode to PSM_AUTO (3)
-	ocr->SetPageSegMode(tesseract::PSM_AUTO);
+	ocr.SetPageSegMode(tesseract::PSM_AUTO);
 
-
-	//ThresholdRange(pData, croppedImage, 200);
-	//NoiseOut(pData, croppedImage, 202);
-	//Expansion(pData, croppedImage, 204);
+	ThresholdRange(pData, croppedImage, 200);
+	NoiseOut(pData, croppedImage, 202);
+	Expansion(pData, croppedImage, 204);
 	CvSize sz = CvSize(croppedImage->width, croppedImage->height - croppedImage->height/4);
 	IplImage* tmp = cvCreateImage(sz, 8, 1);
-	//cvResize(croppedImage, tmp, CV_INTER_LINEAR);
-	//Smooth(pData, tmp, 206);
-	//
-	//if (gCfg.m_bSaveEngineImg) {
-	//	str.Format(_T("%s\\[%d]%03d_cvTmp.BMP"), m_sDebugPath, pData->m_nCh, 300);
-	//	CT2A ascii(str); cvSaveImage(ascii, tmp);
-	//}
+	cvResize(croppedImage, tmp, CV_INTER_LINEAR);
+	Smooth(pData, tmp, 206);
+	
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%s\\[%d]%03d_cvTmp.BMP"), m_sDebugPath, pData->m_nCh, 300);
+		CT2A ascii(str); cvSaveImage(ascii, tmp);
+	}
 
 	// Open input image using OpenCV
-	cv::Mat im = cv::cvarrToMat(croppedImage);
+	cv::Mat im = cv::cvarrToMat(tmp);
 	
 	// Set image data
-	ocr->SetImage(im.data, im.cols, im.rows, 1, im.step); // BW color
-
-
+	ocr.SetImage(im.data, im.cols, im.rows, 1, im.step); // BW color
+	
 	// Run Tesseract OCR on image
-	ocr->Recognize(nullptr);
+	ocr.Recognize(nullptr);
 
-	char* rst = ocr->GetUTF8Text();
+	char* rst = ocr.GetUTF8Text();
 	//string outText = string();
+	
+	ocr.End();
 	
 	// print recognized text
 	//cout << outText << endl; // Destroy used object and release memory ocr->End();
@@ -180,8 +182,6 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	pData->m_vecDetectResult.push_back(m_DetectResult);
 
 	cvReleaseImage(&tmp);
-
-	ocr->End();
 
 #endif	
 	return -1;

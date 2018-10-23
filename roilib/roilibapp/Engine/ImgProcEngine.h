@@ -22,6 +22,10 @@
 #define CVX_BLICK	CV_RGB(0,0,0)
 #define CVX_WHITE	CV_RGB(255,255,255)
 
+namespace tesseract {
+	class TessBaseAPI;
+}
+
 class CImgProcEngine : public CImgProcBase
 {
 public:
@@ -51,5 +55,6 @@ public:
 	int SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
 	int SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
 	int SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect);
+
 };
 

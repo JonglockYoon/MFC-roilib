@@ -31,37 +31,38 @@
 // D:\Projects\vcpkg-master\installed\x64-windows\lib 를 속성에 등록.
 
 #pragma comment (lib, "jpeg.lib")
-#pragma comment (lib, "libpng16.lib")
+#pragma comment (lib, "libpng16.lib") 
 #pragma comment (lib, "tiff.lib")
 #pragma comment (lib, "jasper.lib")
 #pragma comment (lib, "zlib.lib")
+#pragma comment (lib, "../../lib/pvt.cppan.demo.danbloomberg.leptonica-1.76.0.lib")
 
 #ifdef _DEBUG
-#pragma comment (lib, "../../lib/leptonica-1.76.0d.lib")
+//#pragma comment (lib, "../../lib/leptonica-1.76.0d.lib")
 #pragma comment (lib, "../../lib/tesseract40d.lib")
 #pragma comment (lib, "../../zxing/lib/ZXingCoreD.lib")
 #pragma comment (lib, "../../lib/opencv_world340d.lib")
-#pragma comment (lib, "../../lib/libdcrD.lib")
 //#pragma comment (lib, "../../lib/pngD.lib")
 //#pragma comment (lib, "../../lib/jpegD.lib")
 //#pragma comment (lib, "../../lib/zlibD.lib")
 //#pragma comment (lib, "../../lib/tiffD.lib")
 //#pragma comment (lib, "../../lib/jbigD.lib")
 //#pragma comment (lib, "../../lib/jasperD.lib")
+#pragma comment (lib, "../../lib/libdcrD.lib")
 #pragma comment (lib, "../../lib/mngD.lib")
 #pragma comment (lib, "../../lib/cximageD.lib")
 #else
-#pragma comment (lib, "../../lib/leptonica-1.76.0.lib")
+//#pragma comment (lib, "../../lib/leptonica-1.76.0.lib") 
 #pragma comment (lib, "../../lib/tesseract40.lib")
 #pragma comment (lib, "../../zxing/lib/ZXingCore.lib")
 #pragma comment (lib, "../../lib/opencv_world340.lib")
-#pragma comment (lib, "../../lib/libdcr.lib")
 //#pragma comment (lib, "../../lib/png.lib")
 //#pragma comment (lib, "../../lib/jpeg.lib")
 //#pragma comment (lib, "../../lib/zlib.lib")
 //#pragma comment (lib, "../../lib/tiff.lib")
-//#pragma comment (lib, "../../lib/jbig.lib")
+//#pragma comment (lib, "../../lib/jbig.lib") 
 //#pragma comment (lib, "../../lib/jasper.lib")
+#pragma comment (lib, "../../lib/libdcr.lib")
 #pragma comment (lib, "../../lib/mng.lib")
 #pragma comment (lib, "../../lib/cximage.lib")
 #endif
@@ -79,13 +80,13 @@ BEGIN_MESSAGE_MAP(CRoilibAppApp, CSDIWinApp)
 END_MESSAGE_MAP()
 
 
-// CRoilibAppApp 생성
+// CRoilibAppApp 생성.
 
 CRoilibAppApp::CRoilibAppApp()
 {
     m_bHiColorIcons = TRUE;
 
-    // 다시 시작 관리자 지원
+    // 다시 시작 관리자 지원.
     m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
 #ifdef _MANAGED
     // 응용 프로그램을 공용 언어 런타임 지원을 사용하여 빌드한 경우(/clr):
@@ -118,12 +119,12 @@ CRoilibAppApp theApp;
 
 BOOL CRoilibAppApp::InitInstance()
 {
-    // 응용 프로그램 매니페스트가 ComCtl32.dll 버전 6 이상을 사용하여 비주얼 스타일을
+    // 응용 프로그램 매니페스트가 ComCtl32.dll 버전 6 이상을 사용하여 비주얼 스타일을.
     // 사용하도록 지정하는 경우, Windows XP 상에서 반드시 InitCommonControlsEx()가 필요합니다.
     // InitCommonControlsEx()를 사용하지 않으면 창을 만들 수 없습니다.
     INITCOMMONCONTROLSEX InitCtrls;
     InitCtrls.dwSize = sizeof(InitCtrls);
-    // 응용 프로그램에서 사용할 모든 공용 컨트롤 클래스를 포함하도록
+    // 응용 프로그램에서 사용할 모든 공용 컨트롤 클래스를 포함하도록.
     // 이 항목을 설정하십시오.
     InitCtrls.dwICC = ICC_WIN95_CLASSES;
     InitCommonControlsEx(&InitCtrls);
@@ -189,7 +190,7 @@ BOOL CRoilibAppApp::InitInstance()
     theApp.GetTooltipManager()->SetTooltipParams(AFX_TOOLTIP_TYPE_ALL,
         RUNTIME_CLASS(CMFCToolTipCtrl), &ttParams);
 
-    // 응용 프로그램의 문서 템플릿을 등록합니다. 문서 템플릿은
+    // 응용 프로그램의 문서 템플릿을 등록합니다. 문서 템플릿은.
     //  문서, 프레임 창 및 뷰 사이의 연결 역할을 합니다.
     CSDIDocTemplate* pDocTemplate; //CSingleDocTemplate
 
@@ -426,3 +427,4 @@ int CRoilibAppApp::Opencv2ximage(IplImage *iplImage, CxImage *ximg)
     }
     return -1;
 }
+
