@@ -26,5 +26,6 @@ MFC-roilib compile 절차
 </pre>
 
 https://blog.naver.com/jerry1455/221381146963 - roilib tesseract with OpenCV
-https://blog.naver.com/jerry1455/221380408455 - roilib 바코드 Decode추가
+https://blog.naver.com/jerry1455/221380408455 - roilib 바코드 Decode추가   
+
 https://blog.naver.com/jerry1455/221379771615 - MFC-roilib 란?
