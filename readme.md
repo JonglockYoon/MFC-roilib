@@ -21,7 +21,20 @@ MFC-roilib compile 절차
     
 3. Visual studio 2015 를 이용하여 CxImage project를 실행해서 X64 library를 만듭니다.
 
-4. Visual studio 2015 를 이용하여 roilibapp project 실행해서 roilibapp.exe를 생성합니다.
+4. tesseract compile
+   //cppan 을 다운로드해서 준비합니다.
+   cd \roilib
+   git clone https://github.com/tesseract-ocr/tesseract tesseract
+   cd tesseract
+   // src/viewer/svpaint.cpp 파일의 main()함수를 다른이름으로 rename해줍니다.
+   mkdir Win64
+   cd Win64
+   cppan ..
+   cmake .. -G "Visual Studio 14 2015 Win64"
+   cppan --generate .
+   또는 cmake gui program을 이용해서 Visual studio project를 생성합니다.
+
+5. Visual studio 2015 를 이용하여 roilibapp project 실행해서 roilibapp.exe를 생성합니다.
 
 </pre>
 
