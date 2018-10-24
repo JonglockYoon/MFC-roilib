@@ -146,18 +146,18 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	ThresholdRange(pData, croppedImage, 200);
 	NoiseOut(pData, croppedImage, 202);
 	Expansion(pData, croppedImage, 204);
-	CvSize sz = CvSize(croppedImage->width, croppedImage->height - croppedImage->height/4);
-	IplImage* tmp = cvCreateImage(sz, 8, 1);
-	cvResize(croppedImage, tmp, CV_INTER_LINEAR);
-	Smooth(pData, tmp, 206);
+	//CvSize sz = CvSize(croppedImage->width, croppedImage->height - croppedImage->height/4);
+	//IplImage* tmp = cvCreateImage(sz, 8, 1);
+	//cvResize(croppedImage, tmp, CV_INTER_LINEAR);
+	Smooth(pData, croppedImage, 206);
 	
 	if (gCfg.m_bSaveEngineImg) {
 		str.Format(_T("%s\\[%d]%03d_cvTmp.BMP"), m_sDebugPath, pData->m_nCh, 300);
-		CT2A ascii(str); cvSaveImage(ascii, tmp);
+		CT2A ascii(str); cvSaveImage(ascii, croppedImage);
 	}
 
 	// Open input image using OpenCV
-	cv::Mat im = cv::cvarrToMat(tmp);
+	cv::Mat im = cv::cvarrToMat(croppedImage);
 	
 	// Set image data
 	ocr.SetImage(im.data, im.cols, im.rows, 1, im.step); // BW color
@@ -180,7 +180,7 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	m_DetectResult.strResult = rst;// outText.c_str();
 	pData->m_vecDetectResult.push_back(m_DetectResult);
 
-	cvReleaseImage(&tmp);
+	//cvReleaseImage(&tmp);
 
 #endif	
 	return -1;
