@@ -1226,7 +1226,7 @@ void CRecipeView::OnRecipeInspection()
 
 				if (pData->m_nInspectType == _Inspect_BarCode || pData->m_nInspectType == _Inspect_Teseract)
 				{
-					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 200, 60));
+					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 60));
 					_tcscpy(pObj->m_text, prst->strResult);
 					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
 					pObj->m_pDocument = pDoc;
