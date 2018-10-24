@@ -27,6 +27,9 @@ void CConfig::ReadConfig()
 	m_bSaveEngineImg		=	ini->ReadInt(_T("SYSTEMINFO"), _T("SAVEENGINEIMG"), false);
 	m_bSaveGrabImg	=	ini->ReadInt(_T("SYSTEMINFO"), _T("SAVEGRABIMG"), false);
 
+	m_bCamFlipHoriz = ini->ReadInt(_T("SYSTEMINFO"), _T("CAMHORIZFLIP"), 0);
+	m_bCamFlipVert = ini->ReadInt(_T("SYSTEMINFO"), _T("CAMVERTFLIP"), 0);
+
 	for (int i = 0; i < MAX_CH_NUM; i++) {
 		str.Format(_T("WEBCAM%d"), i);
 		m_Webcam[i] = ini->ReadInt(_T("SYSTEMINFO"), str, false);
@@ -61,6 +64,9 @@ void CConfig::WriteConfig()
 	ini->WriteInt(_T("SYSTEMINFO"), _T("SAVEENGINEIMG"), m_bSaveEngineImg);
 	ini->WriteInt(_T("SYSTEMINFO"), _T("SAVEGRABIMG"), m_bSaveGrabImg);
 	ini->WriteString(_T("SYSTEMINFO"), _T("SAVE_DIR"), m_sSaveRootDir);
+
+	ini->WriteInt(_T("SYSTEMINFO"), _T("CAMHORIZFLIP"), m_bCamFlipHoriz);
+	ini->WriteInt(_T("SYSTEMINFO"), _T("CAMVERTFLIP"), m_bCamFlipVert);
 
 	for (int i = 0; i < MAX_CH_NUM; i++) {
 		str.Format(_T("WEBCAM%d"), i);

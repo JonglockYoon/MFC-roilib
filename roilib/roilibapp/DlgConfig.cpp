@@ -23,6 +23,8 @@ void CDlgConfig::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Check(pDX, IDC_CHECK_ENGINE_IMAGE, m_bSaveEngineImage);
 	DDX_Check(pDX, IDC_CHECK_GRAB_IMAGE, m_bSaveGrabImage);
+	DDX_Check(pDX, IDC_CHECK_CAM_FLIP_HORIZ, m_bCamFlipHoriz);
+	DDX_Check(pDX, IDC_CHECK_CAM_FLIP_VERT, m_bCamFlipVert);
 }
 
 
@@ -40,7 +42,9 @@ BOOL CDlgConfig::OnInitDialog()
 
 	m_bSaveEngineImage = gCfg.m_bSaveEngineImg;
 	m_bSaveGrabImage = gCfg.m_bSaveGrabImg;
-	
+	m_bCamFlipHoriz = gCfg.m_bCamFlipHoriz;
+	m_bCamFlipVert = gCfg.m_bCamFlipVert;
+
 	UpdateData(FALSE);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
@@ -53,6 +57,8 @@ void CDlgConfig::OnBnClickedConfigOk()
 	UpdateData(TRUE);
 	gCfg.m_bSaveEngineImg = m_bSaveEngineImage;
 	gCfg.m_bSaveGrabImg = m_bSaveGrabImage;
+	gCfg.m_bCamFlipHoriz = m_bCamFlipHoriz;
+	gCfg.m_bCamFlipVert = m_bCamFlipVert;
 
 	gCfg.WriteConfig();
 

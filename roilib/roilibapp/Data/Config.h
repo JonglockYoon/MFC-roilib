@@ -25,6 +25,8 @@ public:
         int    m_Webcam[MAX_CH_NUM];
         bool	m_bSaveEngineImg;
         bool	m_bSaveGrabImg;
+		bool	m_bCamFlipHoriz;
+		bool	m_bCamFlipVert;
 
         double m_dRulerMaxY;
         double m_dRulerMaxX;

@@ -113,7 +113,12 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
         IplImage *s = &IplImage(mat);
         if (s != NULL)
         {
-            //cvFlip(s, NULL, 1); // 좌우
+			if (gCfg.m_bCamFlipHoriz && gCfg.m_bCamFlipVert)
+				cvFlip(s, NULL, -1);
+			else if (gCfg.m_bCamFlipHoriz)
+				cvFlip(s, NULL, 1);
+			else if (gCfg.m_bCamFlipVert)
+				cvFlip(s, NULL, 0);
 
             int sx = s->width;
             int sy = s->height;

@@ -24,4 +24,6 @@ public:
 	afx_msg void OnBnClickedConfigCancel();
 	BOOL m_bSaveEngineImage;
 	BOOL m_bSaveGrabImage;
+	BOOL m_bCamFlipVert;
+	BOOL m_bCamFlipHoriz;
 };
