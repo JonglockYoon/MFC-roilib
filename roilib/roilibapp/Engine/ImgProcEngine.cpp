@@ -16,7 +16,6 @@ CImgProcEngine::CImgProcEngine()
 	CString str;
 	str.Format(_T("%s\\[%d]Engine"), theApp.g_sRootPath);
 
-	// Create Tesseract object
 	setlocale(LC_ALL, "C");
 	//setlocale(LC_ALL, NULL);
 }

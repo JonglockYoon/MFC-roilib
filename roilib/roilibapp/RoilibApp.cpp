@@ -30,11 +30,9 @@
 
 // D:\Projects\vcpkg-master\installed\x64-windows\lib 를 속성에 등록.
 
-#pragma comment (lib, "jpeg.lib")
-#pragma comment (lib, "libpng16.lib") 
-#pragma comment (lib, "tiff.lib")
-#pragma comment (lib, "jasper.lib")
-#pragma comment (lib, "zlib.lib")
+#pragma comment (lib, "../../lib/pvt.cppan.demo.jpeg-9.2.0.lib")
+#pragma comment (lib, "../../lib/pvt.cppan.demo.png-1.6.35.lib") 
+#pragma comment (lib, "../../lib/pvt.cppan.demo.tiff-4.0.9.lib")
 #pragma comment (lib, "../../lib/pvt.cppan.demo.danbloomberg.leptonica-1.76.0.lib")
 
 #ifdef _DEBUG
@@ -44,12 +42,12 @@
 #pragma comment (lib, "../../lib/opencv_world340d.lib")
 //#pragma comment (lib, "../../lib/pngD.lib")
 //#pragma comment (lib, "../../lib/jpegD.lib")
-//#pragma comment (lib, "../../lib/zlibD.lib")
 //#pragma comment (lib, "../../lib/tiffD.lib")
 //#pragma comment (lib, "../../lib/jbigD.lib")
-//#pragma comment (lib, "../../lib/jasperD.lib")
 #pragma comment (lib, "../../lib/libdcrD.lib")
 #pragma comment (lib, "../../lib/mngD.lib")
+#pragma comment (lib, "../../lib/jasperD.lib")
+#pragma comment (lib, "../../lib/zlibD.lib")
 #pragma comment (lib, "../../lib/cximageD.lib")
 #else
 //#pragma comment (lib, "../../lib/leptonica-1.76.0.lib") 
@@ -58,12 +56,12 @@
 #pragma comment (lib, "../../lib/opencv_world340.lib")
 //#pragma comment (lib, "../../lib/png.lib")
 //#pragma comment (lib, "../../lib/jpeg.lib")
-//#pragma comment (lib, "../../lib/zlib.lib")
 //#pragma comment (lib, "../../lib/tiff.lib")
 //#pragma comment (lib, "../../lib/jbig.lib") 
-//#pragma comment (lib, "../../lib/jasper.lib")
 #pragma comment (lib, "../../lib/libdcr.lib")
 #pragma comment (lib, "../../lib/mng.lib")
+#pragma comment (lib, "../../lib/jasper.lib")
+#pragma comment (lib, "../../lib/zlib.lib")
 #pragma comment (lib, "../../lib/cximage.lib")
 #endif
 
