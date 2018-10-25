@@ -55,9 +55,9 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 	if (rcInter.IsRectEmpty())
 		return -1;
 
-	cv::Point2f left_top = cv::Point2f(rect.left, rect.top);
-	cvSetImageROI(graySearchImg, cvRect((int)left_top.x, (int)left_top.y, rect.Width(), rect.Height()));
-	croppedImage = cvCreateImage(cvSize(rect.Width(), rect.Height()), graySearchImg->depth, graySearchImg->nChannels);
+	cv::Point2f left_top = cv::Point2f(rcInter.left, rcInter.top);
+	cvSetImageROI(graySearchImg, cvRect((int)left_top.x, (int)left_top.y, rcInter.Width(), rcInter.Height()));
+	croppedImage = cvCreateImage(cvSize(rcInter.Width(), rcInter.Height()), graySearchImg->depth, graySearchImg->nChannels);
 	cvCopy(graySearchImg, croppedImage);
 	cvResetImageROI(graySearchImg);
 
@@ -66,13 +66,13 @@ int CImgProcEngine::InspectOneItem(int nCh, IplImage* img, CRoiData *pData)
 	switch (pData->m_nInspectType)
 	{
 	case _Inspect_Roi_Circle:
-		SingleROICircle(nCh, croppedImage, pData, rect);
+		SingleROICircle(nCh, croppedImage, pData, rcInter);
 		break;
 	case _Inspect_BarCode:
-		SingleROIBarCode(nCh, croppedImage, pData, rect);
+		SingleROIBarCode(nCh, croppedImage, pData, rcInter);
 		break;
 	case _Inspect_Teseract:
-		SingleROIOCR(nCh, croppedImage, pData, rect);
+		SingleROIOCR(nCh, croppedImage, pData, rcInter);
 		break;
 	}
 	cvReleaseImage(&croppedImage);
