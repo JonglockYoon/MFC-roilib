@@ -42,6 +42,8 @@ protected:
 	int NoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg = 100);
 	int Expansion(CRoiData *pData, IplImage* grayImg, int nDbg = 150);
 	void Smooth(CRoiData *pData, IplImage* ImgIn, int iImgID);
+	int PostNoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg = 110);
+	int PostExpansion(CRoiData *pData, IplImage* grayImg, int nDbg = 160);
 
 public:
 	CImgProcEngine();

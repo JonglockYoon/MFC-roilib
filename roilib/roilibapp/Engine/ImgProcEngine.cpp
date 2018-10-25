@@ -144,11 +144,31 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 	ocr.SetPageSegMode(tesseract::PSM_AUTO);
 
 	ThresholdRange(pData, croppedImage, 200);
+	
+	FilterBlobBoundingBoxYLength(croppedImage, 100, 1000);
+
 	NoiseOut(pData, croppedImage, 202);
 	Expansion(pData, croppedImage, 204);
 
-	CvSize sz;// = CvSize(croppedImage->width / 3, croppedImage->height / 3);
-	sz = CvSize(croppedImage->width, croppedImage->height);
+	PostNoiseOut(pData, croppedImage, 206);
+	PostExpansion(pData, croppedImage, 208);
+
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%s\\[%d]%03d_cvClose.BMP"), m_sDebugPath, pData->m_nCh, 205);
+		CT2A ascii(str); cvSaveImage(ascii, croppedImage);
+	}
+
+	double dSizeX = 1.0, dSizeY = 1.0;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Size X(%)"));
+		if (pParam)
+			dSizeX = _ttof(pParam->Value.c_str()) / 100.0;
+		pParam = pData->getParam(_T("Size Y(%)"));
+		if (pParam)
+			dSizeY = _ttof(pParam->Value.c_str()) / 100.0;
+	}
+
+	CvSize sz = CvSize(croppedImage->width * dSizeX, croppedImage->height * dSizeY);
 	IplImage* tmp = cvCreateImage(sz, 8, 1);
 	cvResize(croppedImage, tmp, CV_INTER_CUBIC);
 
@@ -266,8 +286,8 @@ int CImgProcEngine::FindCircle(CRoiData *pData, IplImage* graySearchImgIn)
 			cvCircle(graySearchImg, cvPoint(cvRound(circle[0]), cvRound(circle[1])), cvRound(m_DetectResult.dRadius), CV_RGB(128, 128, 128), 3);
 			break;
 		}
-		str.Format(_T("%s\\[%d]210_Circles.BMP"), theApp.m_ImgProcEngine.m_sDebugPath, pData->m_nCh);
-		CT2A ascii(str); cvSaveImage(ascii, graySearchImg);
+		str.Format(_T("210_Circles.BMP"));
+		SaveOutImage(graySearchImg, pData->m_nCh, str, FALSE);
 	}
 
 	cvReleaseImage(&graySearchImg);
@@ -327,8 +347,8 @@ double CImgProcEngine::ThresholdOTSU(CRoiData *pData, IplImage* grayImg, int nDb
 	int nInvert = CV_THRESH_BINARY | CV_THRESH_OTSU;
 	double otsuThreshold = cvThreshold(grayImg, grayImg, 0, nThresholdMaxVal, nInvert);
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("%s\\[%d]%03d_cvThreshold.BMP"), m_sDebugPath, pData->m_nCh, nDbg);
-		CT2A ascii(str); cvSaveImage(ascii, grayImg);
+		str.Format(_T("%03d_cvThreshold.BMP"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
 	}
 
 	return otsuThreshold;
@@ -364,8 +384,8 @@ int CImgProcEngine::ThresholdRange(CRoiData *pData, IplImage* grayImg, int nDbg)
 		cvNot(grayImg, grayImg);
 
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("%s\\[%d]%03d_cvThresholdRange.BMP"), m_sDebugPath, pData->m_nCh, nDbg);
-		CT2A ascii(str); cvSaveImage(ascii, grayImg);
+		str.Format(_T("%03d_cvThresholdRange.BMP"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
 	}
 
 	return 0;
@@ -392,7 +412,7 @@ int CImgProcEngine::NoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg)
 		filterSize = 1;
 	if (filterSize % 2 == 0)
 		filterSize++;
-	element = cvCreateStructuringElementEx(filterSize, filterSize, filterSize / 2, filterSize / 2, CV_SHAPE_RECT, NULL);
+	element = cvCreateStructuringElementEx(filterSize, filterSize, filterSize / 2, filterSize / 2, CV_SHAPE_ELLIPSE, NULL);
 	int nNoiseout = 1;
 	if (pData != NULL) {
 		CParam *pParam = pData->getParam(_T("Noise out 1"));
@@ -416,8 +436,64 @@ int CImgProcEngine::NoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg)
 		cvMorphologyEx(tmp, grayImg, NULL, element, CV_MOP_CLOSE, nNoiseout);
 
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("%s\\[%d]%03d_cvClose.BMP"), m_sDebugPath, pData->m_nCh, nDbg);
-		CT2A ascii(str); cvSaveImage(ascii, grayImg);
+		str.Format(_T("%03d_cvClose.BMP"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
+	}
+	cvReleaseImage(&tmp);
+
+	cvReleaseStructuringElement(&element);
+	return 0;
+}
+
+
+
+int CImgProcEngine::PostNoiseOut(CRoiData *pData, IplImage* grayImg, int nDbg)
+{
+	CString str;
+
+
+	IplImage* tmp = cvCreateImage(cvGetSize(grayImg), 8, 1);
+
+	// 1. Template이미지의 노이즈 제거.
+	int filterSize = 3;  // 필터의 크기를 3으로 설정 (Noise out area)
+						 //if (pData != NULL) {
+						 //	CParam *pParam = pData->getParam(_T("Noise out area"));
+						 //	if (pParam)
+						 //		filterSize = _ttoi(pParam->Value.c_str());
+						 //}
+	IplConvKernel *element = NULL;
+	if (filterSize <= 0)
+		filterSize = 1;
+	if (filterSize % 2 == 0)
+		filterSize++;
+	//element = cvCreateStructuringElementEx(filterSize, filterSize, (filterSize - 1) / 2, (filterSize - 1) / 2, CV_SHAPE_RECT, NULL);
+	element = cvCreateStructuringElementEx(filterSize, filterSize, filterSize / 2, filterSize / 2, CV_SHAPE_RECT, NULL);
+	int nNoiseout = 0;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Noise out 3"));
+		if (pParam)
+			nNoiseout = _ttoi(pParam->Value.c_str());
+	}
+	if (nNoiseout < 0)
+		cvMorphologyEx(grayImg, tmp, NULL, element, CV_MOP_OPEN, -nNoiseout);
+	else //if (nNoiseout > 0)
+		cvMorphologyEx(grayImg, tmp, NULL, element, CV_MOP_CLOSE, nNoiseout);
+
+	nNoiseout = 0;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Noise out 4"));
+		if (pParam)
+			nNoiseout = _ttoi(pParam->Value.c_str());
+	}
+	if (nNoiseout < 0)
+		cvMorphologyEx(tmp, grayImg, NULL, element, CV_MOP_OPEN, -nNoiseout);
+	else //if (nNoiseout > 0)
+		cvMorphologyEx(tmp, grayImg, NULL, element, CV_MOP_CLOSE, nNoiseout);
+
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%03d_cvClose.jpg"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
+
 	}
 	cvReleaseImage(&tmp);
 
@@ -457,13 +533,49 @@ int CImgProcEngine::Expansion(CRoiData *pData, IplImage* grayImg, int nDbg)
 		cvDilate(tmp, grayImg, NULL, nExpansion);
 
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("%s\\[%d]%03d_cvExpansion.BMP"), m_sDebugPath, pData->m_nCh, nDbg);
-		CT2A ascii(str); cvSaveImage(ascii, grayImg);
+		str.Format(_T("03d_cvExpansion.BMP"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
 	}
 	cvReleaseImage(&tmp);
 	return 0;
 }
 
+
+int CImgProcEngine::PostExpansion(CRoiData *pData, IplImage* grayImg, int nDbg)
+{
+	CString str;
+
+	IplImage* tmp = cvCreateImage(cvGetSize(grayImg), 8, 1);
+
+	int nExpansion = 0;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Expansion 3"));
+		if (pParam)
+			nExpansion = _ttoi(pParam->Value.c_str());
+	}
+	if (nExpansion < 0)
+		cvErode(grayImg, tmp, NULL, -nExpansion);
+	else  //if (nExpansion > 0)
+		cvDilate(grayImg, tmp, NULL, nExpansion);
+
+	nExpansion = 0;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Expansion 4"));
+		if (pParam)
+			nExpansion = _ttoi(pParam->Value.c_str());
+	}
+	if (nExpansion < 0)
+		cvErode(tmp, grayImg, NULL, -nExpansion);
+	else //if (nExpansion > 0)
+		cvDilate(tmp, grayImg, NULL, nExpansion);
+
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%03d_cvExpansion.jpg"), nDbg);
+		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
+	}
+	cvReleaseImage(&tmp);
+	return 0;
+}
 
 void CImgProcEngine::Smooth(CRoiData *pData, IplImage* ImgIn, int iImgID)
 {
