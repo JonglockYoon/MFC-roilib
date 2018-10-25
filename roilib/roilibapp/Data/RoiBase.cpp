@@ -8,9 +8,9 @@ CString  StepTypeValue[] = {
 	_T("ProcessValue2"),
 	_T("ProcessValue3"),
 	_T("FilterValue"),
-	_T("DecideValue"),
 	_T("PostProcessValue1"),
 	_T("PostProcessValue2"),
+	_T("DecideValue"),
 	_T("PriorityValue(0-High)"),
 	_T("LightValue"),
 };
