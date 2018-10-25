@@ -50,7 +50,6 @@ void CImgProcBase::CopyImageROI(IplImage* pImgIn, IplImage* pImgOut, CvRect rect
 
 int CImgProcBase::FilterBlobLength(IplImage* grayImg, int nMinLength, int nMaxLength)
 {
-    IplImage *pMask = cvCloneImage(grayImg);
     CBlobResult blobs;
     blobs = CBlobResult(grayImg, nullptr);
 
@@ -63,17 +62,14 @@ int CImgProcBase::FilterBlobLength(IplImage* grayImg, int nMinLength, int nMaxLe
         for (int i = 0; i < blobCount; i++)
         {
             CBlob *currentBlob = blobs.GetBlob(i);
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
-    cvAnd(grayImg, pMask, grayImg);
-    cvReleaseImage(&pMask);
     return 0;
 }
 
 int CImgProcBase::FilterBlobBoundingBoxLength(IplImage* grayImg, int nMinLength, int nMaxLength)
 {
-    IplImage *pMask = cvCloneImage(grayImg);
     CBlobResult blobs;
     blobs = CBlobResult(grayImg, nullptr);
     int blobCount = blobs.GetNumBlobs();
@@ -96,11 +92,9 @@ int CImgProcBase::FilterBlobBoundingBoxLength(IplImage* grayImg, int nMinLength,
         for (int i = 0; i < blobCount; i++)
         {
             CBlob *currentBlob = blobs.GetBlob(i);
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
-    cvAnd(grayImg, pMask, grayImg);
-    cvReleaseImage(&pMask);
 
     return 0;
 }
@@ -133,7 +127,7 @@ int CImgProcBase::FilterBlobBoundingBoxXLength(IplImage* grayImg, int nMinLength
         for (int i = 0; i < blobCount; i++)
         {
             CBlob *currentBlob = blobs.GetBlob(i);
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
 
@@ -167,7 +161,7 @@ int CImgProcBase::FilterBlobBoundingBoxYLength(IplImage* grayImg, int nMinLength
         for (int i = 0; i < blobCount; i++)
         {
             CBlob *currentBlob = blobs.GetBlob(i);
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
 
@@ -177,7 +171,6 @@ int CImgProcBase::FilterBlobBoundingBoxYLength(IplImage* grayImg, int nMinLength
 int CImgProcBase::FilterIncludeLargeBlob(IplImage* grayImg)
 {
     //QString str;
-    //IplImage *pMask = cvCloneImage(grayImg);
     CBlobResult blobs;
     blobs = CBlobResult(grayImg, nullptr);
     double dLargeArea = 0;
@@ -197,14 +190,13 @@ int CImgProcBase::FilterIncludeLargeBlob(IplImage* grayImg)
     cvZero(grayImg);
     for (int i = 0; i < blobs.GetNumBlobs(); i++) {
         CBlob *currentBlob = blobs.GetBlob(i);
-        currentBlob->FillBlob(grayImg, CV_RGB(255, 255, 255));	// Draw the large blobs as white.
+        currentBlob->FillBlob(grayImg, CV_RGB(255, 255, 255), 0, 0, true);
     }
     return 0;
 }
 
 int CImgProcBase::EraseLargeBlob(IplImage* grayImg)
 {
-    IplImage *pMask = cvCloneImage(grayImg);
     CBlobResult blobs;
     blobs = CBlobResult(grayImg, nullptr);
     double dLargeArea = 0;
@@ -224,10 +216,8 @@ int CImgProcBase::EraseLargeBlob(IplImage* grayImg)
     cvZero(grayImg);
     for (int i = 0; i < blobs.GetNumBlobs(); i++) {
         CBlob *currentBlob = blobs.GetBlob(i);
-        currentBlob->FillBlob(grayImg, CV_RGB(255, 255, 255));	// Draw the large blobs as white.
+        currentBlob->FillBlob(grayImg, CV_RGB(255, 255, 255), 0, 0, true);
     }
-    cvAnd(grayImg, pMask, grayImg);
-    cvReleaseImage(&pMask);
     return 0;
 }
 
@@ -511,19 +501,15 @@ int CImgProcBase::FilterLargeBlob(IplImage* grayImg, int nAxisLength)
     CBlobResult blobs;
     blobs = CBlobResult(grayImg, nullptr);
     blobs.Filter(blobs, B_EXCLUDE, CBlobGetMajorAxisLength(), B_GREATER, nAxisLength); // 블럽 큰것 제거.
-    IplImage *pMask = cvCloneImage(grayImg);
     cvZero(grayImg);
     int blobCount = blobs.GetNumBlobs();
     if (blobCount > 0) {
         for (int i = 0; i < blobCount; i++)
         {
             CBlob *currentBlob = blobs.GetBlob(i);
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
-    cvAnd(grayImg, pMask, grayImg);
-
-    cvReleaseImage(&pMask);
     return 0;
 }
 
@@ -548,7 +534,7 @@ int CImgProcBase::IncludeRadiusBlob(IplImage* grayImg, int nMinCircleRadius, int
             if (_min < nMinCircleRadius)
                 continue;
 
-            currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+            currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
         }
     }
 
@@ -577,15 +563,12 @@ void CImgProcBase::FilterLargeArea(IplImage* grayImg)
     if (blobCount == 0) {
         return;
     }
-    IplImage *pMask = cvCloneImage(grayImg);
     cvZero(grayImg);
     for (int i = 0; i < blobCount; i++)
     {
         CBlob *currentBlob = blobs.GetBlob(i);
-        currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+        currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
     }
-    cvAnd(grayImg, pMask, grayImg);
-    cvReleaseImage(&pMask);
 }
 
 
@@ -609,21 +592,18 @@ void CImgProcBase::FilterLargeDiameter(IplImage* grayImg)
     if (index >= 0)
     {
 #if 1
-        IplImage *pMask = cvCloneImage(grayImg);
         cvZero(grayImg);
         CBlob *currentBlob = blobs.GetBlob(index);
-        currentBlob->FillBlob(grayImg, CVX_WHITE);	// Draw the filtered blobs as white.
+        currentBlob->FillBlob(grayImg, CVX_WHITE, 0, 0, true);
 #else
         cvSet(grayImg, cvScalar(255));
         for (int i = 0; i < nBlobs; i++) {
             if (i != index) {
                 CBlob *p = blobs.GetBlob(i);
-                p->FillBlob(grayImg, CVX_BLICK);
+                p->FillBlob(grayImg, CVX_BLICK, 0, 0, true);
             }
         }
 #endif
-        cvAnd(grayImg, pMask, grayImg);
-        cvReleaseImage(&pMask);
     }
 }
 
