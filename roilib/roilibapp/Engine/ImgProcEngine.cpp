@@ -117,10 +117,15 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 
 int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
-
-#if 1
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
+
+#if 1
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%s\\[%d]%03d_src.BMP"), m_sDebugPath, pData->m_nCh, 100);
+		CT2A ascii(str); cvSaveImage(ascii, croppedImage);
+	}
+
 
 	static tesseract::TessBaseAPI ocr;
 	int init_failed;
@@ -145,7 +150,17 @@ int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pDat
 
 	ThresholdRange(pData, croppedImage, 200);
 	
-	FilterBlobBoundingBoxYLength(croppedImage, 100, 1000);
+	int iMinY = 0, iMaxY = 100000;
+	if (pData != NULL) {
+		CParam *pParam = pData->getParam(_T("Min Size Y"));
+		if (pParam)
+			iMinY = (int)(_ttof(pParam->Value.c_str()));
+		pParam = pData->getParam(_T("Max Size Y"));
+		if (pParam)
+			iMaxY = (int)(_ttof(pParam->Value.c_str()));
+	}
+	FilterBlobBoundingBoxYLength(croppedImage, iMinY, iMaxY);
+
 
 	NoiseOut(pData, croppedImage, 202);
 	Expansion(pData, croppedImage, 204);
@@ -533,7 +548,7 @@ int CImgProcEngine::Expansion(CRoiData *pData, IplImage* grayImg, int nDbg)
 		cvDilate(tmp, grayImg, NULL, nExpansion);
 
 	if (gCfg.m_bSaveEngineImg){
-		str.Format(_T("03d_cvExpansion.BMP"), nDbg);
+		str.Format(_T("%03d_cvExpansion.BMP"), nDbg);
 		SaveOutImage(grayImg, pData->m_nCh, str, FALSE);
 	}
 	cvReleaseImage(&tmp);

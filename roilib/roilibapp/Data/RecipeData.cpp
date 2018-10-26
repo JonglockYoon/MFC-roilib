@@ -27,6 +27,8 @@ ParamTable paramTable[] = {
 		//_Inspect_Teseract, CParam(_ProcessValue1, _T("Type"), _ComboValue, _T("Multiformat")),
 		_Inspect_Teseract, CParam(_ProcessValue1, _T("Low Threshold"), _IntValue, _T("100")),
 		_Inspect_Teseract, CParam(_ProcessValue1, _T("High Threshold"), _IntValue, _T("255")),
+		_Inspect_Teseract, CParam(_ProcessValue1, _T("Min Size Y"), _IntValue, _T("50")),
+		_Inspect_Teseract, CParam(_ProcessValue1, _T("Max Size Y"), _IntValue, _T("10000")),
 		_Inspect_Teseract, CParam(_ProcessValue1, _T("Noise out 1"), _IntValue, _T("-2")),	// -1 : Open - 작은 White blob 들을 없앤다.
 		_Inspect_Teseract, CParam(_ProcessValue1, _T("Noise out 2"), _IntValue, _T("2")),	// 1 : Close - White blob 들을 묶는다.
 		_Inspect_Teseract, CParam(_ProcessValue1, _T("Expansion 1"), _IntValue, _T("-2")),	// -1 : Erode - 	
@@ -35,11 +37,11 @@ ParamTable paramTable[] = {
 		_Inspect_Teseract, CParam(_ProcessValue2, _T("Noise out 4"), _IntValue, _T("0")),	// 1 : Close - White blob 들을 묶는다.
 		_Inspect_Teseract, CParam(_ProcessValue2, _T("Expansion 3"), _IntValue, _T("0")),	// -1 : Erode - 	
 		_Inspect_Teseract, CParam(_ProcessValue2, _T("Expansion 4"), _IntValue, _T("0")),	// 1 : Dilate - 팽창연산
-		_Inspect_Teseract, CParam(_ProcessValue1, _T("Size X(%)"), _IntValue, _T("100")),
-		_Inspect_Teseract, CParam(_ProcessValue1, _T("Size Y(%)"), _IntValue, _T("100")),
-		_Inspect_Teseract, CParam(_ProcessValue1, _T("Smooth Use"), _ComboValue, _T("0"), _T("No,Yes")),
-		_Inspect_Teseract, CParam(_ProcessValue1, _T("Smooth method"), _ComboValue, _T("2"), _T("BLUR_NO_SCALE,BLUR,GAUSSIAN,CV_MEDIAN,BILATERAL ")),
-		_Inspect_Teseract, CParam(_ProcessValue1, _T("Smooth size"), _IntValue, _T("7")),
+		_Inspect_Teseract, CParam(_ProcessValue3, _T("Size X(%)"), _IntValue, _T("100")),
+		_Inspect_Teseract, CParam(_ProcessValue3, _T("Size Y(%)"), _IntValue, _T("100")),
+		_Inspect_Teseract, CParam(_ProcessValue3, _T("Smooth Use"), _ComboValue, _T("0"), _T("No,Yes")),
+		_Inspect_Teseract, CParam(_ProcessValue3, _T("Smooth method"), _ComboValue, _T("2"), _T("BLUR_NO_SCALE,BLUR,GAUSSIAN,CV_MEDIAN,BILATERAL ")),
+		_Inspect_Teseract, CParam(_ProcessValue3, _T("Smooth size"), _IntValue, _T("7")),
 
         _Inspect_Type_End, CParam(_FilterValue, _T(""), _IntValue, _T("")), // 반드시 있어야한다.
 };
