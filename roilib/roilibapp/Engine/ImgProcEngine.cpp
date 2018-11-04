@@ -647,6 +647,7 @@ void CImgProcEngine::Smooth(CRoiData *pData, IplImage* ImgIn, int iImgID)
 		SaveOutImage(ImgIn, pData->m_nCh, str);
 	}
 }
+
 int CImgProcEngine::SinglePattIdentify(int nCh, IplImage* grayImage, CRoiData *pData, CRect rect)
 {
 
@@ -862,6 +863,8 @@ int CImgProcEngine::SinglePattMatchShapes(int nCh, IplImage* croppedImage, CRoiD
         ThresholdRange(pData, g2, 255);
     NoiseOut(pData, g2, _ProcessValue1, 260);
     Expansion(pData, g2, _ProcessValue1, 261);
+	FilterIncludeLargeBlob(g2);
+
     cvCanny(g2, g2, 100, 300, 3);
     if (gCfg.m_bSaveEngineImg){
         SaveOutImage(g2, pData->m_nCh, _T("265_TemplateImageCany.jpg"));
@@ -869,14 +872,14 @@ int CImgProcEngine::SinglePattMatchShapes(int nCh, IplImage* croppedImage, CRoiD
 
     CvMemStorage *s2 = cvCreateMemStorage(0); //storage area for all contours 모든 형상들을 위한 저장공간.
     CvSeq* c2 = 0;         // 경계 계수를 저장할 변수
-    cvFindContours(g2, s2, &c2, sizeof(CvContour), CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
+    cvFindContours(g2, s2, &c2, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
     if (c2 == nullptr || c2->total <= 0) {
         if (grayTemplateImg) cvReleaseImage(&grayTemplateImg);
         if (c2) cvClearSeq(c2);
         if (s2) cvReleaseMemStorage(&s2);
         return 0;
     }
-    CvSeq* result2 = cvApproxPoly(c2, sizeof(CvContour), s2, CV_POLY_APPROX_DP, cvContourPerimeter(c2)*0.02, 1);
+    CvSeq* result2 = cvApproxPoly(c2, sizeof(CvContour), s2, CV_POLY_APPROX_DP, cvContourPerimeter(c2)*0.001, 1);
 
     CvRect boundbox2 = cvBoundingRect(result2);
     for (int i = 0; i < result2->total; ++i)
@@ -903,34 +906,58 @@ int CImgProcEngine::SinglePattMatchShapes(int nCh, IplImage* croppedImage, CRoiD
 
     int seq = 0;
     cvCanny(grayImg, grayImg, 100, 300, 3);
-    cvFindContours(grayImg, storage, &contours, sizeof(CvContour), CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
+    cvFindContours(grayImg, storage, &contours, sizeof(CvContour), CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+
+	int total = contours->total;
+	if (gCfg.m_bSaveEngineImg)
+	{
+		IplImage* drawImage = cvCreateImage(cvSize(grayImg->width, grayImg->height), grayImg->depth, grayImg->nChannels);
+		cvZero(drawImage);
+		cvDrawContours(drawImage, contours, CVX_WHITE, CVX_WHITE, 1, 1, 8); // 외곽선 근사화가 잘되었는지 테스트
+		str.Format(_T("269_cvApproxPoly.jpg"));
+		SaveOutImage(drawImage, pData->m_nCh, str, false);
+		if (drawImage) cvReleaseImage(&drawImage);
+	}
+
     //iterating through each contour
     while(contours)
     {
         //obtain a sequence of points of contour, pointed by the variable 'contour' 형상의 점들의 시퀀스 가져오기, 인자 ‘contour’에 의해 지정된
-        CvSeq* result = cvApproxPoly(contours, sizeof(CvContour), storage, CV_POLY_APPROX_DP, cvContourPerimeter(contours)*0.02, 1);
+        CvSeq* result = cvApproxPoly(contours, sizeof(CvContour), storage, CV_POLY_APPROX_DP, cvContourPerimeter(contours)*0.001, 1);
         CvRect boundbox = cvBoundingRect(contours);
-        if (boundbox.x+boundbox.width < grayImg->width && boundbox.y+boundbox.height < grayImg->height)
+        //if (boundbox.x+boundbox.width < grayImg->width && boundbox.y+boundbox.height < grayImg->height)
         {
-            if (abs(result2->total - result->total) <= 3)
+            if (abs(result2->total - result->total) <= 10)
             {
-                for (int i = 0; i < result->total; ++i)
-                {
-                    CvPoint* p = CV_GET_SEQ_ELEM(CvPoint, result, i);
-                    p->x = p->x - boundbox.x;
-                    p->y = p->y - boundbox.y;
-                }
+				CvSeq* ptseq = cvCreateSeq((CV_SEQ_KIND_CURVE | CV_SEQ_ELTYPE_POINT | CV_SEQ_FLAG_CLOSED) | CV_32SC2, sizeof(CvContour), sizeof(CvPoint), storage);
+				for (int i = 0; i < result->total; ++i)
+				{
+					CvPoint* p = CV_GET_SEQ_ELEM(CvPoint, result, i);
+					p->x = p->x - boundbox.x;
+					p->y = p->y - boundbox.y;
+					cvSeqPush(ptseq, p);
+				}
 
                 if (gCfg.m_bSaveEngineImg)
                 {
+					//IplImage* drawImage1 = cvCreateImage(cvSize(grayImg->width, grayImg->height), grayImg->depth, grayImg->nChannels);
+					//cvZero(drawImage1);
+					//cvDrawContours(drawImage1, contours, CVX_WHITE, CVX_WHITE, 1, 1, 8); // 외곽선 근사화가 잘되었는지 테스트
+					//str.Format(_T("270_cvApproxPoly1_%d.jpg"), seq);
+					//SaveOutImage(drawImage1, pData->m_nCh, str, false);
+					//if (drawImage1) cvReleaseImage(&drawImage1);
+
                     IplImage* drawImage = cvCreateImage(cvSize(g2->width, g2->height), grayImg->depth, grayImg->nChannels);
                     cvZero(drawImage);
-                    cvDrawContours(drawImage, result, CVX_WHITE, CVX_WHITE, 1, 1, 8); // 외곽선 근사화가 잘되었는지 테스트
-                    str.Format(_T("270_cvApproxPoly_%d.jpg"), seq);
+                    cvDrawContours(drawImage, ptseq, CVX_WHITE, CVX_WHITE, 1, 1, 8); // 외곽선 근사화가 잘되었는지 테스트
+                    str.Format(_T("270_cvApproxPoly2_%d.jpg"), seq);
                     SaveOutImage(drawImage, pData->m_nCh, str, false);
                     if (drawImage) cvReleaseImage(&drawImage);
                 }
+				cvClearSeq(ptseq);
 
+				// result - search image
+				// result2 - template image
                 double matching = cvMatchShapes(result, result2, CV_CONTOURS_MATCH_I1); // 작은 값 일수록 두 이미지의 형상이 가까운 (0은 같은 모양)라는 것이된다.
                 //double matching2 = cvMatchShapes(result, result2, CV_CONTOURS_MATCH_I2);
                 //double matching3 = cvMatchShapes(result, result2, CV_CONTOURS_MATCH_I3);
@@ -938,10 +965,10 @@ int CImgProcEngine::SinglePattMatchShapes(int nCh, IplImage* croppedImage, CRoiD
                 if (matching > 1.0)
                     matching = 1.0;
                 double dMatchShapes = (1.0-matching) * 100.0;
-                if (matching <= (1.0 - dMatchShapesingRate)) // || max > 0.9)
+                if (matching <= (1.0 - dMatchShapesingRate))
                 {
-                    str.Format(_T("Template Shape Match(%d) ===> : %.2f%%  %d:%d"), seq, dMatchShapes, result2->total, result->total);
-					g_cLog->AddLog(str, _LOG_LIST_SYS);
+                    //str.Format(_T("Template Shape Match(%d) ===> : %.2f%%  %d:%d"), seq, dMatchShapes, result2->total, result->total);
+					//g_cLog->AddLog(str, _LOG_LIST_SYS);
 
                     CvSeq* ptseq = cvCreateSeq((CV_SEQ_KIND_CURVE | CV_SEQ_ELTYPE_POINT | CV_SEQ_FLAG_CLOSED) | CV_32SC2, sizeof(CvContour), sizeof(CvPoint), storage);
                     for (int i = 0; i < result->total; ++i)
@@ -973,7 +1000,7 @@ int CImgProcEngine::SinglePattMatchShapes(int nCh, IplImage* croppedImage, CRoiD
     }
 
     int size = pData->m_vecDetectResult.size();
-    if (size > 1) {
+    if (size >= 1) {
         std::stable_sort(pData->m_vecDetectResult.begin(), pData->m_vecDetectResult.end(), [](const DetectResult lhs, const DetectResult rhs)->bool {
             if (lhs.dMatchRate > rhs.dMatchRate) // descending
                 return true;

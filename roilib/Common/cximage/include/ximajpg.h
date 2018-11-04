@@ -29,8 +29,8 @@
 #define CXIMAGEJPG_SUPPORT_EXIF 1
 
 extern "C" {
- #include "./jpeg/jpeglib.h"
- #include "./jpeg/jerror.h"
+ #include "jpeg/jpeglib.h"
+ #include "jpeg/jerror.h"
 }
 
 class DLL_EXP CxImageJPG: public CxImage
@@ -39,8 +39,8 @@ public:
 	CxImageJPG();
 	~CxImageJPG();
 
-//	bool Load(const TCHAR * imageFileName){ return CxImage::Load(imageFileName,CXIMAGE_FORMAT_JPG);}
-//	bool Save(const TCHAR * imageFileName){ return CxImage::Save(imageFileName,CXIMAGE_FORMAT_JPG);}
+	//bool Load(const TCHAR * imageFileName){ return CxImage::Load(imageFileName,CXIMAGE_FORMAT_JPG);}
+	//bool Save(const TCHAR * imageFileName){ return CxImage::Save(imageFileName,CXIMAGE_FORMAT_JPG);}
 	bool Decode(CxFile * hFile);
 	bool Decode(FILE *hFile) { CxIOFile file(hFile); return Decode(&file); }
 

@@ -72,7 +72,7 @@ CString CRoilibAppDoc::RemoveExtension(const CString& name)
 //////////////////////////////////////////////////////////////////////////////
 int CRoilibAppDoc::FindType(const CString& ext)
 {
-    return CxImage::GetTypeIdFromName(ext);
+    return CxImage::GetTypeIdFromName((const TCHAR*)ext);
 }
 //////////////////////////////////////////////////////////////////////////////
 
