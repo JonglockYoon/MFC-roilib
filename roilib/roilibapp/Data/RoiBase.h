@@ -8,7 +8,10 @@
 typedef enum _tagInspectType
 {
         _Inspect_Patt_Start = 0,
-        _Inspect_Patt_End,		// 패턴마지막.
+		_Inspect_Patt_Identify,
+		_Inspect_Patt_MatchShapes,
+		_Inspect_Patt_FeatureMatch,
+		_Inspect_Patt_End,		// 패턴마지막.
 
         _Inspect_Roi_Start = 100,
         _Inspect_Roi_Circle,

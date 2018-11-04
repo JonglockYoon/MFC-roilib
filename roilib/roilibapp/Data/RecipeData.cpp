@@ -12,6 +12,31 @@
 CRecipeData * g_cRecipeData = NULL;
 
 ParamTable paramTable[] = {
+
+
+		_Inspect_Patt_Identify,  CParam(_ProcessValue1, _T("Pattern matching rate"), _DoubleValue, _T("60")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue1, _T("Rotate angle"), _IntValue, _T("0")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue1, _T("Angle step"), _IntValue, _T("2")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("Shape matching rate"), _DoubleValue, _T("70")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("Low Threshold"), _IntValue, _T("0")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("High Threshold"), _IntValue, _T("100")),
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("Noise out 1"), _IntValue, _T("1")),	// -1 : Open - 작은 White blob 들을 없앤다.
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("Noise out 2"), _IntValue, _T("-1")),	// 1 : Close - White blob 들을 묶는다..
+		_Inspect_Patt_Identify,  CParam(_ProcessValue2, _T("Filter blob"), _ComboValue, _T("2"), _T("None,LargeArea,LargeDiameter")),
+
+		_Inspect_Patt_MatchShapes,  CParam(_ProcessValue1, _T("Low Threshold"), _IntValue, _T("0")),
+		_Inspect_Patt_MatchShapes,  CParam(_ProcessValue1, _T("High Threshold"), _IntValue, _T("100")),
+		_Inspect_Patt_MatchShapes,  CParam(_ProcessValue1, _T("Noise out 1"), _IntValue, _T("1")),	// -1 : Open - 작은 White blob 들을 없앤다
+		_Inspect_Patt_MatchShapes,  CParam(_ProcessValue1, _T("Noise out 2"), _IntValue, _T("-1")),	// 1 : Close - White blob 들을 묶는다.
+		_Inspect_Patt_MatchShapes,  CParam(_ProcessValue1, _T("Shape matching rate"), _DoubleValue, _T("85")),
+		//_Inspect_Patt_MatchShapes,  CParam(_PriorityValue, _T("Priority"), _IntValue, _T("5")),
+
+		_Inspect_Patt_FeatureMatch, CParam(_ProcessValue1, _T("Method"), _ComboValue, _T("2"), _T("SURF,SIFT,ORB")),
+		_Inspect_Patt_FeatureMatch, CParam(_ProcessValue1, _T("Param1"), _IntValue, _T("2000")),
+		_Inspect_Patt_FeatureMatch, CParam(_ProcessValue1, _T("kDistanceCoef"), _IntValue, _T("5")),
+		_Inspect_Patt_FeatureMatch, CParam(_ProcessValue1, _T("kMaxMatchingSize"), _IntValue, _T("200")),
+
+
 		_Inspect_Roi_Circle, CParam(_ProcessValue1, _T("Noise out area"), _IntValue, _T("3")), // pixel size
         _Inspect_Roi_Circle, CParam(_ProcessValue1, _T("Noise out 1"), _IntValue, _T("-2")),	// -1 : Open - 작은 White blob 들을 없앤다.
         _Inspect_Roi_Circle, CParam(_ProcessValue1, _T("Noise out 2"), _IntValue, _T("2")),	// 1 : Close - White blob 들을 묶는다.
@@ -67,6 +92,11 @@ CRecipeData::~CRecipeData(void)
 
 void CRecipeData::InitParamData()
 {
+	m_sInspList[_Inspect_Patt_Identify].Format(_T("Pattern Identify"));
+	m_sInspList[_Inspect_Patt_MatchShapes].Format(_T("Pattern Shape Match"));
+	m_sInspList[_Inspect_Patt_FeatureMatch].Format(_T("Feature Match"));
+
+
         m_sInspList[_Inspect_Roi_Circle].Format(_T("Find Circle"));
         m_sInspList[_Inspect_BarCode].Format(_T("BarCode"));
 		m_sInspList[_Inspect_Teseract].Format(_T("OCR"));
@@ -122,6 +152,19 @@ void CRecipeData::LoadRecipeData()
                         pRoiData->ptnRoi.bottom = ini->ReadInt(str, _T("PATBOTTOM"), 0);
                         pRoiData->m_dCenterPos.x = ini->ReadInt(str, _T("PATCENTERX"), 0);
                         pRoiData->m_dCenterPos.y = ini->ReadInt(str, _T("PATCENTERY"), 0);
+
+						if (pRoiData->iplTemplate) {
+							cvReleaseImage(&pRoiData->iplTemplate);
+							pRoiData->iplTemplate = NULL;
+						}
+
+						sub.Format(_T("%s\\Recipe\\%s\\Pat%02d\\%s.bmp"), theApp.g_sRootPath, gCfg.m_sLastRecipeName, pRoiData->m_nCh, pRoiData->m_sName);
+						if (::PathFileExists(sub))
+						{
+							CT2A ascii(sub);
+							pRoiData->iplTemplate = cvLoadImage(ascii, 0);
+						}
+
                         break;
                 case _ObjType_Roi:
                         pRoiData->m_RoiArea.left = ini->ReadInt(str, _T("ROILEFT"), 0);
@@ -244,6 +287,21 @@ void CRecipeData::LoadRecipeData()
 void CRecipeData::UpdateOneRecipeData(CRoiData *pRoiData, int nSeq)
 {
         CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
+		CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[theApp.m_nSelectCh];
+		//pProcessingClass->m_pMainFrame;
+
+		CRect roirect = pRoiData->m_RoiArea.GetRect();
+		roirect.NormalizeRect();
+		if (roirect.left < 0)	roirect.left = 0;
+		if (roirect.top < 0)	roirect.top = 0;
+		if (roirect.right >= pProcessingClass->iplImage->width) roirect.right = pProcessingClass->iplImage->width - 1;
+		if (roirect.bottom >= pProcessingClass->iplImage->height) roirect.bottom = pProcessingClass->iplImage->height - 1;
+		CRect ptnrect = pRoiData->ptnRoi.GetRect();
+		ptnrect.NormalizeRect();
+		if (ptnrect.left < 0)	ptnrect.left = 0;
+		if (ptnrect.top < 0)	ptnrect.top = 0;
+		if (ptnrect.right >= pProcessingClass->iplImage->width) ptnrect.right = pProcessingClass->iplImage->width - 1;
+		if (ptnrect.bottom >= pProcessingClass->iplImage->height) ptnrect.bottom = pProcessingClass->iplImage->height - 1;
 
         CIniUtil* ini = new CIniUtil(m_sFileName);
         CString str, sub, strParam;
@@ -256,23 +314,21 @@ void CRecipeData::UpdateOneRecipeData(CRoiData *pRoiData, int nSeq)
         ini->WriteInt(str, _T("OBJECT_TYPE"), pRoiData->m_nObjectType); // 패턴, 영역, 포인터
         ini->WriteInt(str, _T("INSPECT_TYPE"), pRoiData->m_nInspectType); // InspectType 참조, _Inspect_Patt_VerticalAlign,.. 등
 
-        CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[theApp.m_nSelectCh];
-        //pProcessingClass->m_pMainFrame;
         sPatternPath.Format(_T("%s\\Recipe\\%s"), theApp.g_sRootPath, gCfg.m_sLastRecipeName);
 
         switch (pRoiData->m_nObjectType) {
         case _ObjType_Patt:
-                ini->WriteInt(str, _T("ROILEFT"), pRoiData->m_RoiArea.left);
-                ini->WriteInt(str, _T("ROITOP"), pRoiData->m_RoiArea.top);
-                ini->WriteInt(str, _T("ROIRIGHT"), pRoiData->m_RoiArea.right);
-                ini->WriteInt(str, _T("ROIBOTTOM"), pRoiData->m_RoiArea.bottom);
-                ini->WriteInt(str, _T("PATLEFT"), pRoiData->ptnRoi.left);
-                ini->WriteInt(str, _T("PATTOP"), pRoiData->ptnRoi.top);
-                ini->WriteInt(str, _T("PATRIGHT"), pRoiData->ptnRoi.right);
-                ini->WriteInt(str, _T("PATBOTTOM"), pRoiData->ptnRoi.bottom);
+                ini->WriteInt(str, _T("ROILEFT"), roirect.left);
+                ini->WriteInt(str, _T("ROITOP"), roirect.top);
+                ini->WriteInt(str, _T("ROIRIGHT"), roirect.right);
+                ini->WriteInt(str, _T("ROIBOTTOM"), roirect.bottom);
+                ini->WriteInt(str, _T("PATLEFT"), ptnrect.left);
+                ini->WriteInt(str, _T("PATTOP"), ptnrect.top);
+                ini->WriteInt(str, _T("PATRIGHT"), ptnrect.right);
+                ini->WriteInt(str, _T("PATBOTTOM"), ptnrect.bottom);
                 ini->WriteInt(str, _T("PATCENTERX"), pRoiData->m_dCenterPos.x);
                 ini->WriteInt(str, _T("PATCENTERY"), pRoiData->m_dCenterPos.y);
-                sub.Format(_T("%s\\Pat%02d\\%s.pat"), sPatternPath, pRoiData->m_nCh, pRoiData->m_sName);
+                sub.Format(_T("%s\\Pat%02d\\%s.bmp"), sPatternPath, pRoiData->m_nCh, pRoiData->m_sName);
 
                 if (pProcessingClass->iplImage != NULL)
                 {
@@ -280,8 +336,8 @@ void CRecipeData::UpdateOneRecipeData(CRoiData *pRoiData, int nSeq)
                                 cvReleaseImage(&pRoiData->iplTemplate);
                                 pRoiData->iplTemplate = NULL;
                         }
-                        pRoiData->iplTemplate = cvCreateImage(cvSize(pRoiData->ptnRoi.Width(), pRoiData->ptnRoi.Height()), IPL_DEPTH_8U, 1);
-                        cvSetImageROI(pProcessingClass->iplImage, cvRect(pRoiData->ptnRoi.left, pRoiData->ptnRoi.top, pRoiData->ptnRoi.Width(), pRoiData->ptnRoi.Height()));
+                        pRoiData->iplTemplate = cvCreateImage(cvSize(ptnrect.Width(), ptnrect.Height()), IPL_DEPTH_8U, 1);
+                        cvSetImageROI(pProcessingClass->iplImage, cvRect(ptnrect.left, ptnrect.top, ptnrect.Width(), ptnrect.Height()));
                         cvCopy(pProcessingClass->iplImage, pRoiData->iplTemplate);
                         cvResetImageROI(pProcessingClass->iplImage);
                 }

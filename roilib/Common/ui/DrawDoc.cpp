@@ -350,8 +350,8 @@ BOOL CDrawDoc::PromptForFileName(CString& fileName, UINT /*nIDSTitle*/,
 
     dlgFile.m_ofn.Flags |= dwFlags;
 
-    int nDocType = (pType != NULL) ? *pType : CXIMAGE_FORMAT_BMP;
-    if (nDocType==0) nDocType=1;
+	int nDocType = (pType != NULL) ? *pType : 0;// CXIMAGE_FORMAT_BMP;
+    //if (nDocType==0) nDocType=1;
 
     int nIndex = GetIndexFromType(nDocType, bOpenFileDialog);
     if (nIndex == -1) nIndex = 0;

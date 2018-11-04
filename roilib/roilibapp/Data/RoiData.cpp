@@ -42,12 +42,14 @@ BOOL CRoiData::IsRegWorkList(CString sName)
 	return FALSE;
 }
 
-CParam* CRoiData::getParam(CString sName)
+CParam* CRoiData::getParam(CString sName, int t)
 {
+	if (t == -1)
+		t = _ProcessValue1;
 	int size = m_vecParams.size();
 	for (int i = 0; i < size; i++)
 	{
-		if (_tcscmp(sName, m_vecParams[i].Name.c_str()) == 0)
+		if (_tcscmp(sName, m_vecParams[i].Name.c_str()) == 0 && t == m_vecParams[i].stepType)
 		{
 			return &m_vecParams[i];
 		}

@@ -1224,10 +1224,10 @@ void CRecipeView::OnRecipeInspection()
 			for (int i = 0; i < size; i++) {
 				DetectResult *prst = &pData->m_vecDetectResult[i];
 
-				if (pData->m_nInspectType == _Inspect_BarCode || pData->m_nInspectType == _Inspect_Teseract)
+				if (prst->resultType == RESULTTYPE_STRING)
 				{
 					CDrawObj* pObj = new CDrawRect(CRect(0, 0, 600, 60));
-					_tcscpy(pObj->m_text, prst->strResult);
+					_tcscpy(pObj->m_text, CString(prst->str.c_str()));
 					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
 					pObj->m_pDocument = pDoc;
 					pObj->m_nShape = CDrawObj::text;
@@ -1237,12 +1237,23 @@ void CRecipeView::OnRecipeInspection()
 					pObj->SetTextColor(RGB(255, 0, 0));
 					m_otherObjects.AddTail(pObj);
 				}
-				else {
-					CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x, prst->pt.y, prst->pt1.x, prst->pt1.y));
+				else if (prst->resultType == RESULTTYPE_POINT) {
+					CDrawObj* pObj = new CDrawRect(CRect(prst->pt.x-10, prst->pt.y-10, prst->pt.x+10, prst->pt.y+10));
 					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
 					pObj->SetLineColor(RGB(255, 0, 0));
 					pObj->m_pDocument = pDoc;
-					pObj->m_nShape = CDrawObj::ellipse;
+					pObj->m_nShape = CDrawObj::point;
+					pObj->m_ZoomFactor = GetZoomFactor();
+					pObj->SetLineWidth(2);
+					_stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
+					m_otherObjects.AddTail(pObj);
+				}
+				else if (prst->resultType == RESULTTYPE_RECT || prst->resultType == RESULTTYPE_RECT4P) {
+					CDrawObj* pObj = new CDrawRect(CRect(prst->tl.x, prst->tl.y, prst->br.x, prst->br.y));
+					pObj->m_dwType = DRAWOBJ_TYPE_RESULT;
+					pObj->SetLineColor(RGB(255, 0, 0));
+					pObj->m_pDocument = pDoc;
+					pObj->m_nShape = CDrawObj::rectangle;
 					pObj->m_ZoomFactor = GetZoomFactor();
 					pObj->SetLineWidth(2);
 					_stprintf(pObj->m_pRoiData->m_sName, _T("%.2f %.2f"), prst->pt.x, prst->pt.y);
