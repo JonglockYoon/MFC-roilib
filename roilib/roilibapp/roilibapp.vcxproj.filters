@@ -177,9 +177,6 @@
     <ClInclude Include="..\Common\ui\DrawObj.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\ui\DrawTool.H">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\ui\DrawVw.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -327,9 +324,6 @@
     <ClInclude Include="Data\Config.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Data\DefIOAddr.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="Data\LineData.h">
       <Filter>Data</Filter>
     </ClInclude>
@@ -356,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="BarcodeReader.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ui\DrawTool.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -589,9 +586,6 @@
     <Image Include="res\GridBrush.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\Common\XListCtrl\checkboxes.bmp">
-      <Filter>XListCtrl</Filter>
-    </Image>
     <Image Include="res\yjmain32.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -599,6 +593,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\Splash.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Common\XListCtrl\checkboxes.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

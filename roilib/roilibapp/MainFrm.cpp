@@ -86,6 +86,7 @@ CMainFrame::CMainFrame()
     m_bMultiNetConnected = FALSE;
     m_bGrabON = FALSE;
 
+#if _MSC_VER>1800 // VS2013 보다크면.
 	// ZXing init
 	bool tryHarder = false;
 	bool tryRotate = false;
@@ -93,6 +94,7 @@ CMainFrame::CMainFrame()
 	hints.setShouldTryHarder(tryHarder);
 	hints.setShouldTryRotate(tryRotate);
 	_bcreader = std::make_shared<ZXing::MultiFormatReader>(hints);
+#endif
 
 }
 

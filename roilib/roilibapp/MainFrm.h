@@ -5,7 +5,7 @@
 // All rights reserved by jerry1455@gmail.com
 //
 
-// MainFrm.h : CMainFrame 클래스의 인터페이스
+// MainFrm.h : CMainFrame 클래스의 인터페이스.
 //
 
 #pragma once
@@ -39,7 +39,7 @@ public:
     virtual void Dump(CDumpContext& dc) const;
 #endif
 
-// 생성된 메시지 맵 함수
+// 생성된 메시지 맵 함수.
 protected:
     afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
     afx_msg void OnApplicationLook(UINT id);
@@ -86,7 +86,9 @@ public:
     BOOL m_bMultiNetConnected;
     ULONGLONG m_oTime;
     BOOL m_bGrabON;
+#if _MSC_VER>1800 // VS2013 보다크면.
 	std::shared_ptr<ZXing::MultiFormatReader> _bcreader;
+#endif	
 
 public:
     inline CMFCRibbonStatusBar&	  GetStatusBar() { return m_wndStatusBar; }

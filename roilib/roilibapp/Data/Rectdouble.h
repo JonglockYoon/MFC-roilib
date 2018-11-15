@@ -1,9 +1,8 @@
 #pragma once
-
 #include <math.h>
+
 class CRectdouble
 {
-
 public:
 	CRectdouble();
 	CRectdouble(CRect nrect);

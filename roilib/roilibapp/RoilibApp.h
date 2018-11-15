@@ -3,7 +3,7 @@
 // All rights reserved by jerry1455@gmail.com
 //
 
-// RoilibApp.h : RoilibApp 응용 프로그램에 대한 주 헤더 파일
+// RoilibApp.h : RoilibApp 응용 프로그램에 대한 주 헤더 파일.
 //
 #pragma once
 
@@ -14,7 +14,7 @@
 #include "resource.h"       // 주 기호입니다.
 #include "Data/Config.h"
 #include <sys/timeb.h>
-#include "ui/DrawTool.H"
+#include "ui/DrawTool.h"
 #include "Utils/Direct_Info.h"
 #include "ProcessingClass.h"
 #include "Utils/Log.h"
@@ -49,22 +49,22 @@ public:
 
 public:
     CCriticalSection	cs;
-    cv::VideoCapture cap[16]; // 최대 16개의 Webcam Open 지원
+    cv::VideoCapture cap[16]; // 최대 16개의 Webcam Open 지원.
 
     CString	g_sRootPath;
 
-    BOOL	m_bStopProcess;
+    BOOL m_bStopProcess;
     BOOL m_bViewMeasureResult;
     BOOL m_bPreviewMode; // 평상시에는  Preview Mode로 동작하고 이미지 분석할때는 FALSE로 설정해서 다른 이미지 처리를 배제한다.
     BOOL m_bSmoothMode;
 
-    CString m_sProcID;		//서버로 부터 검사 시작시 넘겨받을 검사아이뒤
+    CString m_sProcID;		//서버로 부터 검사 시작시 넘겨받을 검사아이뒤.
     BOOL						m_bCamTimeOut;
 
-    //BOOL m_bAutoSelectCh; // TRUE이면 자동검사모드로 진입
+    //BOOL m_bAutoSelectCh; // TRUE이면 자동검사모드로 진입.
     // m_nSelectCh은 0 ~ m_nCh사이 값이다.
-    // Ch이 달라지면 Base이미지가 달라진다. (즉, 다른 그랩이미지)
-    int	m_nSelectCh;			// 검사시 그랩 횟수 관련 영역에 대한 설정이 달라짐으로 추가됨. (Ch은 그랩 이미지 구분)
+    // Ch이 달라지면 Base이미지가 달라진다. (즉, 다른 그랩이미지).
+    int	m_nSelectCh;			// 검사시 그랩 횟수 관련 영역에 대한 설정이 달라짐으로 추가됨. (Ch은 그랩 이미지 구분).
 
 	std::vector<RecipeListInformation>	m_vecRecipeInfo;
 	std::vector<CProcessingClass*> m_vecProcessingClass; // 카메라당 한개의 Class가 생성 운용된다.

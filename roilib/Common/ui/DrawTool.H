@@ -4,33 +4,31 @@
 
 #ifndef __DRAWTOOL_H__
 #define __DRAWTOOL_H__
-
+#pragma once
 #include "DrawObj.h"
-
-//class CVMS5View;
 
 enum SelectMode
 {
-    none,
-    netSelect,
-    move1, // move -> move1, size -> size1 일반적인용어라서 1을 붙임
-    size1
+	none,
+	netSelect,
+	move1, // move -> move1, size -> size1 일반적인용어라서 1을 붙임.
+	size1
 };
 
-enum DrawShape // ToolBar와 1:1 매칭되는 값
+enum DrawShape // ToolBar와 1:1 매칭되는 값.
 {
-    moving,
-    selection,
-    tracker,
-    point1,
-    rect,
-    line,
-    cross,
-    roundRect,
-    ellipse,
-    poly,
-    roi,
-    roipat
+	moving,
+	selection,
+	tracker,
+	point1,
+	rect,
+	line,
+	cross,
+	roundRect,
+	ellipse,
+	poly,
+	roi,
+	roipat
 };
 
 class CDrawTool

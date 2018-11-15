@@ -120,7 +120,7 @@ public:
 					::WriteFile(hFile,							// handle to file
 								buf2,							// data buffer
 								_tcslen(buf2)*sizeof(TCHAR),	// number of bytes to write
-								(LPDWORD)&dwWritten,						// number of bytes written
+								(LPDWORD)&dwWritten,			// number of bytes written
 								NULL);							// overlapped buffer
 				}
 

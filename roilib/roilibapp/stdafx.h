@@ -1,8 +1,8 @@
 // Copyright (C) jerry1455@gmail.com
 // 모든 권리 보유.
 
-// stdafx.h : 자주 사용하지만 자주 변경되지는 않는
-// 표준 시스템 포함 파일 및 프로젝트 관련 포함 파일이
+// stdafx.h : 자주 사용하지만 자주 변경되지는 않는.
+// 표준 시스템 포함 파일 및 프로젝트 관련 포함 파일이.
 // 들어 있는 포함 파일입니다.
 
 #pragma once
@@ -37,7 +37,7 @@
 #include <afxcmn.h>             // Windows 공용 컨트롤에 대한 MFC 지원입니다.
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
-#include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원
+#include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원.
 
 #include <afxsock.h>            // MFC socket extensions
 
@@ -56,7 +56,9 @@
 
 #include "XListCtrl/XTrace.h"
 #include "XListCtrl/XListCtrl.h"
+
 #include "Utils/Utils.h"
+#include "./ui/DrawTool.h"
 
 #define USER_CTL_ID		40000
 

@@ -9,7 +9,7 @@
 #include "shlobj.h"
 #include "PropertyGridDirectoryPicker.h"
 
-#define BIF_NEWDIALOGSTYLE 0x0040
+//#define BIF_NEWDIALOGSTYLE 0x0040
 
 std::basic_string<TCHAR> CPropertyGridDirectoryPicker::m_strTitle = _T("Choose a directory");
 

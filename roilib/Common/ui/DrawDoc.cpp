@@ -21,9 +21,11 @@
 
 #include "stdafx.h"
 
+#include "Data/RecipeData.h"
 #include "DrawDoc.h"
 #include "DrawVw.h"
 #include "DrawObj.h"
+
 
 #ifdef _DEBUG
 #undef THIS_FILE

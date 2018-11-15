@@ -12,7 +12,7 @@
 
 #include "RoilibAppDoc.h"
 #include "RoilibAppView.h"
-#include "UI/memdc.h"
+#include "ui/memdc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

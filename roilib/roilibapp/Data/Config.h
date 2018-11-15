@@ -37,4 +37,4 @@ public:
         CString m_sLastRecipeName;
 
 };
-extern CConfig gCfg;//외부(다른 클래스)에서 접근하기 위한 변수.
+extern CConfig gCfg; //외부(다른 클래스)에서 접근하기 위한 변수.

@@ -19,7 +19,7 @@ CProcessingClass::CProcessingClass(int nCh)
     m_bInspProcessRun = FALSE;
 
     m_pMainFrame = NULL;
-    m_hProcessEvent = CreateEvent(NULL, TRUE, FALSE, NULL); // Manual Reset - ResetEvent를 해주어야함
+    m_hProcessEvent = CreateEvent(NULL, TRUE, FALSE, NULL); // Manual Reset - ResetEvent를 해주어야함.
 }
 
 CProcessingClass::~CProcessingClass(void)
@@ -31,13 +31,14 @@ CProcessingClass::~CProcessingClass(void)
 //
 // Program이 종료될때까지 계속 실행되는 Thread이다.
 //
-UINT CProcessingClass::ThreadInspProcessing(LPVOID pParam){
+UINT CProcessingClass::ThreadInspProcessing(LPVOID pParam)
+{
     CString str;
     CProcessingClass *pProcessingClass = (CProcessingClass *)pParam;
 
     while (pProcessingClass->m_bInspProcessRun)
     {
-        DWORD state = WaitForSingleObject(pProcessingClass->m_hProcessEvent, 50); // 50ms대기
+        DWORD state = WaitForSingleObject(pProcessingClass->m_hProcessEvent, 50); // 50ms대기.
         //if(state == WAIT_TIMEOUT)            // 이벤트가 발생하지 않은 경우.
         //	continue;
 
@@ -48,7 +49,8 @@ UINT CProcessingClass::ThreadInspProcessing(LPVOID pParam){
     return 0;
 }
 
-void CProcessingClass::Class_Init(CMainFrame* pFrameWnd, int nGrabFrame, BOOL bDigMode, int nCamSeq){
+void CProcessingClass::Class_Init(CMainFrame* pFrameWnd, int nGrabFrame, BOOL bDigMode, int nCamSeq)
+{
 
     m_pMainFrame = (CMainFrame*)pFrameWnd;
 
@@ -56,17 +58,17 @@ void CProcessingClass::Class_Init(CMainFrame* pFrameWnd, int nGrabFrame, BOOL bD
     m_pThread = AfxBeginThread(ThreadInspProcessing, (PVOID) this, THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED);
     m_pThread->m_bAutoDelete = FALSE;
     m_pThread->ResumeThread();
-
-
 }
-void CProcessingClass::Class_Destory(){
 
+void CProcessingClass::Class_Destory()
+{
     m_bInspProcessRun = FALSE; // ThreadInspProcessing Thread를 종료한다.
     WaitForSingleObject(m_pThread, INFINITE);
     if (m_pThread)
         delete m_pThread;
 
-    if (iplImage) {
+    if (iplImage) 
+	{
         cvReleaseImage(&iplImage);
         iplImage = NULL;
     }
@@ -104,6 +106,7 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
     {
         if (!theApp.cap[nCam].isOpened())
             return FALSE;
+
         cv::Mat mat;
 
         theApp.cs.Lock();
@@ -125,10 +128,12 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
 
             if (cimg == NULL)	// cimg는 color buffer
                 cimg = cvCreateImage(cvSize(sx, sy), IPL_DEPTH_8U, 3);
-            else {
+            else 
+			{
                 int tx = cimg->width;
                 int ty = cimg->height;
-                if (sx != tx || sy != ty) {
+                if (sx != tx || sy != ty) 
+				{
                     cvReleaseImage(&cimg);
                     cimg = cvCreateImage(cvSize(sx, sy), IPL_DEPTH_8U, 3);
                 }
@@ -145,8 +150,10 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
                 int sy = cimg->height;
                 if (iplImage == NULL)
                     iplImage = cvCreateImage(cvSize(s->width, s->height), IPL_DEPTH_8U, 1);
-                else {
-                    if (sx != iplImage->width || sy != iplImage->height) {
+                else 
+				{
+                    if (sx != iplImage->width || sy != iplImage->height) 
+					{
                         cvReleaseImage(&iplImage);
                         iplImage = cvCreateImage(cvSize(sx, sy), IPL_DEPTH_8U, 1);
                     }
@@ -156,12 +163,11 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
                 else
                     cvCopy(s, iplImage);
             }
-
             bRet = TRUE;
         }
         theApp.cs.Unlock();
         bRet = TRUE;
     }
+
     return bRet;
 }
-

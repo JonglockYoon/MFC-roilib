@@ -60,7 +60,7 @@ CDrawObj::CDrawObj(const CRect& position)
 
     m_selcolor = RGB(255, 0, 255);
 
-    m_pRoiData = new CRoiData();//CRoiBase();
+    m_pRoiData = new CRoiData();
     m_pRoiData->m_nCh = theApp.m_nSelectCh;
     m_pRoiData->SetRect(position);
 
@@ -212,7 +212,7 @@ BOOL CDrawObj::SetNoOutline( BOOL bSet /*= TRUE*/ )
     return bPrev;
 }
 
-// **** 죽는 지점
+// **** 죽는 지점.
 void CDrawObj::Remove()
 {
     if (m_pRoiData)
@@ -1083,11 +1083,11 @@ BOOL CDrawRect::Intersects(const CRect& rect)
             return rst;
     }
 
-    if (m_nShape == CDrawObj::point || m_nShape == CDrawObj::cross) { // 포인트는 중심점에 클릭해야함
+    if (m_nShape == CDrawObj::point || m_nShape == CDrawObj::cross) { // 포인트는 중심점에 클릭해야함.
         CPoint pt = fixed.CenterPoint();
         fixed = CRect(pt.x-10, pt.y-10, pt.x+10, pt.y+10);
         rst = inter.IntersectRect(rectT, fixed);
-    } else { // 사각형은 테두리부근을 클릭해야함
+    } else { // 사각형은 테두리부근을 클릭해야함.
         rst = inter.IntersectRect(rectT, fixed);
         if (rst && inter == rectT)
             rst = FALSE;
@@ -1173,7 +1173,7 @@ CDrawObj* CDrawRect::Clone(CDrawDoc* pDoc)
 {
     ASSERT_VALID(this);
 
-    //if (m_pParent) return NULL; // 상위에서 수행
+    //if (m_pParent) return NULL; // 상위에서 수행.
 
     CDrawRect* pClone = new CDrawRect(m_position);
     //*(CDrawObj*)pClone = *(CDrawObj*)this;
@@ -1199,7 +1199,7 @@ CDrawObj* CDrawRect::Clone(CDrawDoc* pDoc)
 void CDrawRect::Remove()
 {
     #if 0
-    if (this->IsKindOf(RUNTIME_CLASS( CDrawRoiPat ))) { // m_pCrossObj 그리고 m_pPatObj 보다 먼저 지워지면 안되므로 편법동원
+    if (this->IsKindOf(RUNTIME_CLASS( CDrawRoiPat ))) { // m_pCrossObj 그리고 m_pPatObj 보다 먼저 지워지면 안되므로 편법동원.
         CDrawRoiPat *p = (CDrawRoiPat *)this;
         if (p->m_pCrossObj != NULL || p->m_pPatObj != NULL) {
             p->m_bZombie = TRUE;

@@ -1,11 +1,14 @@
 ﻿#include "stdafx.h"
 #include "RoilibApp.h"
+#include "Data\RecipeData.h"
 #include "ImgProcEngine.h"
 #include "MainFrm.h"
 #include "Utils/String.h"
 #include <string>
 
+#if _MSC_VER>1800 // VS2013 보다크면.
 #include <tesseract/baseapi.h>
+#endif
 #include <leptonica/allheaders.h>
 
 using namespace cv;
@@ -112,6 +115,8 @@ int CImgProcEngine::SingleROICircle(int nCh, IplImage* croppedImage, CRoiData *p
 
 int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
+#if _MSC_VER>1800 // VS2013 보다크면.
+
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
 
@@ -130,15 +135,19 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 		pData->m_vecDetectResult.push_back(m_DetectResult);
 		return 0;
 	}
+
+#endif
+
 	return -1;
 }
 
 int CImgProcEngine::SingleROIOCR(int nCh, IplImage* croppedImage, CRoiData *pData, CRect rect)
 {
+#if _MSC_VER>1800 // VS2013 보다크면.
+
 	CString str;
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
 
-#if 1
 	if (gCfg.m_bSaveEngineImg) {
 		str.Format(_T("%s\\[%d]%03d_src.BMP"), m_sDebugPath, pData->m_nCh, 100);
 		CT2A ascii(str); cvSaveImage(ascii, croppedImage);
@@ -1606,4 +1615,3 @@ double CImgProcEngine::TemplateMatch(CRoiData *pData, IplImage* graySearchImgIn,
 
     return max*100.0;// -1;
 }
-

@@ -62,8 +62,10 @@ BOOL	CRoiData::LoadImageData(CString path)
 	CString sFileName;
 	extern CDirect_Info * g_pDirectory;
 	sFileName.Format(_T("%s"), path);
-	if(g_pDirectory->Search_FileName(sFileName)){
-		if (iplTemplate){
+	if(g_pDirectory->Search_FileName(sFileName))
+	{
+		if (iplTemplate)
+		{
 			cvReleaseImage(&iplTemplate);
 			iplTemplate = NULL;
 		}

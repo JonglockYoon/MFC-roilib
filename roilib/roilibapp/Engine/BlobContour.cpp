@@ -73,7 +73,7 @@ CBlobContour& CBlobContour::operator=( const CBlobContour &source )
 
 
 /**
-- FUNCIÓ: AddChainCode
+- FUNCI? AddChainCode
 - FUNCIONALITAT: Add chain code to contour
 - PARÀMETRES:
 	- 
@@ -82,8 +82,8 @@ CBlobContour& CBlobContour::operator=( const CBlobContour &source )
 - RESTRICCIONS:
 	- 
 - AUTOR: rborras
-- DATA DE CREACIÓ: 2008/05/06
-- MODIFICACIÓ: Data. Autor. Descripció.
+- DATA DE CREACI? 2008/05/06
+- MODIFICACI? Data. Autor. Descripci?
 */
 void CBlobContour::AddChainCode(t_chainCode chaincode)
 {
@@ -98,7 +98,7 @@ void CBlobContour::Reset()
 }
 
 /**
-- FUNCIÓ: GetPerimeter
+- FUNCI? GetPerimeter
 - FUNCIONALITAT: Get perimeter from chain code. Diagonals sum sqrt(2) and horizontal and vertical codes 1
 - PARÀMETRES:
 	- 
@@ -107,8 +107,8 @@ void CBlobContour::Reset()
 - RESTRICCIONS:
 	- 
 - AUTOR: rborras
-- DATA DE CREACIÓ: 2008/04/30
-- MODIFICACIÓ: Data. Autor. Descripció.
+- DATA DE CREACI? 2008/04/30
+- MODIFICACI? Data. Autor. Descripci?
 - NOTA: Algorithm derived from "Methods to estimate area and perimeters of blob-like objects: A comparison", L.Yang
 */
 double CBlobContour::GetPerimeter()
@@ -127,7 +127,7 @@ double CBlobContour::GetPerimeter()
 }
 
 /**
-- FUNCIÓ: GetArea
+- FUNCI? GetArea
 - FUNCIONALITAT: Computes area from chain code
 - PARÀMETRES:
 	- 
@@ -136,8 +136,8 @@ double CBlobContour::GetPerimeter()
 - RESTRICCIONS:
 	- 
 - AUTOR: rborras
-- DATA DE CREACIÓ: 2008/04/30
-- MODIFICACIÓ: Data. Autor. Descripció.
+- DATA DE CREACI? 2008/04/30
+- MODIFICACI? Data. Autor. Descripci?
 - NOTA: Algorithm derived from "Properties of contour codes", G.R. Wilson
 */
 double CBlobContour::GetArea()

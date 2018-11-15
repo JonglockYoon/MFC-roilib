@@ -23,9 +23,9 @@
 #pragma comment (lib, "Psapi.lib")
 #pragma comment (lib, "Dbghelp.lib")
 
-#pragma comment(lib,"wininet.lib")
-#pragma comment(lib,"crypt32.lib")
-#pragma comment(lib,"Setupapi.lib")
+#pragma comment(lib,  "wininet.lib")
+#pragma comment(lib,  "crypt32.lib")
+#pragma comment(lib,  "Setupapi.lib")
 #pragma comment (lib, "./pthread/pthreadVC.lib")
 
 // D:\Projects\vcpkg-master\installed\x64-windows\lib 를 속성에 등록.
@@ -38,7 +38,9 @@
 #ifdef _DEBUG
 //#pragma comment (lib, "../../lib/leptonica-1.76.0d.lib")
 #pragma comment (lib, "../../lib/tesseract40d.lib")
+#if _MSC_VER>1800 // VS2013 보다크면.
 #pragma comment (lib, "../../zxing/lib/ZXingCoreD.lib")
+#endif
 #pragma comment (lib, "../../lib/opencv_world340d.lib")
 #pragma comment (lib, "../../lib/pngD.lib")
 #pragma comment (lib, "../../lib/jpegD.lib")

@@ -1,6 +1,7 @@
 #pragma once
 
-struct RecipeListInformation{
+struct RecipeListInformation
+{
 	CString sRecipeName;
 };
 

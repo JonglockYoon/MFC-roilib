@@ -120,7 +120,7 @@ void CFrmProperty::AddListItem(CRoiData *pData, bool save)
     pListCtrl->InsertItem(cnt, str);
     pListCtrl->SetCheckbox(cnt, 0, FALSE);
 
-    str.Format(_T("%s"), pData->m_sName); // 이름
+    str.Format(_T("%s"), pData->m_sName); // 이름.
     pListCtrl->SetItemText(cnt, 1, str);
     pListCtrl->SetEdit(cnt, 1);
     str = g_cRecipeData->getInspName(pData->m_nInspectType);
@@ -405,7 +405,7 @@ void CFrmProperty::NewWorkList(CRoiData* pData)
 {
 	std::vector<CRoiData*>* pVecRoiData = &g_cRecipeData->m_vecWorkRoiData[theApp.m_nSelectCh];
     int size = pVecRoiData->size();
-    BOOL bExist = FALSE; //수정부분
+    BOOL bExist = FALSE; //수정부분.
     for (int i = 0; i < size; i++){
         CRoiData* pWorkData = (*pVecRoiData)[i];
         if (pData->m_sName == pWorkData->m_sName)
@@ -433,7 +433,7 @@ void CFrmProperty::NewAllWorkList()
     pVecRoiData->clear();
     for (int i = 0; i<g_cRecipeData->m_vecRoiData.size(); i++){
 
-        if(g_cRecipeData->m_vecRoiData[i]->m_nCh != theApp.m_nSelectCh) continue;//채널이 다른 roiData일 경우 등록할 필요가 없음
+        if(g_cRecipeData->m_vecRoiData[i]->m_nCh != theApp.m_nSelectCh) continue;//채널이 다른 roiData일 경우 등록할 필요가 없음.
         CRoiData* pdata = g_cRecipeData->m_vecRoiData[i];
         pVecRoiData->push_back(pdata);
     }

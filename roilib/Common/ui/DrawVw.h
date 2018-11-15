@@ -137,11 +137,11 @@ public:
     BOOL m_bActive;					// is the view active?
     BOOL m_bEditEnable;
 
-    long m_SelCount; // LineDDAProc()을 위한 변수
+    long m_SelCount; // LineDDAProc()을 위한 변수.
     long m_SelShift;
     void DrawSelection();
 
-    CPoint m_RefPoint; // 마우스를 클릭했을때화면상의 x,y좌표
+    CPoint m_RefPoint; // 마우스를 클릭했을때화면상의 x,y좌표.
     CPoint m_RefScroll; // 마우스를 클릭했을때 현재의 Scroll Position - 이미지Size에대한 화면 좌상단 위치를 나타낸다.
 
     CRectTracker m_tracker;

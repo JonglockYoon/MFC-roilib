@@ -11,7 +11,8 @@
 #include "MainFrm.h"
 #include "RoilibAppDoc.h"
 #include "RecipeView.h"
-#include "UI/memdc.h"
+#include "ui/memdc.h"
+#include "ui/DrawTool.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

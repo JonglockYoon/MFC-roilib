@@ -87,7 +87,7 @@ public:
 
 public:
     CxImage* m_ximage[MAX_CH_NUM]; // theApp.m_nSelectCh 로 구분한다.
-    IplImage *cimg;	// Grab을 위한 Temporary 저장소
+    IplImage *cimg;	// Grab을 위한 Temporary 저장소.
     void SetZoomCal(double zf);
 
 protected:

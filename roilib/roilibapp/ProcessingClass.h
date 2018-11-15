@@ -17,7 +17,7 @@ public:
     int m_nCh;
 
     IplImage* cimg;	// preview 용 color buffer
-    IplImage *iplImage; // OPENCV를 이용하기위한 gray base이미지
+    IplImage *iplImage; // OPENCV를 이용하기위한 gray base이미지.
 
     CMainFrame* m_pMainFrame;
 
@@ -34,3 +34,4 @@ public:
     void GrabImageSave(CString sName);
 
 };
+

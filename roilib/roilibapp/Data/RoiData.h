@@ -1,7 +1,7 @@
 #pragma once
 
-#include "RoiBase.h"
-
+//#include "RoiBase.h"
+#include "opencv/cv.hpp"
 
 #define RESULTTYPE_POINT 0x0001
 #define RESULTTYPE_RECT  0x0002
@@ -25,10 +25,10 @@ typedef struct  _tagDetectResult
 	CvPoint2D32f tl; // rect, rect4p
 	CvPoint2D32f tr; // rect4p
 	CvPoint2D32f bl; // rect4p
-	CvPoint2D32f br; // rect, rect4p
-	bool	result; // bool
+	CvPoint2D32f br; // rect, rect4p	
 	std::vector<CvPoint2D32f> vpolygon;
 
+	bool result; 
 	double dRadius;
 	double dAngle;
 	double dMatchRate;
@@ -37,7 +37,6 @@ typedef struct  _tagDetectResult
 	double dHeight;
 	std::string str;
 	IplImage* img;
-
 } DetectResult;
 
 class CRoiData : public CRoiBase
@@ -52,8 +51,8 @@ public:
 		int ReplaceParam(CParam param);
 		BOOL IsRegWorkList(CString sName);
         CParam* getParam(CString sName, int t = -1);
-        BOOL	LoadImageData(CString path);
-        BOOL	SaveImageData(CString path);
+        BOOL LoadImageData(CString path);
+        BOOL SaveImageData(CString path);
 };
 
 

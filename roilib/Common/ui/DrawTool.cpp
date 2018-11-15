@@ -197,7 +197,7 @@ void CSelectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& poi
         if (nDragHandle != 0)
             selectMode = size1;
         else {
-            // SelectTool로 선택되어 있는 Object내부에 다른 Object를 선택했을때
+            // SelectTool로 선택되어 있는 Object내부에 다른 Object를 선택했을때.
             if ((pObj->m_nShape == CDrawObj::roipat) ||
                 (pObj->m_pParent && pObj->m_pParent->m_nShape == CDrawObj::roipat) )
             {
@@ -239,7 +239,7 @@ void CSelectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& poi
     // See if the click was on an object, select and start move if so
     if (selectMode == none)
     {
-        pObj = pView->GetDocument()->ObjectAt(local); // 마우스로 클릭한 선택된 Object가 리턴된다
+        pObj = pView->GetDocument()->ObjectAt(local); // 마우스로 클릭한 선택된 Object가 리턴된다.
         if (pObj && pObj->m_pParent)
             pObj = pObj->m_pParent;
 
@@ -279,7 +279,8 @@ void CSelectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& poi
         //pView->OnUpdate(NULL, HINT_UPDATE_SELECTION, NULL);
     }
 
-    if (selectMode != none) {
+    if (selectMode != none) 
+	{
         POSITION pos = pView->m_selection.GetHeadPosition();
         while (pos != NULL)
         {
@@ -306,13 +307,14 @@ void CSelectTool::OnLButtonDblClk(CDrawView* pView, UINT nFlags, const CPoint& p
     else
     {
         // "Normal" DblClk opens properties...
-        if (pView->m_selection.GetCount() == 1) {
+        if (pView->m_selection.GetCount() == 1) 
+		{
             CDrawObj* pObj = pView->m_selection.GetHead();
             if (pObj->m_pParent != NULL)
                 pObj->m_pParent->OnOpen(pView);
             else pObj->OnOpen(pView);
         } else {
-            if (pView->m_selection.GetCount() == 3) { // Pattern Object에대한 처리
+            if (pView->m_selection.GetCount() == 3) { // Pattern Object에대한 처리.
                 POSITION pos = pView->m_selection.GetHeadPosition();
                 while (pos != NULL)
                 {
@@ -346,7 +348,7 @@ void CSelectTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point
             rect.NormalizeRect();
             dc.DrawFocusRect(rect);
 
-            rect.InflateRect(1, 1); // CDrawView::OnDraw(CDC* pDC) 에서 CMemDC()사용 이미지를 그리니까 DrawFocusRect() XOR기능이 동작을 하지않아 편법동원
+            rect.InflateRect(1, 1); // CDrawView::OnDraw(CDC* pDC) 에서 CMemDC()사용 이미지를 그리니까 DrawFocusRect() XOR기능이 동작을 하지않아 편법동원.
             pView->InvalidateRect(rect, FALSE);
 
             pView->SelectWithinRect(rect, TRUE);
@@ -374,7 +376,6 @@ void CSelectTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point
 
 void CSelectTool::OnMouseMove(CDrawView* pView, UINT nFlags, const CPoint& point)
 {
-
     if (pView->GetCapture() != pView)
     {
         if (c_drawShape == selection && pView->m_selection.GetCount() == 1)
@@ -525,7 +526,7 @@ void CRectTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point)
         pObj = pView->m_selection.GetTail();
     if (pObj == NULL) {
         selectTool.OnLButtonUp(pView, nFlags, point);
-        return; //방어코드
+        return; //방어코드.
     }
     if (rect.Width() < 5 && rect.Height() < 5)
     {
@@ -785,7 +786,7 @@ void CRoiTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point)
 
     if (pObj == NULL) {
         selectTool.OnLButtonUp(pView, nFlags, point);
-        return; //방어코드
+        return; //방어코드.
     }
 
     if (rect.Width() < 10 || rect.Height() < 10)

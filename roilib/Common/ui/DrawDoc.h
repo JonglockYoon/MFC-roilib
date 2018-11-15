@@ -59,7 +59,8 @@ public:
     //friend class CRoiTool;
     inline double GetOldZoomFactor() { return m_OldZF; }
     virtual double GetZoomFactor() { return m_ZoomFactor; }
-    virtual inline void SetZoomFactor(double zf) {
+    virtual inline void SetZoomFactor(double zf) 
+	{
         m_OldZF = m_ZoomFactor;
         m_ZoomFactor = zf;
 
@@ -74,7 +75,8 @@ public:
 
 // Operations
 public:
-    virtual inline void SetShowFilter(DWORD dwViewFilter) {
+    virtual inline void SetShowFilter(DWORD dwViewFilter) 
+	{
         POSITION pos = m_objects.GetHeadPosition();
         while (pos != NULL)
         {
@@ -134,9 +136,9 @@ protected:
 
 
 public:
-    int m_nSelectCh; //채널
+    int m_nSelectCh; //채널.
 
-    CDrawView *m_pActiveMainView; // 여러개의 View중 ROI편집기능을 가진 View Pointer를 저장
+    CDrawView *m_pActiveMainView; // 여러개의 View중 ROI편집기능을 가진 View Pointer를 저장.
     POINT m_Sel[MAX_SEL_POINTS]; //Selection
     long m_NumSel;
 

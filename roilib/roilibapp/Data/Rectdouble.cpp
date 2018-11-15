@@ -2,7 +2,8 @@
 #include "Rectdouble.h"
 
 
-CRectdouble::CRectdouble(){
+CRectdouble::CRectdouble()
+{
 }
 
 CRectdouble::CRectdouble(CRect nrect)

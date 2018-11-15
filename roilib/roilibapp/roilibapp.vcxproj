@@ -75,6 +75,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\myungk\Desktop\MFC programming\MFC-roilib-master_vs2013\MFC-roilib-master\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\myungk\Desktop\MFC programming\MFC-roilib-master_vs2013\MFC-roilib-master\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -249,7 +251,7 @@
     <ClInclude Include="..\Common\PropertyGrid\PropertyGridMonthCalCtrl.h" />
     <ClInclude Include="..\Common\ui\DrawDoc.h" />
     <ClInclude Include="..\Common\ui\DrawObj.h" />
-    <ClInclude Include="..\Common\ui\DrawTool.H" />
+    <ClInclude Include="..\Common\ui\DrawTool.h" />
     <ClInclude Include="..\Common\ui\DrawVw.h" />
     <ClInclude Include="..\Common\ui\ScrollViewEx.h" />
     <ClInclude Include="..\Common\ui\Sdiapp.h" />
@@ -280,7 +282,6 @@
     <ClInclude Include="..\Common\XListCtrl\XTrace.h" />
     <ClInclude Include="BarcodeReader.h" />
     <ClInclude Include="Data\Config.h" />
-    <ClInclude Include="Data\DefIOAddr.h" />
     <ClInclude Include="Data\LineData.h" />
     <ClInclude Include="Data\RecipeBase.h" />
     <ClInclude Include="Data\RecipeData.h" />

@@ -15,14 +15,14 @@ time_t TimeFromSystemTime(const SYSTEMTIME * pTime)
     struct tm tm;
     memset(&tm, 0, sizeof(tm));
 
-    tm.tm_year = pTime -> wYear - 1900; // 주의 :년도는 1900년부터 시작
-    tm.tm_mon = pTime -> wMonth - 1; // 주의 :월은 0부터 시작
+    tm.tm_year = pTime -> wYear - 1900; // 주의 :년도는 1900년부터 시작.
+    tm.tm_mon = pTime -> wMonth - 1; // 주의 :월은 0부터 시작.
     tm.tm_mday = pTime -> wDay;
 
     tm.tm_hour = pTime -> wHour;
     tm.tm_min = pTime -> wMinute;
     tm.tm_sec = pTime -> wSecond;
-    tm.tm_isdst = 0;  // 썸머 타임 사용 안함
+    tm.tm_isdst = 0;  // 썸머 타임 사용 안함.
 
     return mktime(&tm);
 }

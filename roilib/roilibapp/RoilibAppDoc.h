@@ -41,11 +41,11 @@ public:
 
 // 작업입니다.
     //CxImage *image;				//main image
-    //CxImage::CXTEXTINFO  m_text; // CxImage모듈
+    //CxImage::CXTEXTINFO  m_text; // CxImage모듈.
     //BOOL m_bInspResultView;
 
 public:
-    //CRoilibAppView *m_pActiveMainView; // 여러개의 View중 ROI편집기능을 가진 View Pointer를 저장
+    //CRoilibAppView *m_pActiveMainView; // 여러개의 View중 ROI편집기능을 가진 View Pointer를 저장.
 
 // 재정의입니다.
     void SubmitUndo();
@@ -87,13 +87,13 @@ public:
 
 public:
 
-// 생성된 메시지 맵 함수
+// 생성된 메시지 맵 함수.
 protected:
     DECLARE_MESSAGE_MAP()
 public:
 
 #ifdef SHARED_HANDLERS
-    // 검색 처리기에 대한 검색 콘텐츠를 설정하는 도우미 함수
+    // 검색 처리기에 대한 검색 콘텐츠를 설정하는 도우미 함수.
     void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
 

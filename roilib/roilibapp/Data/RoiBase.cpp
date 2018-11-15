@@ -1,8 +1,10 @@
 #include "stdafx.h"
+#include "RecipeData.h"
 #include "RoiBase.h"
 #include "Utils\Utils.h"
 
-CString  StepTypeValue[] = {
+CString  StepTypeValue[] = 
+{
 	_T("MaskingValue"),
 	_T("ProcessValue1"),
 	_T("ProcessValue2"),
@@ -27,11 +29,12 @@ CRoiBase::CRoiBase(void)
 
 	iplTemplate = NULL;
 	_tcscpy(m_sName, GetTimeString());
-
 }
+
 CRoiBase::~CRoiBase(void)
 {
 }
+
 CRoiBase::CRoiBase(CRect nrect)
 {
 	m_nCh = 0;

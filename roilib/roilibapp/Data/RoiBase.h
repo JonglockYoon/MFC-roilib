@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Rectdouble.h"
+class CRectdouble;
 
-
-// 여기에 정의된 순서를 변경하면 모든 레시피 파일에 영향을 주므로
+// 여기에 정의된 순서를 변경하면 모든 레시피 파일에 영향을 주므로.
 // 순서변경시에는 레시피 ini 파일의 nInspectType도 같이 변경해야한다.
 typedef enum _tagInspectType
 {
@@ -61,16 +60,19 @@ enum ObjectTypeList
         _ObjType_Number
 };
 
-struct	DOUBLE_POINT{
+struct	DOUBLE_POINT
+{
         double x;
         double y;
-        DOUBLE_POINT(){
+        DOUBLE_POINT()
+		{
                 x = 0;
                 y = 0;
         };
 };
 
-enum  ValueType{
+enum  ValueType
+{
         _BoolValue,
         _IntValue,
         _DoubleValue,
@@ -78,7 +80,8 @@ enum  ValueType{
         _ComboValue,
 };
 
-enum  StepType{
+enum  StepType
+{
         _MaskingValue,
         _ProcessValue1,
         _ProcessValue2,
@@ -115,7 +118,6 @@ public:
         };
 };
 
-
 class CRoiBase
 {
 public:
@@ -124,14 +126,14 @@ public:
         virtual ~CRoiBase();
 
         CString sUniqueID;
-        int m_nCh;	// ROI가 속해있는 Channel - 보통 카메라로 구분된다.
-        int m_nObjectType; // 패턴, 영역, 포인터 구분; ObjectTypeList 참조.
-        TCHAR m_sName[512]; // ROI이름
-        InspectType m_nInspectType; // Inspection Type, RecipeData.h의 InspectType 참조.
-        DOUBLE_POINT m_dCenterPos;	// Point 중심점 또는 Rect의 중심점.
-        CRectdouble	m_RoiArea; // ROI의 전체 영역을 나타낸다.
+        int m_nCh;	// ROI가 속해있는 Channel - 보통 카메라로 구분된다.//
+        int m_nObjectType; // 패턴, 영역, 포인터 구분; ObjectTypeList 참조.//
+        TCHAR m_sName[512]; // ROI이름.//
+        InspectType m_nInspectType; // Inspection Type, RecipeData.h의 InspectType 참조.//
+        DOUBLE_POINT m_dCenterPos;	// Point 중심점 또는 Rect의 중심점.//
+        CRectdouble m_RoiArea; // ROI의 전체 영역을 나타낸다.//
         CRectdouble ptnRoi;
-        IplImage*	iplTemplate;
+        IplImage* iplTemplate;
 
 		std::vector<CParam> m_vecParams;	// stepType, Name, valueType, Value, Detail 를 담은 vector
 

@@ -290,6 +290,8 @@ void CRecipeData::UpdateOneRecipeData(CRoiData *pRoiData, int nSeq)
 		CProcessingClass *pProcessingClass = theApp.m_vecProcessingClass[theApp.m_nSelectCh];
 		//pProcessingClass->m_pMainFrame;
 
+		if (pProcessingClass->iplImage == nullptr)
+			return;
 		CRect roirect = pRoiData->m_RoiArea.GetRect();
 		roirect.NormalizeRect();
 		if (roirect.left < 0)	roirect.left = 0;

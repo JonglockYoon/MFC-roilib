@@ -22,10 +22,9 @@
     #define WM_USER_GET_ROISET			WM_USER+1009
 #endif
 
-#include "Data/RecipeData.h"
-
 class CDrawView;
 class CDrawDoc;
+class CRoiData;
 
 /////////////////////////////////////////////////////////////////////////////
 // CDrawObj - base class for all 'drawable objects'

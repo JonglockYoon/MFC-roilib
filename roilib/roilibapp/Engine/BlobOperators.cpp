@@ -3,7 +3,7 @@
 #include "BlobOperators.h"
 using namespace cv;
 /***************************************************************************
-  Implementació de les classes per al càlcul de característiques sobre el blob
+  Implementaci?de les classes per al c?cul de caracter?tiques sobre el blob
 
   Implementation of the helper classes to perform operations on blobs
 /**************************************************************************/
@@ -16,7 +16,7 @@ using namespace cv;
 	- returns the pq moment or 0 if the moment it is not implemented
 - RESTRICTIONS:
 	- Currently, implemented moments up to 3
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 20-07-2004.
 - MODIFICATION: Date. Author. Description.
 */
@@ -26,19 +26,19 @@ double CBlobGetMoment::operator()(CBlob &blob)
 }
 
 /**
-- FUNCIÓ: HullPerimeter
+- FUNCI? HullPerimeter
 - FUNCIONALITAT: Calcula la longitud del perimetre convex del blob.
-			   Fa servir la funció d'OpenCV cvConvexHull2 per a 
+			   Fa servir la funci?d'OpenCV cvConvexHull2 per a 
 			   calcular el perimetre convex.
 			   
 - PARÀMETRES:
 - RESULTAT:
-	- retorna la longitud del perímetre convex del blob. Si el blob no té coordenades
-	  associades retorna el perímetre normal del blob.
+	- retorna la longitud del per?etre convex del blob. Si el blob no t?coordenades
+	  associades retorna el per?etre normal del blob.
 - RESTRICCIONS:
-- AUTOR: Ricard Borràs
-- DATA DE CREACIÓ: 20-07-2004.
-- MODIFICACIÓ: Data. Autor. Descripció.
+- AUTOR: Ricard Borr?
+- DATA DE CREACI? 20-07-2004.
+- MODIFICACI? Data. Autor. Descripci?
 */
 /**
 - FUNCTION: CBlobGetHullPerimeter
@@ -48,7 +48,7 @@ double CBlobGetMoment::operator()(CBlob &blob)
 	- returns the convex hull perimeter of the blob or the perimeter if the 
 	blob edges could not be retrieved
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -86,7 +86,7 @@ double CBlobGetHullArea::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -120,7 +120,7 @@ double CBlobGetMinXatMinY::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -155,7 +155,7 @@ double CBlobGetMinYatMaxX::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -190,7 +190,7 @@ double CBlobGetMaxXatMaxY::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -228,7 +228,7 @@ double CBlobGetMaxYatMinX::operator()(CBlob &blob)
 - RESULT:
 - RESTRICTIONS:
 	- See below to see how the lenght and the breadth are aproximated
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -242,7 +242,7 @@ double CBlobGetElongation::operator()(CBlob &blob)
 
 	if( tmp > 0.0 )
 		ampladaC = (double) (blob.Perimeter()+sqrt(tmp))/4;
-	// error intrínsec en els càlculs de l'àrea i el perímetre 
+	// error intr?sec en els c?culs de l'?ea i el per?etre 
 	else
 		ampladaC = (double) (blob.Perimeter())/4;
 
@@ -265,7 +265,7 @@ double CBlobGetElongation::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -287,7 +287,7 @@ double CBlobGetCompactness::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -313,7 +313,7 @@ double CBlobGetRoughness::operator()(CBlob &blob)
 - RESULT:
 - RESTRICTIONS:
 	- The lenght is an aproximation to the real lenght
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -326,7 +326,7 @@ double CBlobGetLength::operator()(CBlob &blob)
 
 	if( tmp > 0.0 )
 		ampladaC = (double) (blob.Perimeter()+sqrt(tmp))/4;
-	// error intrínsec en els càlculs de l'àrea i el perímetre 
+	// error intr?sec en els c?culs de l'?ea i el per?etre 
 	else
 		ampladaC = (double) (blob.Perimeter())/4;
 
@@ -346,7 +346,7 @@ double CBlobGetLength::operator()(CBlob &blob)
 - RESULT:
 - RESTRICTIONS:
 	- The breadth is an aproximation to the real breadth
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -359,7 +359,7 @@ double CBlobGetBreadth::operator()(CBlob &blob)
 
 	if( tmp > 0.0 )
 		ampladaC = (double) (blob.Perimeter()+sqrt(tmp))/4;
-	// error intrínsec en els càlculs de l'àrea i el perímetre 
+	// error intr?sec en els c?culs de l'?ea i el per?etre 
 	else
 		ampladaC = (double) (blob.Perimeter())/4;
 
@@ -370,7 +370,7 @@ double CBlobGetBreadth::operator()(CBlob &blob)
 }
 
 /**
-	Calcula la distància entre un punt i el centre del blob
+	Calcula la dist?cia entre un punt i el centre del blob
 */
 /**
 - FUNCTION: CBlobGetDistanceFromPoint
@@ -379,7 +379,7 @@ double CBlobGetBreadth::operator()(CBlob &blob)
 - PARAMETERS:
 - RESULT:
 - RESTRICTIONS:
-- AUTHOR: Ricard Borràs
+- AUTHOR: Ricard Borr?
 - CREATION DATE: 25-05-2005.
 - MODIFICATION: Date. Author. Description.
 */
@@ -420,18 +420,18 @@ double CBlobGetXYInside::operator()(CBlob &blob)
 #ifdef BLOB_OBJECT_FACTORY
 
 /**
-- FUNCIÓ: RegistraTotsOperadors
+- FUNCI? RegistraTotsOperadors
 - FUNCIONALITAT: Registrar tots els operadors definits a blob.h
 - PARÀMETRES:
-	- fabricaOperadorsBlob: fàbrica on es registraran els operadors
+	- fabricaOperadorsBlob: f?rica on es registraran els operadors
 - RESULTAT:
 	- Modifica l'objecte fabricaOperadorsBlob
 - RESTRICCIONS:
-	- Només es registraran els operadors de blob.h. Si se'n volen afegir, cal afegir-los amb 
-	  el mètode Register de la fàbrica.
+	- Nom? es registraran els operadors de blob.h. Si se'n volen afegir, cal afegir-los amb 
+	  el m?ode Register de la f?rica.
 - AUTOR: rborras
-- DATA DE CREACIÓ: 2006/05/18
-- MODIFICACIÓ: Data. Autor. Descripció.
+- DATA DE CREACI? 2006/05/18
+- MODIFICACI? Data. Autor. Descripci?
 */
 void RegistraTotsOperadors( t_OperadorBlobFactory &fabricaOperadorsBlob )
 {

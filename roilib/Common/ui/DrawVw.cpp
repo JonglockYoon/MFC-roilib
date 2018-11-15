@@ -24,6 +24,7 @@
 
 #include "resource.h"
 
+#include "Data/RecipeData.h"
 #include "DrawDoc.h"
 #include "DrawVw.h"
 #include "DrawObj.h"
@@ -365,7 +366,7 @@ void CDrawView::OnMouseMove(UINT nFlags, CPoint point)
     CDrawTool* pTool = CDrawTool::FindTool(CDrawTool::c_drawShape);
 
     // 2011.6.13 SHIFT+LButton으로 대체 <- CTRL+에서 대체 .. Clone동작과 중복되어 불편하네.. 2014.9.16
-    //if (nFlags & MK_RBUTTON) { // 마우스 오른쪽 버턴을 누르고 이동하면 moving동작강제실행
+    //if (nFlags & MK_RBUTTON) { // 마우스 오른쪽 버턴을 누르고 이동하면 moving동작강제실행.
     //	if (CDrawTool::c_drawShape == tracker)
     //		m_tracker.m_rect = CRect(0,0,0,0);;//CDrawTool::c_drawShape = moving;
     //	CDrawTool::FindTool(moving)->OnMouseMove(this, nFlags, point);
@@ -557,7 +558,7 @@ void CALLBACK LineDDAProc(int x, int y, CDrawView *pview)
         if (pview->m_SelCount == 8) pview->m_SelCount=0;
 
 /*
-        // x, y는 선을 이룰 점이 그려질 좌표
+        // x, y는 선을 이룰 점이 그려질 좌표.
         // 아래는 10도트 마다 원을 그려 작은 원으로 된 사선을 형성하게 만듭니다.
         if ((x % 10) == 0)
             Ellipse(*pDC, x - 5, y - 5, x + 5, y + 5);
@@ -686,4 +687,4 @@ void CDrawView::SetShowFilter(DWORD dwFilter)
         CDrawObj* pObj = pObList->GetNext(posObj);
         pObj->m_dwFilter = dwFilter;
     }
-};
+}

@@ -1,15 +1,16 @@
 #pragma once
-#include "RoiData.h"
 
-#define MAX_CH_NUM			2
-#define MAX_WORKLIST_NUM	128
-
+#include "Rectdouble.h"
 #include "RoiBase.h"
 #include "RoiData.h"
 #include "IniUtil.h"
 #include "RecipeBase.h"
 
-typedef struct _tagParamTable {
+#define MAX_CH_NUM			2
+#define MAX_WORKLIST_NUM	128
+
+typedef struct _tagParamTable 
+{
         InspectType nInspectType;
         CParam param;
 } ParamTable;

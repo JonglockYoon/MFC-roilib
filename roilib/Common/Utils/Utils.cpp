@@ -14,7 +14,7 @@
 
 #define USE_DLPortIO
 
-// WaitForUserMultipleObjects()는 MAXIMUM_WAIT_OBJECTS(64)보다 크면 안되므로
+// WaitForUserMultipleObjects()는 MAXIMUM_WAIT_OBJECTS(64)보다 크면 안되므로.
 // 64개가 넘으면 분할해서 처리한다.
 DWORD WaitForUserMultipleObjects(DWORD nCount, CONST HANDLE *lpHandles, BOOL bWaitAll, DWORD dwMilliseconds)
 {
@@ -74,7 +74,7 @@ CStringList * GetList_Dir( CString SourceDir, CString Exe)
     return StringList;
 }
 
-//파일 리스트 얻기
+//파일 리스트 얻기.
 CStringList * GetList_File( CString SourceDir, CString Exe,CString Filter)
 {
     CStringList *StringList;
@@ -159,7 +159,7 @@ CStringList * GetList_File( CString SourceDir, CString Exe,CString Filter1,CStri
     return StringList;
 }
 
-//날짜 문자열을 구한다
+//날짜 문자열을 구한다.
 CString GetDateString(void)
 {
     CTime NowTime = CTime::GetCurrentTime();
@@ -171,7 +171,7 @@ CString GetDateString(void)
 }
 //---------------------------------------------------------------------------
 
-//날짜 문자열을 구한다
+//날짜 문자열을 구한다.
 CString GetDateString(CString cStr)
 {
     CTime NowTime = CTime::GetCurrentTime();
@@ -183,7 +183,7 @@ CString GetDateString(CString cStr)
 }
 //---------------------------------------------------------------------------
 
-//년월일 중 하나를 구한다
+//년월일 중 하나를 구한다.
 CString GetDateSingle(CString index){//index="Y""M""D"
 
     CTime t_cur_time;
@@ -212,7 +212,7 @@ CString GetDateSingle(CString index){//index="Y""M""D"
 }
 //---------------------------------------------------------------------------
 
-//시간 문자열을 구한다
+//시간 문자열을 구한다.
 CString GetTimeString(void)
 {
     CTime NowTime = CTime::GetCurrentTime();
@@ -223,7 +223,7 @@ CString GetTimeString(void)
     return sTime;
 }
 //---------------------------------------------------------------------------
-//시간 문자열을 구한다
+//시간 문자열을 구한다.
 CString GetTimeString(CString cStr)
 {
     CTime NowTime = CTime::GetCurrentTime();
@@ -236,7 +236,7 @@ CString GetTimeString(CString cStr)
 
 //---------------------------------------------------------------------------
 
-//디렉토리 또는 파일 삭제하기
+//디렉토리 또는 파일 삭제하기.
 int Delete_DirOrFile(CString sFile, HWND hWnd)
 {
     TCHAR File[1024];
@@ -247,7 +247,7 @@ int Delete_DirOrFile(CString sFile, HWND hWnd)
     _tcscpy(File,(LPCTSTR)sFile);
     File[sFile.GetLength()+1] = '\0';
 
-    //Dir 삭제
+    //Dir 삭제.
     op.hwnd =  hWnd;
     op.wFunc = FO_DELETE;
     op.pFrom = File;
@@ -272,7 +272,7 @@ void DirectroyCopy(CString SrcFolder, CString DesFolder, HWND hWnd)
     FileOp.wFunc = FO_COPY;
     FileOp.pFrom = szTemp;
     FileOp.pTo = LPCTSTR(DesFolder);
-    FileOp.fFlags = FOF_MULTIDESTFILES |FOF_NOCONFIRMATION;  // 확인메시지가 안뜨도록 설정
+    FileOp.fFlags = FOF_MULTIDESTFILES |FOF_NOCONFIRMATION;  // 확인메시지가 안뜨도록 설정.
     FileOp.fAnyOperationsAborted = false;
     FileOp.hNameMappings = NULL;
     FileOp.lpszProgressTitle = NULL;
@@ -292,7 +292,7 @@ void DirectroyCopy(TCHAR *SrcFolder, TCHAR *DesFolder, HWND hWnd)
     FileOp.wFunc = FO_COPY;
     FileOp.pFrom = szTemp;
     FileOp.pTo = DesFolder;
-    FileOp.fFlags = FOF_NOCONFIRMMKDIR |FOF_MULTIDESTFILES |FOF_NOCONFIRMATION;  // 확인메시지가 안뜨도록 설정
+    FileOp.fFlags = FOF_NOCONFIRMMKDIR |FOF_MULTIDESTFILES |FOF_NOCONFIRMATION;  // 확인메시지가 안뜨도록 설정.
     FileOp.fAnyOperationsAborted = false;
     FileOp.hNameMappings = NULL;
     FileOp.lpszProgressTitle = NULL;
@@ -314,7 +314,7 @@ Path 존재 유무 검사 및 생성
 @return
 0: 주어진 경로가 존재
 -1: 주어진 경로가 존재하지 않음 (bCreate == false 일경우)
--2: 주어진 경로 생성 시도 실패
+-2: 주어진 경로 생성 시도 실패.
 */
 int checkPath(const CString& strAbsFullPath, bool bCreate)
 {
@@ -378,7 +378,7 @@ int checkPath(const CString& strAbsFullPath, bool bCreate)
 
 //---------------------------------------------------------------------------
 
-//파일이나 디렉토리가 존재하는가
+//파일이나 디렉토리가 존재하는가.
 bool ExistDirOrFile( CString sDir,CString sSearchStr)
 {
     CString  SearchExe;
@@ -429,7 +429,7 @@ bool FileExists( CString sFile)
 }
 //---------------------------------------------------------------------------
 
-//문자열 Trim하기
+//문자열 Trim하기.
 CString GetAllTrim(CString sString)
 {
     CString sTemp;
@@ -453,7 +453,7 @@ CString Encord_String(CString sString)
     _tcscpy(cTemp,(LPCTSTR)sString);
     for( int i =0; i < nCount; i++)
     {
-        // PASSWORD 변환 식
+        // PASSWORD 변환 식.
         sTemp = sTemp + char(cTemp[i] + 'Z');
     }
     return sTemp;
@@ -472,7 +472,7 @@ CString Decord_String(CString sString)
     _tcscpy(cTemp,(LPCTSTR)sString);
     for( int i =0; i < nCount; i++)
     {
-        // PASSWORD 변환 식
+        // PASSWORD 변환 식.
         sTemp = sTemp + char(cTemp[i] - 'Z');
     }
     return sTemp;
@@ -1053,11 +1053,11 @@ __int64 GetClockCount( void )
     _LARGE_INTEGER freq;
     _LARGE_INTEGER clock;
 
-    QueryPerformanceFrequency((_LARGE_INTEGER*)&freq);	// cpu 클럭 얻어오기
-    QueryPerformanceCounter((_LARGE_INTEGER*)&clock);	// 현재 클럭 얻어오기
+    QueryPerformanceFrequency((_LARGE_INTEGER*)&freq);	// cpu 클럭 얻어오기.
+    QueryPerformanceCounter((_LARGE_INTEGER*)&clock);	// 현재 클럭 얻어오기.
 
     count = clock.QuadPart;
-    count /= (freq.QuadPart*0.001);						// 현재 클럭을 클럭주파수로 나누기, usec->sec 변환
+    count /= (freq.QuadPart*0.001);						// 현재 클럭을 클럭주파수로 나누기, usec->sec 변환.
 
     return count;
 }
@@ -1122,7 +1122,7 @@ int SubFolderSearchFile(LPCTSTR FolderName, LPCTSTR FileName)
         {
             SubFolderSearchFile(finder.GetFilePath()+"\\", FileName);
         }
-        else //파일인 경우
+        else //파일인 경우.
         {
             //CString tempPath = finder.GetFilePath();
             CString tempPath = finder.GetFileName();

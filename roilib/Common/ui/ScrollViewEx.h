@@ -1,5 +1,5 @@
 
-// ScrollViewEx.h : CScrollViewEx 클래스의 인터페이스
+// ScrollViewEx.h : CScrollViewEx 클래스의 인터페이스.
 //
 
 #pragma once
@@ -19,7 +19,7 @@ public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
 
 public:
-	CBitmap m_bmpMagnify;		//확대경을 위한 비트맵
+	CBitmap m_bmpMagnify;		//확대경을 위한 비트맵.
 	bool	m_bMagnify;
 	CPoint	m_ptOld;
 	int		m_nVal;
