@@ -40,6 +40,9 @@ MFC-roilib compile 절차
 
 </pre>
 
+
+https://blog.naver.com/jerry1455/221391623718 - roilibapp 패턴매칭 및 피처매칭 with OpenCV
+https://blog.naver.com/jerry1455/221384938989 - roilibapp tesseract 이미지 전처리 with OpenCV
 https://blog.naver.com/jerry1455/221381146963 - roilib tesseract with OpenCV (tesseract ocr)
 https://blog.naver.com/jerry1455/221380408455 - roilib 바코드 Decode추가   
 
