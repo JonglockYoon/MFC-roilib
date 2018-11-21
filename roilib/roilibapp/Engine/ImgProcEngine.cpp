@@ -121,6 +121,20 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 	CMainFrame *pMainFrame = (CMainFrame *)AfxGetApp()->m_pMainWnd;
 
 	IplImage *pimg = croppedImage;
+
+	ThresholdRange(pData, croppedImage, 200);
+
+	NoiseOut(pData, croppedImage, _ProcessValue1, 202);
+	Expansion(pData, croppedImage, _ProcessValue1, 204);
+
+	Smooth(pData, croppedImage, 206);
+
+	if (gCfg.m_bSaveEngineImg) {
+		str.Format(_T("%s\\[%d]%03d_input.BMP"), m_sDebugPath, pData->m_nCh, 210);
+		CT2A ascii(str); cvSaveImage(ascii, croppedImage);
+	}
+
+
 	auto binImg = std::make_shared<ZXing::GenericLuminanceSource>((int)pimg->width, (int)pimg->height,
 		(unsigned char*)pimg->imageData, pimg->widthStep, 1, 2, 1, 0); // BW Image
 	auto bitmap = new ZXing::HybridBinarizer(binImg);
@@ -128,7 +142,7 @@ int CImgProcEngine::SingleROIBarCode(int nCh, IplImage* croppedImage, CRoiData *
 	delete bitmap;
 	if (result.isValid()) {
 		str = CString(result.text().c_str());
-		TRACE(_T("Barcode : %d\n"), str);
+		TRACE(_T("Barcode : %s\n"), str);
 		CT2CA pszConvertedAnsiString(str);
 		m_DetectResult.resultType = RESULTTYPE_STRING;
 		m_DetectResult.str = pszConvertedAnsiString;

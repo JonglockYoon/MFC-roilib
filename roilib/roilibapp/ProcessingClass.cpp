@@ -116,6 +116,10 @@ BOOL CProcessingClass::AreaCamImageGrab(int bGrab)
         IplImage *s = &IplImage(mat);
         if (s != NULL)
         {
+			if (s->width == 0 || s->height == 0) {
+				theApp.cs.Unlock();
+				return FALSE;
+			}
 			if (gCfg.m_bCamFlipHoriz && gCfg.m_bCamFlipVert)
 				cvFlip(s, NULL, -1);
 			else if (gCfg.m_bCamFlipHoriz)

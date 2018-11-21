@@ -57,7 +57,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CSDIFrameWnd)
     //ON_COMMAND(ID_BUTTON_DIO_TEST1, &CMainFrame::OnButtonDioTest1)
 END_MESSAGE_MAP()
 
-// CMainFrame 생성/소멸
+// CMainFrame 생성/소멸.
 
 CMainFrame::CMainFrame()
 {
@@ -321,7 +321,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
     if( !CSDIFrameWnd::PreCreateWindow(cs) )
         return FALSE;
-    // TODO: CREATESTRUCT cs를 수정하여 여기에서
+    // TODO: CREATESTRUCT cs를 수정하여 여기에서.
     //  Window 클래스 또는 스타일을 수정합니다.
 
     cs.style = WS_OVERLAPPED | WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU;
@@ -384,7 +384,7 @@ void CMainFrame::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CMainFrame 메시지 처리기
+// CMainFrame 메시지 처리기.
 
 void CMainFrame::OnApplicationLook(UINT id)
 {
